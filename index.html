@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HSK4 · Web dạy học</title>
+<title>Web dạy học HSK</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -58,33 +58,19 @@ h1{font:800 40px/1.1 'Baloo 2',sans-serif;margin:12px 0 4px;color:var(--rung-dam
 <main class="khung">
   <div class="dau">
     <div>
-      <span class="nhan">New HSK Course 4上</span>
-      <h1>Web dạy học HSK4</h1>
-      <p class="phu">Trình chiếu trên lớp · 10 bài · Giáo viên: Thanh Trúc</p>
+      <span class="nhan">Thanh Trúc · 新HSK教程</span>
+      <h1>Web dạy học HSK</h1>
+      <p class="phu">Trình chiếu trên lớp · chọn cấp độ</p>
     </div>
-    <p class="goi-y">Bấm vào bài để mở. Mỗi bài là một tệp lớn (vài MB), lần đầu mở cần chờ vài giây. Chiếu toàn màn hình bằng nút <b>⛶</b> ở góc dưới.</p>
+    <p class="goi-y">Chọn cấp độ để xem danh sách bài. Mỗi bài là một tệp lớn (vài MB), lần đầu mở cần chờ vài giây.</p>
   </div>
   <ul class="luoi" id="ds"></ul>
   <p class="chan">Nét viết chữ Hán và giọng đọc cần kết nối mạng.</p>
 </main>
 <script>
-const BAI = [
-  ['我们来中国学习了', 'Wǒmen lái Zhōngguó xuéxí le', 'Chúng mình đến Trung Quốc học rồi', '留学'],
-  ['租到了合适的房子', 'Zū dào le héshì de fángzi', 'Thuê được căn nhà vừa ý', '租房'],
-  ['手机扫一下', 'Shǒujī sǎo yíxià', 'Lấy điện thoại quét một cái', '手机生活'],
-  ['很高兴能帮到你', 'Hěn gāoxìng néng bāngdào nǐ', 'Rất vui vì giúp được bạn', '出行与互助'],
-  ['“不怕辣”和“怕不辣”', '“Bú pà là” hé “pà bú là”', '“Không sợ cay” và “Sợ không cay”', '饮食'],
-  ['我陪你去看病', 'Wǒ péi nǐ qù kànbìng', 'Mình đi khám bệnh cùng cậu', '看病'],
-  ['在工作中学习', 'Zài gōngzuò zhōng xuéxí', 'Học trong công việc', '职场'],
-  ['该放松时就放松', 'Gāi fàngsōng shí jiù fàngsōng', 'Lúc cần xả hơi thì cứ xả hơi', '放松 · 减压'],
-  ['遇见你，刚刚好', 'Yùjiàn nǐ, gānggāng hǎo', 'Gặp được em, vừa vặn đúng lúc', '爱情与友情'],
-  ['南方不懂北方的冷', 'Nánfāng bù dǒng běifāng de lěng', 'Người miền Nam không hiểu cái lạnh miền Bắc', '气候与环境'],
-];
-document.getElementById('ds').innerHTML = BAI.map(([han, py, vi, cd], i) => {
-  const n = String(i + 1).padStart(2, '0');
-  return `<li class="bai"><a href="bai-${n}.html"><span class="so">${i + 1}</span><span class="noi">
-    <div class="han">${han}</div><div class="py">${py}</div><div class="vi">${vi}</div><span class="chu-de">${cd}</span></span></a></li>`;
-}).join('');
+const CAP = [['hsk1/', 'HSK1', '新HSK教程1', '15 bài · trọn quyển 1', 'Xīn HSK jiàochéng 1'], ['hsk4/', 'HSK4', '新HSK教程4上', '10 bài · quyển thượng', 'Xīn HSK jiàochéng 4 shàng']];
+document.getElementById('ds').innerHTML = CAP.map(([href, so, han, vi, py]) => `<li class="bai"><a href="${href}"><span class="so">${so.replace('HSK', '')}</span><span class="noi">
+    <div class="han">${han}</div><div class="py">${py}</div><div class="vi">${so} · ${vi}</div></span></a></li>`).join('');
 </script>
 </body>
 </html>
