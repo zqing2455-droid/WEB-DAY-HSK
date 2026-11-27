@@ -243,7 +243,14 @@ button{font:inherit;cursor:pointer}
 .hoi .d{margin-top:8px;font-family:var(--zh);font-size:20px;font-weight:700;color:var(--la-dam);background:var(--la-nhat);border-radius:10px;padding:4px 10px;filter:blur(7px);opacity:.55;transition:.25s}
 .hoi.mo .d{filter:none;opacity:1}
 .hoi:not(.mo) .d::after{content:""}
-.nut-lop{display:flex;gap:10px;margin-top:auto}
+.nut-lop{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap}
+.mr-luoi{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px}
+.mr{position:relative;border:2px dashed var(--vien);background:#fff;border-radius:18px;padding:16px 18px 12px;text-align:left;display:flex;flex-direction:column;gap:2px;cursor:pointer}
+.mr .pill{position:absolute;top:-12px;left:14px;font-size:12.5px;padding:2px 12px}
+.mr .zh{font-family:var(--zh);font-size:34px;font-weight:700;line-height:1.2;color:var(--muc)}
+.mr .py{font-size:17px;color:var(--la-dam);font-weight:700}
+.mr .vi{font-size:16px;color:var(--muc-phu)}
+.mr:hover{border-style:solid;border-color:var(--la)}
 
 /* ── bài khoá ── */
 .khoa{display:grid;grid-template-columns:450px 1fr;grid-template-rows:minmax(0,1fr);gap:26px;height:calc(100% - 82px)}
@@ -416,6 +423,7 @@ button{font:inherit;cursor:pointer}
 .np-cau .py{margin-left:14px;font-size:16px}
 .np-ghi{margin-top:12px;background:var(--la-nhat);border-radius:14px;padding:10px 16px;font-size:16.5px;line-height:1.5}
 .np-ghi b{color:var(--la-dam)}
+.np-phai.chat .np-ct{margin-bottom:6px}.np-phai.chat .np-o{padding:3px 16px}.np-phai.chat .np-o b{font-size:26px}.np-phai.chat .np-vd{gap:2px}.np-phai.chat .np-cau{padding:2px 6px}.np-phai.chat .vd-o,.np-phai.chat .np-cau .dau{font-size:27px}.np-phai.chat .np-ghi{margin-top:8px;padding:7px 14px;font-size:15.5px}
 .xep-ds{display:flex;flex-direction:column;gap:14px}
 .xep{border:2px dashed var(--vien);border-radius:18px;padding:10px 16px}
 .xep-kq{min-height:50px;border-bottom:3px solid var(--la-3);font-family:var(--zh);font-size:32px;font-weight:700;display:flex;gap:4px;align-items:center;padding-bottom:2px}
@@ -447,6 +455,22 @@ button{font:inherit;cursor:pointer}
 .luoi6.nhieu .bt .mi{width:72px!important;height:72px!important;font-size:52px!important}
 .luoi6.nhieu .bt h4{font-size:19px}
 /* ── lớp phủ ── */
+#ds-slide{position:absolute;left:18px;right:18px;bottom:58px;max-height:470px;background:#fff;border:2.5px solid var(--la);border-radius:22px;box-shadow:0 10px 30px rgba(60,80,30,.25);z-index:30;display:none;flex-direction:column;overflow:hidden}
+#ds-slide.mo{display:flex}
+#ds-slide .ds-dau{display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:2px dashed var(--vien);font-size:17px;color:var(--la-dam)}
+#ds-slide .ds-dau span{font-size:14px;color:var(--muc-phu)}
+#ds-slide .dong-x{position:static;margin-left:auto}
+#ds-noi{overflow-y:auto;padding:8px 18px 14px}
+.ds-chang{display:flex;gap:12px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--vien)}
+.ds-chang:last-child{border-bottom:0}
+.ds-ten{flex:none;width:150px;font:800 14px "Nunito";color:var(--la-dam);padding-top:5px}
+.ds-the{display:flex;flex-wrap:wrap;gap:6px}
+.ds-the button{border:1.5px solid var(--vien);background:var(--la-nhat);border-radius:10px;padding:3px 10px;font:700 14px "Nunito";color:var(--muc);cursor:pointer;display:flex;gap:6px;align-items:baseline}
+.ds-the button small{font-size:11px;color:var(--muc-phu)}
+.ds-the button .zh{font-family:var(--zh);font-size:17px}
+.ds-the button:hover{border-color:var(--la)}
+.ds-the button.dang{background:var(--la);border-color:var(--la);color:#fff}
+.ds-the button.dang small{color:#E8F2DA}
 #lop{position:absolute;inset:0;background:rgba(60,80,30,.35);display:none;z-index:40;align-items:center;justify-content:center}
 #lop.mo{display:flex}
 #lop .hop{width:860px;max-height:600px;overflow:auto;background:#fff;border-radius:28px;padding:22px 30px 26px;position:relative;border:3px dashed var(--vien);box-shadow:0 16px 40px rgba(40,60,20,.3)}
@@ -510,9 +534,10 @@ button{font:inherit;cursor:pointer}
     <span class="ten" id="ten-bai"></span>
     <span class="toc">Tốc độ đọc: <button data-toc="0.7">chậm</button><button data-toc="0.85">vừa</button><button data-toc="1">thường</button></span>
     <span id="bao-giong"></span>
-    <span class="phai"><button class="dieu" id="lui" title="Trang trước (←)">‹</button><span id="so-trang">1 / 1</span><button class="dieu" id="toi" title="Trang sau (→)">›</button><button class="dieu" id="toan" title="Toàn màn hình (F)" style="font-size:17px">⛶</button></span>
+    <span class="phai"><button class="dieu" id="ds-nut" title="Danh sách slide (G)" style="font-size:17px">☰</button><button class="dieu" id="lui" title="Trang trước (←)">‹</button><span id="so-trang">1 / 1</span><button class="dieu" id="toi" title="Trang sau (→)">›</button><button class="dieu" id="toan" title="Toàn màn hình (F)" style="font-size:17px">⛶</button></span>
   </footer>
   <div id="chi-doc">Cả lớp đọc theo ✋</div>
+  <div id="ds-slide"><div class="ds-dau"><b>☰ Chọn slide</b><span id="ds-dang"></span><button class="dong-x" id="ds-dong">✕</button></div><div id="ds-noi"></div></div>
   <div id="lop"><div class="hop"><button class="dong-x" id="dong-lop">✕</button><div id="lop-noi"></div></div></div>
 </div>
 <script>
@@ -566,15 +591,16 @@ const DATA = {
           meo: '你 = 亻 (bộ nhân đứng, người) + 尔 · 好 = 女 (bộ nữ) + 子 (bộ tử) → gặp NGƯỜI thì chúc điều TỐT.<br>Đọc: viết <b>nǐ hǎo</b> nhưng đọc <b>ní hǎo</b> — hai thanh 3 liền nhau thì chữ trước nhảy lên thanh 2.',
           cum: [['你好！', 'Nǐ hǎo!', 'Xin chào!'], ['小语，你好！', 'Xiǎoyǔ, nǐ hǎo!', 'Chào Tiểu Ngữ!']],
           cau: ['AI小语，你好！', 'AI Xiǎoyǔ, nǐ hǎo!'],
-          hoi: [{ q: '你好！', qv: 'Chào bạn!', d: '你好！' }, { q: '你见到同学，你说什么？', qv: 'Gặp bạn cùng lớp, em nói gì?', d: '你好！/ 同学，你好！' }],
+          hoi: [{ q: '你好！', qv: 'Chào bạn!', d: '你好！' }, { q: '同学，你好！', qv: 'Chào cậu!', d: '你好！' }],
+          mo: [['您好', 'nín hǎo', 'chào (kính trọng)', 'gần nghĩa'], ['大家好', 'dàjiā hǎo', 'chào mọi người', 'cụm hay gặp'], ['你们好', 'nǐmen hǎo', 'chào các bạn', 'cụm hay gặp'], ['再见', 'zàijiàn', 'tạm biệt', 'trái nghĩa']],
           chu: '你好' },
         { w: '王老师', py: 'Wáng lǎoshī', loai: 'danh từ riêng · 专有名词', hv: 'VƯƠNG LÃO SƯ', nghia: 'cô Vương / thầy Vương', anh: 'tu-王老师.jpg', rieng: true,
           khi: 'Khi gọi hoặc nhắc tới thầy cô mà mình biết họ.',
-          the: 'HỌ + 老师 — họ đứng TRƯỚC chức danh, dính liền, không có dấu phẩy ở giữa.',
+          the: 'HỌ + 老师 — họ đứng TRƯỚC chức danh, dính liền, không có dấu phẩy ở giữa. Thay 王 bằng họ của thầy cô mình để gọi.',
           meo: 'Hán–Việt đọc thẳng là VƯƠNG LÃO SƯ — đúng y thứ tự tiếng Trung; tiếng Việt mình nói ngược lại ("cô Vương" = chức danh + tên).<br>王 ba nét ngang như ba tầng vương miện.',
           cum: [['王老师', 'Wáng lǎoshī', 'cô Vương'], ['王老师，你好！', 'Wáng lǎoshī, nǐ hǎo!', 'Em chào cô Vương!']],
           cau: ['王老师，你好！', 'Wáng lǎoshī, nǐ hǎo!'],
-          hoi: [{ q: '你们的老师姓什么？', qv: 'Thầy/cô của các em họ gì?', d: '(姓) 王。— lớp trả lời bằng họ của GV' }, { q: '用中文叫一下你的老师。', qv: 'Gọi thử thầy/cô của em bằng tiếng Trung.', d: '王老师！/ 陈老师！…' }],
+          hoi: [{ q: '王老师，您好！', qv: 'Em chào cô Vương ạ!', d: '你好！' }, { q: '王老师，再见！', qv: 'Em chào cô Vương, em về ạ!', d: '再见！' }],
           chu: '王老师' },
       ],
     },
@@ -599,7 +625,8 @@ const DATA = {
           meo: '女 (bộ nữ — con gái, phụ nữ) + 子 (bộ tử — đứa con) → người phụ nữ bên đứa con là điều TỐT ĐẸP.<br>Chữ hội ý: nhìn hai phần là đoán ra nghĩa.',
           cum: [['你好', 'nǐ hǎo', 'xin chào'], ['大家好', 'dàjiā hǎo', 'chào mọi người']],
           cau: ['大家好！', 'Dàjiā hǎo!'],
-          hoi: [{ q: '今天你好吗？', qv: 'Hôm nay em khoẻ không?', d: '好！' }, { q: '老师来了，你怎么说？', qv: 'Cô vào lớp rồi, em nói thế nào?', d: '老师，您好！' }],
+          hoi: [{ q: '老师好！', qv: 'Em chào cô!', d: '同学们好！' }, { q: '老师们好！', qv: 'Chúng em chào các thầy cô!', d: '同学们好！／大家好！' }],
+          mo: [['很好', 'hěn hǎo', 'rất tốt', 'cụm hay gặp'], ['好吃', 'hǎochī', 'ngon', 'từ ghép'], ['好看', 'hǎokàn', 'đẹp, xem hay', 'từ ghép'], ['好听', 'hǎotīng', 'nghe hay', 'từ ghép']],
           chu: '好' },
         { w: '大家', py: 'dàjiā', loai: 'đại từ · 人称代词', hv: 'ĐẠI GIA', nghia: 'mọi người, cả nhà', anh: 'tu-大家.jpg',
           khi: 'Khi nói với CẢ NHÓM như một khối — kể cả khi chính mình cũng nằm trong nhóm đó.',
@@ -607,7 +634,8 @@ const DATA = {
           meo: 'Hán–Việt ĐẠI GIA = "nhà lớn" → cả nhà → mọi người.<br>家 = 宀 (bộ miên, mái nhà) + 豕 (con lợn): ngày xưa dưới mái nhà có nuôi lợn mới gọi là một cái nhà.',
           cum: [['大家好！', 'Dàjiā hǎo!', 'Chào mọi người!'], ['大家，再见！', 'Dàjiā, zàijiàn!', 'Tạm biệt mọi người!']],
           cau: ['大家好！', 'Dàjiā hǎo!'],
-          hoi: [{ q: '你站在全班前面，第一句话说什么？', qv: 'Em đứng trước cả lớp, câu đầu tiên nói gì?', d: '大家好！' }, { q: '“大家” 后边可以加 “们” 吗？', qv: 'Sau 大家 có gắn được 们 không?', d: '不可以 — 大家 đã là số nhiều.' }],
+          hoi: [{ q: '大家好！', qv: 'Chào mọi người!', d: '老师好！／老师，您好！' }, { q: '大家，再见！', qv: 'Tạm biệt mọi người!', d: '老师，再见！' }],
+          mo: [['家', 'jiā', 'nhà', 'cùng chữ'], ['家人', 'jiārén', 'người nhà', 'cùng chữ'], ['大学', 'dàxué', 'đại học', 'cùng chữ'], ['我们', 'wǒmen', 'chúng ta', 'gần nghĩa']],
           chu: '大家' },
         { w: '老师', py: 'lǎoshī', loai: 'danh từ · 名词', hv: 'LÃO SƯ', nghia: 'thầy giáo, cô giáo', anh: 'tu-老师.jpg',
           khi: 'Khi gọi thầy cô (thay cho tên), hoặc khi kể về nghề của một người.',
@@ -615,7 +643,8 @@ const DATA = {
           meo: 'Hán–Việt LÃO SƯ. 老 mang 耂 (bộ lão) — hình người già tóc dài chống gậy; 师 có 巾 (bộ cân, cái khăn).<br>老 ở đây KHÔNG có nghĩa "già" — đó là tiếng đệm tỏ ý kính trọng.',
           cum: [['老师好！', 'Lǎoshī hǎo!', 'Em chào cô!'], ['王老师', 'Wáng lǎoshī', 'cô Vương']],
           cau: ['老师，您好！', 'Lǎoshī, nín hǎo!'],
-          hoi: [{ q: '在中文里，你怎么叫你的老师？', qv: 'Trong tiếng Trung em gọi thầy cô thế nào?', d: '老师！/ 王老师！' }, { q: '全班对老师说什么？', qv: 'Cả lớp nói gì với cô?', d: '老师，您好！' }],
+          hoi: [{ q: '老师，您好！', qv: 'Em chào cô ạ!', d: '同学们好！' }, { q: '谢谢老师！', qv: 'Em cảm ơn cô!', d: '不客气！' }],
+          mo: [['中文老师', 'Zhōngwén lǎoshī', 'giáo viên tiếng Trung', 'cụm hay gặp'], ['老师们', 'lǎoshīmen', 'các thầy cô', 'cụm hay gặp'], ['学生', 'xuésheng', 'học sinh', 'trái nghĩa'], ['医生', 'yīshēng', 'bác sĩ', 'cùng nhóm']],
           chu: '老师' },
         { w: '学生', py: 'xuésheng', loai: 'danh từ · 名词', hv: 'HỌC SINH', nghia: 'học sinh', anh: 'tu-学生.jpg',
           khi: 'Khi KỂ vai của mình hoặc của người khác — KHÔNG dùng để gọi ai.',
@@ -623,7 +652,8 @@ const DATA = {
           meo: 'Hán–Việt HỌC SINH trùng luôn tiếng Việt.<br>学 = đứa trẻ 子 (bộ tử) ngồi dưới mái nhà; 生 = mầm cây mọc nhú lên khỏi mặt đất.<br>Đọc: 生 ở đây là KHINH THANH — <b>xuésheng</b>.',
           cum: [['学生', 'xuésheng', 'học sinh'], ['学生们', 'xuéshengmen', 'các học sinh']],
           cau: ['学生们', 'xuéshengmen'],
-          hoi: [{ q: '你是老师还是学生？', qv: 'Em là giáo viên hay học sinh?', d: '学生。' }, { q: '老师叫全班的时候，用 “学生们” 还是 “同学们”？', qv: 'Cô gọi cả lớp thì dùng từ nào?', d: '同学们 — 学生 chỉ dùng để kể.' }],
+          hoi: [{ q: '老师？学生？', qv: '(Cô chỉ vào em) Thầy cô hay học sinh?', d: '学生。' }, { q: '老师们？学生们？', qv: '(Cô chỉ cả lớp) Các em là thầy cô hay học sinh?', d: '学生们。' }],
+          mo: [['大学生', 'dàxuéshēng', 'sinh viên', 'từ ghép'], ['中学生', 'zhōngxuéshēng', 'học sinh trung học', 'từ ghép'], ['小学生', 'xiǎoxuéshēng', 'học sinh tiểu học', 'từ ghép'], ['老师', 'lǎoshī', 'giáo viên', 'trái nghĩa']],
           chu: '学生' },
         { w: '们', py: 'men', loai: 'hậu tố · 词缀', hv: 'MÔN', nghia: '(đuôi chỉ số nhiều)', anh: 'tu-们.jpg',
           khi: 'Khi muốn nói rõ là NHIỀU NGƯỜI mà trong câu không có số đếm.',
@@ -631,15 +661,17 @@ const DATA = {
           meo: '亻 (bộ nhân đứng, người) + 门 (cái cửa, mén — gợi âm) → cả một CỬA người bước ra thì phải là nhiều người.<br>Đọc KHINH THANH: <b>men</b>, nhẹ và ngắn; đọc nặng thành mén là ra chữ 门 (cửa).',
           cum: [['学生们', 'xuéshengmen', 'các học sinh'], ['老师们', 'lǎoshīmen', 'các thầy cô']],
           cau: ['学生们', 'xuéshengmen'],
-          hoi: [{ q: '一个人说 “你好”，很多人呢？', qv: 'Một người thì 你好, nhiều người thì sao?', d: '你们好！' }, { q: '“三个学生们” 对不对？', qv: 'Nói 三个学生们 có đúng không?', d: '不对 — có số rồi thì bỏ 们: 三个学生。' }],
+          hoi: [{ q: '同学们，你们好！', qv: 'Chào các em!', d: '老师，您好！' }, { q: '老师们，再见！', qv: 'Chúng em chào các thầy cô ạ!', d: '同学们，再见！' }],
+          mo: [['我们', 'wǒmen', 'chúng tôi', 'từ ghép'], ['他们', 'tāmen', 'họ, các anh ấy', 'từ ghép'], ['她们', 'tāmen', 'các cô ấy', 'từ ghép'], ['同学们', 'tóngxuémen', 'các bạn, các em', 'cụm hay gặp']],
           chu: '们' },
         { w: '你们', py: 'nǐmen', loai: 'đại từ · 人称代词', hv: 'NHĨ MÔN', nghia: 'các bạn, các em', anh: 'tu-你们.jpg',
           khi: 'Khi nói với nhóm người đối diện mà mình KHÔNG thuộc nhóm đó.',
           the: '你 + 们 · 你们 + 好 · làm chủ ngữ bình thường.',
           meo: '你 + 们 = bạn + đuôi số nhiều.<br>So với 大家: 大家 có thể gồm cả người nói, 你们 thì KHÔNG — cô nói 大家好 (cả cô lẫn trò), Tiểu Ngữ nói 你们好 (chỉ các bạn).',
-          cum: [['你们好！', 'Nǐmen hǎo!', 'Chào các bạn!'], ['你们是学生', 'nǐmen shì xuésheng', 'các bạn là học sinh']],
+          cum: [['你们好！', 'Nǐmen hǎo!', 'Chào các bạn!'], ['谢谢你们', 'xièxie nǐmen', 'cảm ơn các bạn']],
           cau: ['你们好！', 'Nǐmen hǎo!'],
-          hoi: [{ q: '小语对全班说什么？', qv: 'Tiểu Ngữ nói gì với cả lớp?', d: '你们好！' }, { q: '“大家好” 和 “你们好” 有什么不一样？', qv: 'Hai câu này khác nhau chỗ nào?', d: '大家 gồm cả người nói · 你们 thì không.' }],
+          hoi: [{ q: '你们好！', qv: 'Chào các bạn!', d: '你好，小语！' }, { q: '谢谢你们！', qv: 'Cảm ơn các bạn!', d: '不客气！' }],
+          mo: [['我们', 'wǒmen', 'chúng tôi', 'cùng nhóm'], ['他们', 'tāmen', 'họ', 'cùng nhóm'], ['大家', 'dàjiā', 'mọi người', 'gần nghĩa']],
           chu: '你们' },
         { w: '您', py: 'nín', loai: 'đại từ kính · 敬称代词', hv: 'NHẪM', nghia: 'ngài, cô, thầy (kính)', anh: 'tu-您.jpg',
           khi: 'Khi nói với MỘT người trên vai mình — thầy cô, người lớn tuổi, khách, cấp trên.',
@@ -647,7 +679,8 @@ const DATA = {
           meo: '您 chính là 你 đội thêm 心 (bộ tâm — trái tim) ở dưới → nói với người trên thì phải đặt thêm TRÁI TIM xuống dưới.',
           cum: [['您好！', 'Nín hǎo!', 'Chào ngài / Em chào cô!'], ['老师，您好！', 'Lǎoshī, nín hǎo!', 'Em chào cô ạ!']],
           cau: ['老师，您好！', 'Lǎoshī, nín hǎo!'],
-          hoi: [{ q: '你见到老师，你说 “你好” 还是 “您好”？', qv: 'Gặp cô thì nói câu nào?', d: '您好！' }, { q: '有三位老师，你怎么说？', qv: 'Có ba thầy cô thì nói thế nào?', d: '老师们好！/ 大家好！— không nói ✗您们好。' }],
+          hoi: [{ q: '您好！', qv: 'Em chào cô ạ!', d: '你好！' }, { q: '老师，谢谢您！', qv: 'Em cảm ơn cô ạ!', d: '不客气！' }],
+          mo: [['你', 'nǐ', 'bạn (ngang hàng)', 'gần nghĩa'], ['谢谢您', 'xièxie nín', 'cảm ơn (kính trọng)', 'cụm hay gặp'], ['先生', 'xiānsheng', 'ông, ngài', 'cùng nhóm'], ['女士', 'nǚshì', 'bà, quý cô', 'cùng nhóm']],
           chu: '您' },
       ],
     },
@@ -670,7 +703,8 @@ const DATA = {
           meo: '讠 (bộ ngôn — lời nói) + 射 → lời cảm ơn BẮN ra khỏi miệng. Hán–Việt là TẠ (như "cảm tạ").<br>Đọc: chữ thứ hai KHINH THANH — <b>xièxie</b>.',
           cum: [['谢谢！', 'Xièxie!', 'Cảm ơn!'], ['谢谢老师', 'xièxie lǎoshī', 'cảm ơn cô']],
           cau: ['谢谢！', 'Xièxie!'],
-          hoi: [{ q: '老师帮了你，你说什么？', qv: 'Cô vừa giúp em, em nói gì?', d: '谢谢老师！' }, { q: '全班一起谢老师，怎么说？', qv: 'Cả lớp cùng cảm ơn cô thì nói sao?', d: '谢谢老师！— cả lớp đồng thanh.' }],
+          hoi: [{ q: '谢谢！', qv: 'Cảm ơn!', d: '不客气！' }, { q: '谢谢大家！', qv: 'Cảm ơn mọi người!', d: '不客气！' }],
+          mo: [['谢谢你', 'xièxie nǐ', 'cảm ơn bạn', 'cụm hay gặp'], ['谢谢大家', 'xièxie dàjiā', 'cảm ơn mọi người', 'cụm hay gặp'], ['谢谢您', 'xièxie nín', 'cảm ơn (kính trọng)', 'cụm hay gặp'], ['对不起', 'duìbuqǐ', 'xin lỗi', 'cùng nhóm']],
           chu: '谢谢' },
         { w: '不客气', py: 'bú kèqi', loai: 'câu xã giao · 客套话', hv: 'BẤT KHÁCH KHÍ', nghia: 'không có gì, đừng khách sáo', anh: 'tu-不客气.jpg',
           khi: 'Khi người ta vừa cảm ơn MÌNH — là vế đáp bắt buộc của 谢谢.',
@@ -678,15 +712,17 @@ const DATA = {
           meo: 'Hán–Việt BẤT KHÁCH KHÍ = "đừng khách sáo" — dịch thẳng ra là hiểu.<br>Đọc: 不 vốn là bù, nhưng đứng trước 客 (thanh 4) thì đổi thành <b>bú</b> → bú kèqi. Đây là biến điệu bắt buộc.',
           cum: [['不客气！', 'Bú kèqi!', 'Không có gì!'], ['谢谢！— 不客气！', 'Xièxie! — Bú kèqi!', 'Cảm ơn! — Không có gì!']],
           cau: ['不客气！', 'Bú kèqi!'],
-          hoi: [{ q: '同学说 “谢谢”，你回答什么？', qv: 'Bạn nói 谢谢, em đáp lại gì?', d: '不客气！' }, { q: '“不” 在这里读 bù 还是 bú？', qv: '不 ở đây đọc thế nào?', d: 'bú — vì đứng trước thanh 4.' }],
+          hoi: [{ q: '小语，谢谢！', qv: 'Cảm ơn Tiểu Ngữ!', d: '不客气！' }, { q: '同学，谢谢！', qv: 'Cảm ơn cậu nhé!', d: '不客气！' }],
+          mo: [['没关系', 'méi guānxi', 'không sao', 'gần nghĩa'], ['没事', 'méishì', 'không sao mà', 'gần nghĩa'], ['不', 'bù', 'không', 'cùng chữ'], ['不要', 'búyào', 'đừng, không cần', 'cùng chữ']],
           chu: '不客气' },
         { w: '同学', py: 'tóngxué', loai: 'danh từ · 名词', hv: 'ĐỒNG HỌC', nghia: 'bạn học', anh: 'tu-同学.jpg',
           khi: 'Khi GỌI bạn cùng lớp, hoặc khi thầy cô gọi học trò.',
-          the: '同学 gọi một người · 同学们 gọi cả lớp · 同学 để GỌI, 学生 để KỂ.',
+          the: '同学 gọi một người · 同学们 gọi cả lớp · 同学 để GỌI, 学生 để KỂ. Không biết tên bạn thì cứ gọi 同学.',
           meo: 'Hán–Việt ĐỒNG HỌC = cùng học.<br>同 = 冂 (bộ quynh, vành bao ngoài) + 一 + 口 (bộ khẩu, miệng) → nhiều người CÙNG nói một tiếng dưới một mái = CÙNG, GIỐNG.',
           cum: [['同学，你好！', 'Tóngxué, nǐ hǎo!', 'Chào bạn!'], ['同学们', 'tóngxuémen', 'các em, các bạn']],
           cau: ['同学们，再见！', 'Tóngxuémen, zàijiàn!'],
-          hoi: [{ q: '老师叫全班，用哪个词？', qv: 'Cô gọi cả lớp thì dùng từ nào?', d: '同学们！' }, { q: '你不知道那个人的名字，怎么叫他？', qv: 'Không biết tên bạn ấy thì gọi thế nào?', d: '同学！/ 同学，你好！' }],
+          hoi: [{ q: '同学们好！', qv: 'Chào các em!', d: '老师好！' }, { q: '同学，再见！', qv: 'Tạm biệt cậu!', d: '再见！' }],
+          mo: [['学生', 'xuésheng', 'học sinh', 'gần nghĩa'], ['朋友', 'péngyou', 'bạn bè', 'gần nghĩa'], ['学校', 'xuéxiào', 'trường học', 'cùng chữ'], ['学习', 'xuéxí', 'học tập', 'cùng chữ']],
           chu: '同学' },
         { w: '再见', py: 'zàijiàn', loai: 'động từ · 动词', hv: 'TÁI KIẾN', nghia: 'tạm biệt', anh: 'tu-再见.jpg',
           khi: 'Khi rời đi và còn gặp lại — hết giờ học, chia tay bạn, cúp máy.',
@@ -694,7 +730,8 @@ const DATA = {
           meo: '再 = lại + 见 = gặp → Hán–Việt TÁI KIẾN, nghĩa đen là "GẶP LẠI".<br>Người Trung chào tạm biệt bằng lời hẹn gặp lại — nhớ nghĩa đen thì không bao giờ dùng nhầm sang 好.',
           cum: [['再见！', 'Zàijiàn!', 'Tạm biệt!'], ['老师，再见！', 'Lǎoshī, zàijiàn!', 'Em chào cô ạ! (lúc về)']],
           cau: ['老师，再见！', 'Lǎoshī, zàijiàn!'],
-          hoi: [{ q: '下课了，你对老师说什么？', qv: 'Hết giờ, em nói gì với cô?', d: '老师，再见！' }, { q: '老师对全班说什么？', qv: 'Cô nói gì với cả lớp?', d: '同学们，再见！' }],
+          hoi: [{ q: '同学们，再见！', qv: 'Tạm biệt các em!', d: '老师，再见！' }, { q: '小语，再见！', qv: 'Tạm biệt Tiểu Ngữ!', d: '再见！' }],
+          mo: [['明天见', 'míngtiān jiàn', 'mai gặp lại', 'cụm hay gặp'], ['你好', 'nǐ hǎo', 'xin chào', 'trái nghĩa'], ['再', 'zài', 'lại, nữa', 'cùng chữ'], ['看见', 'kànjiàn', 'nhìn thấy', 'cùng chữ']],
           chu: '再见' },
       ],
     },
@@ -753,9 +790,9 @@ const DATA = {
       b: { w: '你们', nhan: 'Nhóm đối diện · KHÔNG gồm người nói', vd: [['你们好！', 'Nǐmen hǎo!']], ghi: 'Tiểu Ngữ nói với các bạn' },
       luyen: [['___好！(cô chào cả lớp, có cả cô)', '大家', ['大家', '你们']], ['___好！(Tiểu Ngữ chào các bạn)', '你们', ['大家', '你们']]] },
     { tab: '学生 ↔ 同学',
-      a: { w: '学生', nhan: 'Để KỂ vai, kể nghề', vd: [['我是学生。', 'Wǒ shì xuésheng.']], ghi: 'Không dùng để gọi người' },
+      a: { w: '学生', nhan: 'Để KỂ vai, kể nghề', vd: [['老师 · 学生', 'lǎoshī · xuésheng']], ghi: 'Kể vai: ai là thầy cô, ai là học sinh · không dùng để gọi người' },
       b: { w: '同学', nhan: 'Để GỌI bạn, gọi cả lớp', vd: [['同学们，再见！', 'Tóngxuémen, zàijiàn!']], ghi: 'Một bạn: 同学 · cả lớp: 同学们' },
-      luyen: [['___们，再见！(cô gọi cả lớp)', '同学', ['学生', '同学']], ['你是老师还是___？', '学生', ['学生', '同学']]] },
+      luyen: [['___们，再见！(cô gọi cả lớp)', '同学', ['学生', '同学']], ['___ (kể vai: em là học sinh, không phải 老师)', '学生', ['学生', '同学']]] },
   ],
 
   rao: {
@@ -1003,7 +1040,7 @@ function vietChu(ids, chu, ma, lap = false) {   // vẽ nét lần lượt từn
   const ws = ids.map((id, i) => {
     const o = document.getElementById(id); if (!o) return null;
     o.previousElementSibling && (o.previousElementSibling.style.visibility = 'hidden');
-    return HanziWriter.create(id, chu[i], { width: o.clientWidth, height: o.clientHeight, padding: 4, strokeColor: '#33402A', radicalColor: '#6AAE45', showOutline: true, outlineColor: '#E3ECD3', delayBetweenStrokes: 160, strokeAnimationSpeed: 1.1, showCharacter: false,
+    return HanziWriter.create(id, chu[i], { width: o.clientWidth, height: o.clientHeight, padding: 4, strokeColor: '#33402A', radicalColor: '#6AAE45', showOutline: true, outlineColor: '#C2D3A6', drawingColor: '#33402A', drawingWidth: 6, highlightColor: '#F2A541', showHintAfterMisses: 1, delayBetweenStrokes: 160, strokeAnimationSpeed: 1.1, showCharacter: false,
       onLoadCharDataError: () => { o.previousElementSibling && (o.previousElementSibling.style.visibility = 'visible'); } });
   });
   const chay = i => { if (ma !== phien || i >= ws.length) return; const w = ws[i]; if (!w) return chay(i + 1); w.animateCharacter({ onComplete: () => setTimeout(() => chay(i + 1), 250) }); };
@@ -1029,11 +1066,12 @@ them('bia', { c: 0 });
 DATA.phan.forEach((p, k) => {
   const c = k + 1;
   them('chuong', { c, k }); them('bang', { c, k });
-  // ngữ pháp (np: một điểm hoặc danh sách): np.sau = từ → ngay sau thẻ từ đó; np.sau = 'khoa' → sau bài khoá; không ghi → sau thẻ cuối
+  // ngữ pháp (np: một điểm hoặc danh sách) đứng SAU toàn bộ thẻ từ của phần, theo thứ tự trong dữ liệu (cô chốt 28/11, không xen giữa thẻ);
+  // np.sau = 'khoa' → sau bài khoá
   const nps = [].concat(p.np || []);
   const npSau = dk => nps.forEach((g, n) => { if (dk(g)) them('nguphap', { c, k, n }); });
-  p.tu.forEach((w, j) => { them('the', { c, k, j }); npSau(g => g.sau === w.w); });
-  npSau(g => g.sau !== 'khoa' && !p.tu.some(w => w.w === g.sau));
+  p.tu.forEach((w, j) => them('the', { c, k, j }));
+  npSau(g => g.sau !== 'khoa');
   them('khoa', { c, k });
   npSau(g => g.sau === 'khoa');
   them('tau', { c, k });   // trò xếp toa tàu: câu của bài khoá vừa học
@@ -1150,6 +1188,7 @@ VE.the = (t, el) => {
       <div class="khoi"><span class="pill">Hỏi nhanh</span>
         <div class="hoi-hang">${w.hoi.map((h, i) => `<div class="hoi" data-hoi="${i}"><span class="so">${i + 1}</span><div class="q">${hl(h.q)}</div><div class="qv">${esc(h.qv)}</div><div class="d">→ ${hl(h.d)}</div></div>`).join('')}</div></div>
       <div class="nut-lop">
+        ${w.mo && w.mo.length ? '<button class="nut chinh" id="b-mo">➕ Mở rộng</button>' : ''}
         <button class="nut" id="b-meo">💡 Mẹo nhớ</button>
         <button class="nut" id="b-chu">✍️ Chữ Hán (${chu.length})</button>
         <button class="nut" id="b-gv">🗒 Ghi chú GV</button>
@@ -1160,7 +1199,9 @@ VE.the = (t, el) => {
   const ma = phien;
   vietChu(chu.map((c, i) => 'hw' + i), chu, ma);
   $('#b-ve', el).onclick = () => { chu.forEach((c, i) => { const o = $('#hw' + i, el); if (o) o.innerHTML = ''; }); vietChu(chu.map((c, i) => 'hw' + i), chu, phien); };
-  $$('[data-hoi]', el).forEach(h => h.onclick = () => { const x = w.hoi[h.dataset.hoi]; if (!h.classList.contains('mo')) { h.classList.add('mo'); sao(`the${t.k}-${t.j}-${h.dataset.hoi}`, 1, h); doc(chiHan(x.d.split('—')[0])); } else doc(x.q); });
+  $$('[data-hoi]', el).forEach(h => h.onclick = () => { if (!h.classList.contains('mo')) { h.classList.add('mo'); sao(`the${t.k}-${t.j}-${h.dataset.hoi}`, 1, h); } });   // không phát âm (cô chốt 28/11)
+  const bm = $('#b-mo', el); if (bm) bm.onclick = () => moLop('➕ Mở rộng', `Từ <span class="zh">${esc(w.w)}</span> còn đi với…`,
+    `<div class="mr-luoi">${w.mo.map(m => `<button class="mr" data-doc="${esc(m[0])}">${m[3] ? `<span class="pill">${esc(m[3])}</span>` : ''}<span class="zh">${hl(m[0])}</span><span class="py">${esc(m[1])}</span><span class="vi">${esc(m[2])}</span></button>`).join('')}</div>`);
   $('#b-meo', el).onclick = () => moLop('💡 Mẹo nhớ', `<span class="zh">${esc(w.w)}</span> · ${esc(w.hv)}`, `<p>${w.meo}</p>`);
   $('#b-chu', el).onclick = () => moLop('✍️ Chữ Hán', `Tháo từng chữ của <span class="zh">${esc(w.w)}</span>`, chu.map(c => { const x = DATA.chu[c]; return `<div class="chu-o">${MI(c, 110)}<div>
       <p><b class="zh" style="font-size:26px">${c}</b> <span class="py">${x.py}</span> — bộ <b class="zh">${esc(x.bo)}</b> ${x.viet ? '<span class="pill">★ phải viết tay</span>' : '<span class="pill trang">chỉ nhận mặt</span>'}</p>
@@ -1198,6 +1239,7 @@ VE.nguphap = (t, el) => {
   const chon = k => {
     dungDoc();
     phai.innerHTML = VEM[k]();
+    phai.classList.remove('chat'); if (phai.scrollHeight > phai.clientHeight + 2) phai.classList.add('chat');   // dư chữ thì co lại một nấc
     $$('.np-muc', el).forEach(b => b.classList.toggle('bat', b.dataset.muc === k));
     if (k === 'xep') $$('.xep', phai).forEach(o => {
       const x = g.xep[o.dataset.x], kq = $('.xep-kq', o); let i = 0;
@@ -1209,7 +1251,7 @@ VE.nguphap = (t, el) => {
       });
     });
     if (k === 'loi') $$('.loi', phai).forEach(o => o.onclick = () => { const l = g.loi[o.dataset.l]; if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-l${o.dataset.l}`, 1, o); } doc(l[1]); });
-    if (k === 'hoi') $$('.hoi', phai).forEach(o => o.onclick = () => { const h = g.hoi[o.dataset.hoi]; if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-h${o.dataset.hoi}`, 1, o); doc(chiHan(h.d.split('—')[0])); } else doc(h.q); });
+    if (k === 'hoi') $$('.hoi', phai).forEach(o => o.onclick = () => { if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-h${o.dataset.hoi}`, 1, o); } });   // không phát âm
   };
   $$('.np-muc', el).forEach(b => b.onclick = () => chon(b.dataset.muc));
   $('#np-gv', el).onclick = () => moLop('🗒 Ghi chú giáo viên', `Ngữ pháp ${g.so} · <span class="zh">${esc(g.ten)}</span>`, `<dl class="ghi-gv">
@@ -1588,7 +1630,7 @@ function capNhatDau() {
 }
 function sang(i) {
   i = Math.max(0, Math.min(TRANG.length - 1, i));
-  dungDoc(); phien++; dongLop();
+  dungDoc(); phien++; dongLop(); dongDS();
   S.i = i; luu();
   const t = TRANG[i], k = $('#khung');
   k.dataset.loai = t.loai;
@@ -1601,6 +1643,26 @@ document.addEventListener('click', e => {
   const h = e.target.closest('[data-anh]'); if (h) { xemAnh(h.dataset.anh, h.dataset.tieu || ''); return; }
   const d = e.target.closest('[data-doc]'); if (d) { doc(d.dataset.doc); return; }
 });
+const NHAN_TRANG = { bia: 'Bìa', chuong: 'Mở chặng', bang: 'Bảng từ', tau: '🚂 Tàu', sosanh: 'So sánh', viettay: 'Viết tay', bothu: 'Bộ thủ', nham: 'Chữ dễ nhầm', khoidong: 'Nhìn tranh', rao: 'Nói nhanh', quiz: 'Quiz', check: 'Tự kiểm', cuoi: 'Kết thúc' };
+function nhanTrang(t) {
+  if (t.loai === 'the') return `<span class="zh">${esc(DATA.phan[t.k].tu[t.j].w.replace(/\u200B/g, ''))}</span>`;
+  if (t.loai === 'nguphap') { const g = [].concat(DATA.phan[t.k].np)[t.n || 0]; return `📘 <span class="zh">${esc(g.ten)}</span>`; }
+  if (t.loai === 'khoa') return `📖 Bài khoá ${t.k + 1}`;
+  return NHAN_TRANG[t.loai] || t.loai;
+}
+function moDS() {
+  const nhom = [];
+  TRANG.forEach((t, i) => { const g = nhom[nhom.length - 1]; if (g && g.c === t.c) g.ds.push(i); else nhom.push({ c: t.c, ds: [i] }); });
+  $('#ds-noi').innerHTML = nhom.map(g => `<div class="ds-chang"><div class="ds-ten">${CHUONG[g.c].ic} ${esc(CHUONG[g.c].ten)}</div><div class="ds-the">${g.ds.map(i =>
+    `<button data-sang="${i}" class="${i === S.i ? 'dang' : ''}"><small>${i + 1}</small>${nhanTrang(TRANG[i])}</button>`).join('')}</div></div>`).join('');
+  $('#ds-dang').textContent = `Đang ở slide ${S.i + 1} / ${TRANG.length}`;
+  $('#ds-slide').classList.add('mo');
+  const d = $('#ds-noi .dang'); if (d) d.scrollIntoView({ block: 'center' });
+}
+function dongDS() { $('#ds-slide').classList.toggle('mo', false); }
+const batDS = () => $('#ds-slide').classList.contains('mo') ? dongDS() : moDS();
+$('#ds-nut').onclick = batDS;
+$('#ds-dong').onclick = dongDS;
 $('#lui').onclick = () => sang(S.i - 1);
 $('#toi').onclick = () => sang(S.i + 1);
 const toanMH = () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); else document.exitFullscreen(); };
@@ -1610,7 +1672,8 @@ document.addEventListener('keydown', e => {
   if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); sang(S.i + 1); }
   else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); sang(S.i - 1); }
   else if (e.key === 'f' || e.key === 'F') toanMH();
-  else if (e.key === 'Escape') dongLop();
+  else if (e.key === 'g' || e.key === 'G') batDS();
+  else if (e.key === 'Escape') { dongLop(); dongDS(); }
 });
 $$('[data-toc]').forEach(b => { b.classList.toggle('bat', +b.dataset.toc === S.toc); b.onclick = () => { S.toc = +b.dataset.toc; luu(); $$('[data-toc]').forEach(x => x.classList.toggle('bat', x === b)); }; });
 $('#ten-bai').textContent = `Bài ${DATA.bai} · ${DATA.ten}`;
