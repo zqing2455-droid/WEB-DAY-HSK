@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HSK1 · Web dạy học</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rung:#687D3A; --rung-dam:#4B5A36; --la:#C9D6B3; --la-nhat:#E3EAD3; --giay:#F7F2E1; --trang:#FFFDF5;
+  --vang:#F1E9CC; --vang-dam:#9A7A33; --muc:#33402A; --muc-phu:#6F7860;
+  --han:'Kaiti SC','STKaiti','KaiTi','Noto Serif SC',serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--rung);
+  font-family:'Nunito','Calibri',sans-serif;color:var(--muc);
+  padding:16px;min-height:100vh;
+}
+.khung{
+  max-width:1080px;margin:0 auto;border-radius:22px;padding:34px 34px 28px;
+  background-color:var(--giay);
+  background-image:linear-gradient(rgba(104,125,58,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(104,125,58,.07) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+.dau{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.nhan{display:inline-block;background:var(--rung);color:#fff;font:700 13px/1 'Baloo 2',sans-serif;letter-spacing:.06em;
+  text-transform:uppercase;border-radius:999px;padding:7px 14px 5px}
+h1{font:800 40px/1.1 'Baloo 2',sans-serif;margin:12px 0 4px;color:var(--rung-dam)}
+.phu{margin:0;color:var(--muc-phu);font-size:16px}
+.goi-y{font-size:14px;color:var(--muc-phu);max-width:330px;background:var(--trang);border:2px dashed var(--la);border-radius:14px;padding:10px 14px}
+.goi-y b{color:var(--rung-dam)}
+.luoi{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.bai a{display:flex;gap:14px;align-items:center;text-decoration:none;color:inherit;height:100%;
+  background:var(--trang);border:2px dashed var(--la);border-radius:18px;padding:16px 16px 14px;position:relative;
+  transition:transform .15s,border-color .15s,box-shadow .15s}
+.bai a::before{content:'';position:absolute;top:-7px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;
+  background:var(--rung);box-shadow:0 0 0 3px var(--giay)}
+.bai a:hover,.bai a:focus-visible{transform:translateY(-3px);border-color:var(--rung);border-style:solid;box-shadow:0 8px 20px rgba(75,90,54,.14);outline:none}
+.so{flex:none;width:52px;height:52px;border-radius:50%;background:var(--la-nhat);color:var(--rung-dam);
+  display:grid;place-items:center;font:800 22px/1 'Baloo 2',sans-serif}
+.noi{min-width:0}
+.han{font-family:var(--han);font-size:24px;line-height:1.25;color:var(--muc)}
+.py{font-size:13px;color:var(--muc-phu);margin-top:2px}
+.vi{font-weight:700;font-size:15px;color:var(--rung-dam);margin-top:4px}
+.chu-de{display:inline-block;margin-top:6px;font-size:12px;background:var(--vang);color:var(--vang-dam);border-radius:999px;padding:2px 10px;font-family:var(--han)}
+.chan{margin-top:24px;font-size:13px;color:var(--muc-phu);text-align:center}
+@media (max-width:600px){
+  .khung{padding:22px 16px 20px;border-radius:16px}
+  h1{font-size:30px}
+  .luoi{grid-template-columns:1fr}
+}
+.ve{display:inline-block;margin-bottom:10px;font-weight:700;font-size:14px;color:var(--rung-dam);text-decoration:none}
+.ve:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<main class="khung">
+  <div class="dau">
+    <div>
+      <a class="ve" href="../">← Tất cả cấp độ</a><br>
+      <span class="nhan">新HSK教程1</span>
+      <h1>Web dạy học HSK1</h1>
+      <p class="phu">Trình chiếu trên lớp · 15 bài · Giáo viên: Thanh Trúc</p>
+    </div>
+    <p class="goi-y">Bấm vào bài để mở. Mỗi bài là một tệp lớn (vài MB), lần đầu mở cần chờ vài giây. Chiếu toàn màn hình bằng nút <b>⛶</b> ở góc dưới.</p>
+  </div>
+  <ul class="luoi" id="ds"></ul>
+  <p class="chan">Nét viết chữ Hán và giọng đọc cần kết nối mạng.</p>
+</main>
+<script>
+const BAI = [
+  ['AI小语，你好！', 'AI Xiǎoyǔ, nǐ hǎo!', 'AI Tiểu Ngữ, chào bạn!', ''],
+  ['我叫李文', 'Wǒ jiào Lǐ Wén', 'Tôi tên Lý Văn', ''],
+  ['我是越南人', 'Wǒ shì Yuènán rén', 'Tôi là người Việt Nam', ''],
+  ['我有两个孩子', 'Wǒ yǒu liǎng gè háizi', 'Tôi có hai đứa con', ''],
+  ['今天我休息', 'Jīntiān wǒ xiūxi', 'Hôm nay tôi nghỉ', ''],
+  ['你的手机号是多少？', 'Nǐ de shǒujī hào shì duōshao?', 'Số điện thoại của bạn là bao nhiêu?', ''],
+  ['我晚上六点半下班', 'Wǒ wǎnshang liù diǎn bàn xiàbān', '6 giờ rưỡi tối tôi tan ca', ''],
+  ['我爸爸也在医院工作', 'Wǒ bàba yě zài yīyuàn gōngzuò', 'Bố tôi cũng làm việc ở bệnh viện', ''],
+  ['我明天上午在学校学习', 'Wǒ míngtiān shàngwǔ zài xuéxiào xuéxí', 'Sáng mai tôi học ở trường', ''],
+  ['这儿的苹果真便宜！', 'Zhèr de píngguǒ zhēn piányi!', 'Táo ở đây rẻ thật!', ''],
+  ['我读大学呢', 'Wǒ dú dàxué ne', 'Tôi đang học đại học', ''],
+  ['昨天下雪了', 'Zuótiān xià xuě le', 'Hôm qua tuyết rơi rồi', ''],
+  ['请给我一杯茶', 'Qǐng gěi wǒ yì bēi chá', 'Cho tôi một ly trà', ''],
+  ['我看了一个电影', 'Wǒ kànle yí gè diànyǐng', 'Tôi đã xem một bộ phim', ''],
+  ['大兴机场见！', 'Dàxīng Jīchǎng jiàn!', 'Hẹn gặp ở sân bay Đại Hưng!', ''],
+];
+document.getElementById('ds').innerHTML = BAI.map(([han, py, vi, cd], i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return `<li class="bai"><a href="bai-${n}.html"><span class="so">${i + 1}</span><span class="noi">
+    <div class="han">${han}</div><div class="py">${py}</div><div class="vi">${vi}</div>${cd ? `<span class="chu-de">${cd}</span>` : ''}</span></a></li>`;
+}).join('');
+</script>
+</body>
+</html>
