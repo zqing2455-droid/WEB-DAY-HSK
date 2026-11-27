@@ -243,7 +243,14 @@ button{font:inherit;cursor:pointer}
 .hoi .d{margin-top:8px;font-family:var(--zh);font-size:20px;font-weight:700;color:var(--la-dam);background:var(--la-nhat);border-radius:10px;padding:4px 10px;filter:blur(7px);opacity:.55;transition:.25s}
 .hoi.mo .d{filter:none;opacity:1}
 .hoi:not(.mo) .d::after{content:""}
-.nut-lop{display:flex;gap:10px;margin-top:auto}
+.nut-lop{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap}
+.mr-luoi{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px}
+.mr{position:relative;border:2px dashed var(--vien);background:#fff;border-radius:18px;padding:16px 18px 12px;text-align:left;display:flex;flex-direction:column;gap:2px;cursor:pointer}
+.mr .pill{position:absolute;top:-12px;left:14px;font-size:12.5px;padding:2px 12px}
+.mr .zh{font-family:var(--zh);font-size:34px;font-weight:700;line-height:1.2;color:var(--muc)}
+.mr .py{font-size:17px;color:var(--la-dam);font-weight:700}
+.mr .vi{font-size:16px;color:var(--muc-phu)}
+.mr:hover{border-style:solid;border-color:var(--la)}
 
 /* ── bài khoá ── */
 .khoa{display:grid;grid-template-columns:450px 1fr;grid-template-rows:minmax(0,1fr);gap:26px;height:calc(100% - 82px)}
@@ -416,6 +423,7 @@ button{font:inherit;cursor:pointer}
 .np-cau .py{margin-left:14px;font-size:16px}
 .np-ghi{margin-top:12px;background:var(--la-nhat);border-radius:14px;padding:10px 16px;font-size:16.5px;line-height:1.5}
 .np-ghi b{color:var(--la-dam)}
+.np-phai.chat .np-ct{margin-bottom:6px}.np-phai.chat .np-o{padding:3px 16px}.np-phai.chat .np-o b{font-size:26px}.np-phai.chat .np-vd{gap:2px}.np-phai.chat .np-cau{padding:2px 6px}.np-phai.chat .vd-o,.np-phai.chat .np-cau .dau{font-size:27px}.np-phai.chat .np-ghi{margin-top:8px;padding:7px 14px;font-size:15.5px}
 .xep-ds{display:flex;flex-direction:column;gap:14px}
 .xep{border:2px dashed var(--vien);border-radius:18px;padding:10px 16px}
 .xep-kq{min-height:50px;border-bottom:3px solid var(--la-3);font-family:var(--zh);font-size:32px;font-weight:700;display:flex;gap:4px;align-items:center;padding-bottom:2px}
@@ -447,6 +455,22 @@ button{font:inherit;cursor:pointer}
 .luoi6.nhieu .bt .mi{width:72px!important;height:72px!important;font-size:52px!important}
 .luoi6.nhieu .bt h4{font-size:19px}
 /* ── lớp phủ ── */
+#ds-slide{position:absolute;left:18px;right:18px;bottom:58px;max-height:470px;background:#fff;border:2.5px solid var(--la);border-radius:22px;box-shadow:0 10px 30px rgba(60,80,30,.25);z-index:30;display:none;flex-direction:column;overflow:hidden}
+#ds-slide.mo{display:flex}
+#ds-slide .ds-dau{display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:2px dashed var(--vien);font-size:17px;color:var(--la-dam)}
+#ds-slide .ds-dau span{font-size:14px;color:var(--muc-phu)}
+#ds-slide .dong-x{position:static;margin-left:auto}
+#ds-noi{overflow-y:auto;padding:8px 18px 14px}
+.ds-chang{display:flex;gap:12px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--vien)}
+.ds-chang:last-child{border-bottom:0}
+.ds-ten{flex:none;width:150px;font:800 14px "Nunito";color:var(--la-dam);padding-top:5px}
+.ds-the{display:flex;flex-wrap:wrap;gap:6px}
+.ds-the button{border:1.5px solid var(--vien);background:var(--la-nhat);border-radius:10px;padding:3px 10px;font:700 14px "Nunito";color:var(--muc);cursor:pointer;display:flex;gap:6px;align-items:baseline}
+.ds-the button small{font-size:11px;color:var(--muc-phu)}
+.ds-the button .zh{font-family:var(--zh);font-size:17px}
+.ds-the button:hover{border-color:var(--la)}
+.ds-the button.dang{background:var(--la);border-color:var(--la);color:#fff}
+.ds-the button.dang small{color:#E8F2DA}
 #lop{position:absolute;inset:0;background:rgba(60,80,30,.35);display:none;z-index:40;align-items:center;justify-content:center}
 #lop.mo{display:flex}
 #lop .hop{width:860px;max-height:600px;overflow:auto;background:#fff;border-radius:28px;padding:22px 30px 26px;position:relative;border:3px dashed var(--vien);box-shadow:0 16px 40px rgba(40,60,20,.3)}
@@ -510,9 +534,10 @@ button{font:inherit;cursor:pointer}
     <span class="ten" id="ten-bai"></span>
     <span class="toc">Tốc độ đọc: <button data-toc="0.7">chậm</button><button data-toc="0.85">vừa</button><button data-toc="1">thường</button></span>
     <span id="bao-giong"></span>
-    <span class="phai"><button class="dieu" id="lui" title="Trang trước (←)">‹</button><span id="so-trang">1 / 1</span><button class="dieu" id="toi" title="Trang sau (→)">›</button><button class="dieu" id="toan" title="Toàn màn hình (F)" style="font-size:17px">⛶</button></span>
+    <span class="phai"><button class="dieu" id="ds-nut" title="Danh sách slide (G)" style="font-size:17px">☰</button><button class="dieu" id="lui" title="Trang trước (←)">‹</button><span id="so-trang">1 / 1</span><button class="dieu" id="toi" title="Trang sau (→)">›</button><button class="dieu" id="toan" title="Toàn màn hình (F)" style="font-size:17px">⛶</button></span>
   </footer>
   <div id="chi-doc">Cả lớp đọc theo ✋</div>
+  <div id="ds-slide"><div class="ds-dau"><b>☰ Chọn slide</b><span id="ds-dang"></span><button class="dong-x" id="ds-dong">✕</button></div><div id="ds-noi"></div></div>
   <div id="lop"><div class="hop"><button class="dong-x" id="dong-lop">✕</button><div id="lop-noi"></div></div></div>
 </div>
 <script>
@@ -562,6 +587,7 @@ const DATA = {
           cum: [['今天几号', 'jīntiān jǐ hào', 'hôm nay ngày mấy'], ['今天我休息', 'jīntiān wǒ xiūxi', 'hôm nay tôi nghỉ']],
           cau: ['今天几号？', 'Jīntiān jǐ hào?'],
           hoi: [{ q: '今天几号？', qv: 'Hôm nay ngày mấy?', d: '今天九月八号。' }, { q: '“今天我休息” 和 “我休息今天”，哪个对？', qv: 'Câu nào đúng?', d: '今天我休息 — thời gian đứng trước động từ.' }],
+          mo: [['明天', 'míngtiān', 'ngày mai', 'cùng nhóm'], ['昨天', 'zuótiān', 'hôm qua', 'cùng nhóm'], ['今年', 'jīnnián', 'năm nay', 'cùng chữ'], ['天气', 'tiānqì', 'thời tiết', 'cùng chữ']],
           chu: '今天' },
         { w: '号', py: 'hào', loai: 'lượng từ · 量词', hv: 'HIỆU', nghia: 'ngày (trong tháng)', anh: 'tu-号.jpg',
           khi: 'Khi NÓI MIỆNG ngày trong tháng — cách người Trung dùng hằng ngày.',
@@ -569,7 +595,8 @@ const DATA = {
           meo: 'Hán–Việt HIỆU — như "ký hiệu", "số hiệu": con số đánh dấu. Mồng 8 chính là "số 8" của tháng.<br>Chữ 号 = 口 (miệng) trên một nét gập — mở miệng GỌI ra con số.',
           cum: [['几号', 'jǐ hào', 'ngày mấy'], ['八号', 'bā hào', 'mùng tám']],
           cau: ['今天九月八号。', 'Jīntiān jiǔ yuè bā hào.'],
-          hoi: [{ q: '日历上写 8，你怎么说？', qv: 'Lịch ghi số 8, em nói thế nào?', d: '八号。' }, { q: '写请帖的时候用 “号” 还是 “日”？', qv: 'Viết thiệp mời thì dùng 号 hay 日?', d: '日 — 九月八日。' }],
+          hoi: [{ q: '你几号休息？', qv: 'Em nghỉ vào ngày mấy?', d: '我八号休息。' }, { q: '今天八号吗？', qv: 'Hôm nay mùng 8 à?', d: '是，今天八号。／ 不是，今天九号。' }],
+          mo: [['手机号', 'shǒujī hào', 'số điện thoại', 'từ ghép'], ['几月几号', 'jǐ yuè jǐ hào', 'ngày mấy tháng mấy', 'cụm hay gặp'], ['日', 'rì', 'ngày (văn viết)', 'gần nghĩa']],
           chu: '号' },
         { w: '月', py: 'yuè', loai: 'danh từ · 名词', hv: 'NGUYỆT', nghia: 'tháng', anh: 'tu-月.jpg',
           khi: 'Khi nói THÁNG nào trong năm: 一月 … 十二月.',
@@ -577,7 +604,8 @@ const DATA = {
           meo: 'Hán–Việt NGUYỆT — mặt trăng. Chữ 月 vẽ trăng khuyết dựng đứng, hai nét ngang bên trong là mây. Một vòng trăng là một THÁNG.<br>Tên tháng chỉ là SỐ + 月: 一月 · 二月 … 十二月 — dễ hơn tiếng Anh nhiều.',
           cum: [['九月', 'jiǔ yuè', 'tháng chín'], ['几月', 'jǐ yuè', 'tháng mấy']],
           cau: ['今天九月八号。', 'Jīntiān jiǔ yuè bā hào.'],
-          hoi: [{ q: '“九月” 和 “九个月” 有什么不同？', qv: '九月 và 九个月 khác nhau ra sao?', d: '九月 là tháng 9; 九个月 là chín tháng.' }, { q: '今天几月？', qv: 'Hôm nay tháng mấy?', d: '今天……月。' }],
+          hoi: [{ q: '十月一号你休息吗？', qv: 'Mùng 1 tháng 10 em có được nghỉ không?', d: '我休息。／ 我不休息。' }, { q: '今天几月？', qv: 'Hôm nay tháng mấy?', d: '今天……月。' }],
+          mo: [['一个月', 'yí gè yuè', 'một tháng (khoảng thời gian)', 'cụm hay gặp'], ['年', 'nián', 'năm', 'cùng nhóm'], ['星期', 'xīngqī', 'tuần, thứ', 'cùng nhóm'], ['号', 'hào', 'ngày (trong tháng)', 'cùng nhóm']],
           chu: '月' },
         { w: '日', py: 'rì', loai: 'lượng từ · 量词', hv: 'NHẬT', nghia: 'ngày', anh: 'tu-日.jpg',
           khi: 'Khi VIẾT ngày tháng trang trọng (giấy tờ, lịch, thiệp mời), và trong từ 星期日.',
@@ -585,7 +613,8 @@ const DATA = {
           meo: 'Hán–Việt NHẬT — mặt trời. Chữ 日 vẽ mặt trời: khung vuông, chấm ở giữa kéo dài thành nét ngang.<br>⚠ 日 một nét ngang bên trong · 目 (con mắt) hai nét.',
           cum: [['九月八日', 'jiǔ yuè bā rì', 'ngày 8 tháng 9 (viết)'], ['星期日', 'Xīngqīrì', 'chủ nhật']],
           cau: ['星期日。', 'Xīngqīrì.'],
-          hoi: [{ q: '“星期日” 还可以怎么说？', qv: '星期日 còn nói cách nào nữa?', d: '星期天 — cách nói thường ngày.' }, { q: '“日” 和 “目” 怎么分？', qv: 'Phân biệt 日 với 目 thế nào?', d: '日 một nét ngang bên trong, 目 hai nét.' }],
+          hoi: [{ q: '今天星期日吗？', qv: 'Hôm nay chủ nhật à?', d: '是，今天星期日。／ 不是，今天星期六。' }, { q: '星期日你做什么？', qv: 'Chủ nhật em làm gì?', d: '我休息。／ 我做饭。' }],
+          mo: [['号', 'hào', 'ngày (khẩu ngữ)', 'gần nghĩa'], ['星期天', 'xīngqītiān', 'chủ nhật (khẩu ngữ)', 'gần nghĩa'], ['月', 'yuè', 'tháng', 'cùng nhóm']],
           chu: '日' },
         { w: '星期', py: 'xīngqī', loai: 'danh từ · 名词', hv: 'TINH KỲ', nghia: 'tuần; thứ (trong tuần)', anh: 'tu-星期.jpg',
           khi: 'Khi hỏi và nói THỨ mấy trong tuần, hoặc đếm số tuần.',
@@ -593,7 +622,8 @@ const DATA = {
           meo: 'Hán–Việt TINH KỲ — 星 là ngôi sao (日 mặt trời + 生 sinh ra), 期 là kỳ hạn. Người xưa chia tuần theo bảy ngôi sao.<br>Mẹo: thứ HAI = 星期一 — cứ lấy thứ tiếng Việt TRỪ 1.<br>Khẩu ngữ còn nói 周: 周一 = 星期一 (PPT của cô).',
           cum: [['星期几', 'xīngqī jǐ', 'thứ mấy'], ['星期一', 'xīngqīyī', 'thứ hai']],
           cau: ['星期几？', 'Xīngqī jǐ?'],
-          hoi: [{ q: '越南语的 “thứ hai” 中文怎么说？', qv: '"Thứ hai" nói thế nào?', d: '星期一 — luôn lệch một bậc.' }, { q: '有没有 “星期七”？', qv: 'Có 星期七 không?', d: 'Không — chủ nhật là 星期天 / 星期日.' }],
+          hoi: [{ q: '星期六你工作吗？', qv: 'Thứ bảy em có làm việc không?', d: '我工作。／ 我不工作，我休息。' }, { q: '有没有 “星期七”？', qv: 'Có 星期七 không?', d: 'Không — chủ nhật là 星期天 / 星期日.' }],
+          mo: [['一个星期', 'yí gè xīngqī', 'một tuần', 'cụm hay gặp'], ['星期六', 'xīngqīliù', 'thứ bảy', 'cụm hay gặp'], ['星期天', 'xīngqītiān', 'chủ nhật', 'cùng nhóm'], ['月', 'yuè', 'tháng', 'cùng nhóm']],
           chu: '星期' },
         { w: '星期日', py: 'Xīngqīrì', loai: 'danh từ · 名词', hv: 'TINH KỲ NHẬT', nghia: 'chủ nhật', emoji: '📆',
           khi: 'Khi VIẾT ngày chủ nhật — trên lịch, giấy tờ, thông báo.',
@@ -601,7 +631,8 @@ const DATA = {
           meo: '日 = mặt trời → ngày CỦA MẶT TRỜI, giống Sunday trong tiếng Anh.<br>Cặp viết / nói: 日 ↔ 号 · 星期日 ↔ 星期天.',
           cum: [['星期日休息', 'Xīngqīrì xiūxi', 'chủ nhật nghỉ'], ['今天星期日', 'jīntiān Xīngqīrì', 'hôm nay chủ nhật']],
           cau: ['星期日。今天我休息。', 'Xīngqīrì. Jīntiān wǒ xiūxi.'],
-          hoi: [{ q: '星期六后边是星期几？', qv: 'Sau thứ bảy là thứ mấy?', d: '星期日 / 星期天。' }, { q: '“星期七” 对不对？', qv: 'Nói 星期七 đúng không?', d: 'Sai — chủ nhật là 星期日 / 星期天.' }],
+          hoi: [{ q: '星期日你忙吗？', qv: 'Chủ nhật em có bận không?', d: '我不忙，我休息。／ 我很忙。' }, { q: '“星期七” 对不对？', qv: 'Nói 星期七 đúng không?', d: 'Sai — chủ nhật là 星期日 / 星期天.' }],
+          mo: [['星期天', 'xīngqītiān', 'chủ nhật (khẩu ngữ)', 'gần nghĩa'], ['星期六', 'xīngqīliù', 'thứ bảy', 'cùng nhóm'], ['星期一', 'xīngqīyī', 'thứ hai', 'cùng nhóm']],
           chu: '星期日' },
         { w: '星期天', py: 'Xīngqītiān', loai: 'danh từ · 名词', hv: 'TINH KỲ THIÊN', nghia: 'chủ nhật', emoji: '☀️',
           khi: 'Khi NÓI chuyện hằng ngày về ngày chủ nhật — hay dùng hơn 星期日.',
@@ -609,7 +640,8 @@ const DATA = {
           meo: '天 = ngày, trời. 今天 (hôm nay) · 星期天 (ngày chủ nhật) — cùng một chữ 天.<br>Nhớ gọn: nói 天, viết 日.',
           cum: [['星期天休息', 'Xīngqītiān xiūxi', 'chủ nhật nghỉ'], ['今天星期天', 'jīntiān Xīngqītiān', 'hôm nay chủ nhật']],
           cau: ['星期天我也做饭。', 'Xīngqītiān wǒ yě zuò fàn.'],
-          hoi: [{ q: '你星期天休息吗？', qv: 'Chủ nhật em có nghỉ không?', d: '我星期天休息。/ 我星期天不休息。' }, { q: '说话的时候，“星期日” 和 “星期天” 哪个更常用？', qv: 'Khi nói, từ nào hay dùng hơn?', d: '星期天.' }],
+          hoi: [{ q: '你星期天休息吗？', qv: 'Chủ nhật em có nghỉ không?', d: '我星期天休息。/ 我星期天不休息。' }, { q: '星期天你做饭吗？', qv: 'Chủ nhật em có nấu cơm không?', d: '我做饭。／ 我不做饭。' }],
+          mo: [['星期日', 'xīngqīrì', 'chủ nhật (văn viết)', 'gần nghĩa'], ['今天', 'jīntiān', 'hôm nay', 'cùng chữ'], ['明天', 'míngtiān', 'ngày mai', 'cùng chữ'], ['星期六', 'xīngqīliù', 'thứ bảy', 'cùng nhóm']],
           chu: '星期天' },
         { w: '休息', py: 'xiūxi', loai: 'động từ · 动词', hv: 'HƯU TỨC', nghia: 'nghỉ ngơi', anh: 'tu-休息.jpg',
           khi: 'Khi nói mình được NGHỈ — nghỉ làm, nghỉ học, nghỉ giữa giờ.',
@@ -617,7 +649,8 @@ const DATA = {
           meo: 'Hán–Việt HƯU TỨC. 休 = 亻 (người) dựa vào 木 (cây) — người tựa gốc cây mà nghỉ.<br>息 = 自 (mũi) trên 心 (tim) — thở đều, tim chậm lại.',
           cum: [['今天休息', 'jīntiān xiūxi', 'hôm nay nghỉ'], ['星期天休息', 'Xīngqītiān xiūxi', 'chủ nhật nghỉ']],
           cau: ['今天我休息。', 'Jīntiān wǒ xiūxi.'],
-          hoi: [{ q: '你星期几休息？', qv: 'Em nghỉ thứ mấy?', d: '我星期天休息。' }, { q: '“休” 字为什么是人靠着树？', qv: 'Vì sao chữ 休 là người dựa cây?', d: '亻 + 木 — người tựa gốc cây mà nghỉ.' }],
+          hoi: [{ q: '你星期几休息？', qv: 'Em nghỉ thứ mấy?', d: '我星期天休息。' }, { q: '今天你休息吗？', qv: 'Hôm nay em có nghỉ không?', d: '我今天休息。／ 我今天不休息，我很忙。' }],
+          mo: [['睡觉', 'shuìjiào', 'ngủ', 'gần nghĩa'], ['下班', 'xiàbān', 'tan làm', 'cùng nhóm'], ['工作', 'gōngzuò', 'làm việc', 'trái nghĩa'], ['休息一下', 'xiūxi yíxià', 'nghỉ một chút', 'cụm hay gặp']],
           chu: '休息' },
       ],
       np: [
@@ -628,7 +661,7 @@ const DATA = {
             [['几月', 'tháng mấy', 'b'], ['几号', 'ngày mấy', 'c'], ['星期几', 'thứ mấy', 'd']],
           ],
           vd: [
-            { o: [['2026年', 'a'], ['9月', 'b'], ['8号', 'c'], ['星期天', 'd']], dau: '', py: 'èr líng èr liù nián jiǔ yuè bā hào, Xīngqītiān' },
+            { o: [['9月', 'b'], ['8号', 'c'], ['星期日', 'd']], dau: '', py: 'jiǔ yuè bā hào, Xīngqīrì' },
             { o: [['今天', 'a'], ['九月', 'b'], ['八号', 'c']], dau: '。', py: 'Jīntiān jiǔ yuè bā hào.' },
             { o: [['今天', 'a'], ['几月', 'b'], ['几号', 'c']], dau: '？', py: 'Jīntiān jǐ yuè jǐ hào?' },
           ],
@@ -636,7 +669,7 @@ const DATA = {
           xep: [
             { dap: ['今天', '九月', '八号'], dau: '。' },
             { dap: ['今天', '几月', '几号'], dau: '？' },
-            { dap: ['2026年', '5月', '10号', '星期天'], dau: '。' },
+            { dap: ['5月', '10号', '星期天'], dau: '。' },
           ],
           loi: [
             ['今天八号九月。', '今天九月八号。', 'Dịch nguyên trật tự tiếng Việt — phải đảo lại: **月** trước, **号** sau.'],
@@ -645,7 +678,7 @@ const DATA = {
           ],
           hoi: [
             { q: '今天几月几号？', qv: 'Hôm nay ngày mấy tháng mấy?', d: '今天……月……号。' },
-            { q: '“2026年9月8号” 读的时候先说哪个？', qv: 'Đọc ngày đó thì nói phần nào trước?', d: '年 trước — lớn xuống nhỏ.' },
+            { q: '星期天几月几号？', qv: 'Chủ nhật này là ngày mấy tháng mấy?', d: '星期天九月十三号。' },
           ],
           gv: {
             dan: 'Cầm một cuốn lịch bàn THẬT, lật tới trang hôm nay, chỉ từng ô và đọc chậm: **2026 … 年 … 9 … 月 … 8 … 号**. Chưa giải thích. Lật tiếp một trang, gọi một học viên đọc theo cách vừa nghe. Rồi viết câu tiếng Việt "ngày 8 tháng 9 năm 2026" bên cạnh, hỏi lớp: hai câu khác nhau ở đâu?',
@@ -680,8 +713,8 @@ const DATA = {
             ['今天是九月八号星期天。', '今天九月八号，星期天。', 'Không sai, nhưng khẩu ngữ bỏ **是** nghe gọn hơn nhiều.'],
           ],
           hoi: [
-            { q: '“今天是星期一” 可以怎么说得更口语？', qv: 'Nói sao cho tự nhiên hơn?', d: '今天星期一。— bỏ 是.' },
-            { q: '那否定呢？', qv: 'Thế còn phủ định?', d: '今天不是星期一。— phải giữ 是.' },
+            { q: '今天星期几？', qv: 'Hôm nay thứ mấy?', d: '今天星期一。' },
+            { q: '今天星期二吗？', qv: 'Hôm nay thứ ba à?', d: '不是，今天不是星期二，今天星期三。' },
           ],
           gv: {
             dan: 'Viết ba cặp câu, mỗi cặp một câu có **是** một câu không: **我是学生 / 我学生 ｜ 今天是星期一 / 今天星期一 ｜ 我是十八岁 / 我十八岁**. Đọc to cả sáu câu, hỏi: có đúng MỘT câu nghe sai, là câu nào? Lớp sẽ chỉ ra **我学生**. Hỏi tiếp: vì sao **今天星期一** lại được?',
@@ -713,7 +746,8 @@ const DATA = {
           meo: 'Hán–Việt TỐ PHẠN — "làm cơm". 饭 = 饣 (bộ thực, ăn) + 反 gợi âm fǎn → fàn.<br>Thấy bộ 饣 bên trái là chữ liên quan tới ĂN: 饭 · 饺.',
           cum: [['会做饭', 'huì zuò fàn', 'biết nấu ăn'], ['星期天做饭', 'Xīngqītiān zuò fàn', 'chủ nhật nấu cơm']],
           cau: ['你会做饭吗？', 'Nǐ huì zuò fàn ma?'],
-          hoi: [{ q: '星期天你做什么？', qv: 'Chủ nhật em làm gì?', d: '我做饭。/ 我休息。' }, { q: '“做饭” 是一个词还是两个？', qv: '做饭 là một từ hay hai phần?', d: 'Hai phần — động từ 做 + tân ngữ 饭.' }],
+          hoi: [{ q: '星期天你做什么？', qv: 'Chủ nhật em làm gì?', d: '我做饭。/ 我休息。' }, { q: '你妈妈做饭吗？', qv: 'Mẹ em có nấu cơm không?', d: '她做饭。／ 她不做饭，我爸爸做饭。' }],
+          mo: [['吃饭', 'chī fàn', 'ăn cơm', 'cụm hay gặp'], ['晚饭', 'wǎnfàn', 'bữa tối', 'cùng chữ'], ['米饭', 'mǐfàn', 'cơm trắng', 'cùng chữ'], ['饭店', 'fàndiàn', 'nhà hàng', 'cùng chữ']],
           chu: '做饭' },
         { w: '做', py: 'zuò', loai: 'động từ · 动词', hv: 'TỐ', nghia: 'làm, nấu (món ăn)', anh: 'tu-做.jpg',
           khi: 'Khi nói LÀM ra một thứ cụ thể — làm cơm, làm món ăn, làm sủi cảo.',
@@ -721,31 +755,35 @@ const DATA = {
           meo: 'Hán–Việt TỐ. 做 = 亻 (người) + 古 (cũ) + 攵 (tay cầm gậy gõ) — người gõ vào cái cũ để LÀM ra cái mới.',
           cum: [['做什么', 'zuò shénme', 'làm gì'], ['做菜', 'zuò cài', 'nấu món ăn']],
           cau: ['你会做什么？', 'Nǐ huì zuò shénme?'],
-          hoi: [{ q: '你会做什么？', qv: 'Em biết làm món gì?', d: '我会做饺子。/ 我会做一些菜。' }, { q: '“做” 和 “工作” 的 “作” 一样吗？', qv: '做 và 作 trong 工作 có giống nhau không?', d: 'Cùng đọc zuò nhưng khác chữ — 做 là làm cụ thể bằng tay.' }],
+          hoi: [{ q: '你会做什么？', qv: 'Em biết làm món gì?', d: '我会做饺子。/ 我会做一些菜。' }, { q: '今天你做什么菜？', qv: 'Hôm nay em nấu món gì?', d: '我做越南菜。' }],
+          mo: [['做饭', 'zuò fàn', 'nấu cơm', 'cụm hay gặp'], ['做饺子', 'zuò jiǎozi', 'làm sủi cảo', 'cụm hay gặp'], ['工作', 'gōngzuò', 'làm việc', 'gần nghĩa']],
           chu: '做' },
         { w: '会', py: 'huì', loai: 'động từ năng nguyện · 能愿动词', hv: 'HỘI', nghia: 'biết (làm), có thể', anh: 'tu-会.jpg',
           khi: 'Khi nói mình BIẾT LÀM một việc nhờ ĐÃ HỌC mà có — nấu ăn, nói ngoại ngữ, bơi.',
           the: 'AI + 会 + ĐỘNG TỪ: 我会做饭。 ⚠ Sau 会 bắt buộc là ĐỘNG TỪ (✗我会饭). Phủ định 不会, KHÔNG phải 没会. Hỏi: 你会……吗？ / 你会不会……？',
           meo: 'Hán–Việt HỘI. 会 = 人 (mái người) úp lên 云 (mây) — nhiều người tụ lại thì học được của nhau.<br>⚠ 会 ↔ 今: phần trên giống hệt, phần dưới khác.<br>Thêm: 说 shuō (nói) — 我会说中文。',
-          cum: [['会做饭', 'huì zuò fàn', 'biết nấu ăn'], ['会说中文', 'huì shuō Zhōngwén', 'biết nói tiếng Trung']],
+          cum: [['会做饭', 'huì zuò fàn', 'biết nấu ăn'], ['不会做', 'bú huì zuò', 'không biết làm']],
           cau: ['你会做饭吗？', 'Nǐ huì zuò fàn ma?'],
-          hoi: [{ q: '你会做饭吗？', qv: 'Em biết nấu ăn không?', d: '我会做。/ 我不会做饭。' }, { q: '“会” 的否定是 “没会” 还是 “不会”？', qv: 'Phủ định của 会 là gì?', d: '不会 — chỉ 有 mới dùng 没.' }],
+          hoi: [{ q: '你会做饭吗？', qv: 'Em biết nấu ăn không?', d: '我会做。/ 我不会做饭。' }, { q: '你会做中国菜吗？', qv: 'Em biết nấu món Trung Quốc không?', d: '我会。／ 我不会做中国菜。' }],
+          mo: [['会说中文', 'huì shuō Zhōngwén', 'biết nói tiếng Trung', 'cụm hay gặp'], ['能', 'néng', 'có thể', 'gần nghĩa'], ['可以', 'kěyǐ', 'có thể, được phép', 'gần nghĩa'], ['想', 'xiǎng', 'muốn', 'cùng nhóm']],
           chu: '会' },
         { w: '面条儿', py: 'miàntiáor', loai: 'danh từ · 名词', hv: 'DIỆN ĐIỀU NHI', nghia: 'mì sợi', anh: 'tu-面条儿.jpg',
           khi: 'Khi nói về mì sợi — món ăn nấu được, rất quen ở miền Bắc Trung Quốc.',
           the: '做面条儿 · 吃面条儿. ⚠ Chữ 儿 KHÔNG đọc thành âm riêng, chỉ uốn lưỡi ở cuối âm trước: miàntiáor (không đọc miàn tiáo ér).',
           meo: '面 = bột mì · 条 = sợi dài · 儿 = đuôi uốn lưỡi của giọng Bắc Kinh.<br>Viết 儿 nhưng đọc dính vào 条 thành tiáor.',
-          cum: [['做面条儿', 'zuò miàntiáor', 'làm mì'], ['吃面条儿', 'chī miàntiáor', 'ăn mì']],
+          cum: [['做面条儿', 'zuò miàntiáor', 'làm mì'], ['我会做面条儿', 'wǒ huì zuò miàntiáor', 'tôi biết làm mì']],
           cau: ['我会做面条儿、饺子。', 'Wǒ huì zuò miàntiáor, jiǎozi.'],
-          hoi: [{ q: '你会做面条儿吗？', qv: 'Em biết làm mì không?', d: '我会做。/ 我不会做。' }, { q: '“面条儿” 的 “儿” 要读成 “ér” 吗？', qv: 'Chữ 儿 có đọc thành ér không?', d: 'Không — chỉ uốn lưỡi: miàntiáor.' }],
+          hoi: [{ q: '你会做面条儿吗？', qv: 'Em biết làm mì không?', d: '我会做。/ 我不会做。' }, { q: '你喜欢面条儿吗？', qv: 'Em có thích mì không?', d: '我很喜欢。／ 我不太喜欢。' }],
+          mo: [['吃面条儿', 'chī miàntiáor', 'ăn mì', 'cụm hay gặp'], ['米饭', 'mǐfàn', 'cơm trắng', 'cùng nhóm'], ['饺子', 'jiǎozi', 'sủi cảo', 'cùng nhóm'], ['面包', 'miànbāo', 'bánh mì', 'cùng chữ']],
           chu: '面条儿' },
         { w: '饺子', py: 'jiǎozi', loai: 'danh từ · 名词', hv: 'GIẢO TỬ', nghia: 'sủi cảo', anh: 'tu-饺子.jpg',
           khi: 'Khi nói về sủi cảo — món gắn với dịp sum họp, nhất là Tết của người Trung.',
           the: 'Đếm bằng 个: 十个饺子. Động từ đi kèm: 包饺子 (gói sủi cảo) · 做饺子 · 吃饺子. Chữ 子 đọc KHINH THANH: jiǎozi.',
           meo: 'Hán–Việt GIẢO TỬ. 饺 = 饣 (ăn) + 交 (giao nhau) gợi âm jiāo → jiǎo — miếng bột gập lại GIAO hai mép, đúng hình cái sủi cảo.',
-          cum: [['包饺子', 'bāo jiǎozi', 'gói sủi cảo'], ['做饺子', 'zuò jiǎozi', 'làm sủi cảo']],
+          cum: [['很喜欢饺子', 'hěn xǐhuan jiǎozi', 'rất thích sủi cảo'], ['做饺子', 'zuò jiǎozi', 'làm sủi cảo']],
           cau: ['我会做面条儿、饺子。', 'Wǒ huì zuò miàntiáor, jiǎozi.'],
-          hoi: [{ q: '你会包饺子吗？', qv: 'Em biết gói sủi cảo không?', d: '我会。/ 我不会包饺子。' }, { q: '“饺” 和 “饭” 有什么一样的地方？', qv: '饺 và 饭 giống nhau chỗ nào?', d: 'Cùng bộ 饣 — đều liên quan tới ăn.' }],
+          hoi: [{ q: '你会做饺子吗？', qv: 'Em biết làm sủi cảo không?', d: '我会做。／ 我不会做饺子。' }, { q: '这是什么？', qv: 'Đây là món gì?', d: '这是饺子。' }],
+          mo: [['吃饺子', 'chī jiǎozi', 'ăn sủi cảo', 'cụm hay gặp'], ['包子', 'bāozi', 'bánh bao', 'cùng nhóm'], ['面条儿', 'miàntiáor', 'mì sợi', 'cùng nhóm'], ['十个饺子', 'shí gè jiǎozi', 'mười cái sủi cảo', 'cụm hay gặp']],
           chu: '饺子' },
         { w: '一些', py: 'yìxiē', loai: 'số lượng từ · 数量词', hv: 'NHẤT TA', nghia: 'một số, một vài', anh: 'tu-一些.jpg',
           khi: 'Khi nói số lượng KHÔNG XÁC ĐỊNH, ít, không cần đếm chính xác.',
@@ -753,7 +791,8 @@ const DATA = {
           meo: 'Hán–Việt NHẤT TA. 些 = 此 (này) + 二 (hai) ở dưới — chỉ dăm ba cái ở đây, không nhiều.<br>⚠ 些 ↔ 此: 些 có thêm 二 bên dưới.',
           cum: [['一些菜', 'yìxiē cài', 'vài món ăn'], ['一些饺子', 'yìxiē jiǎozi', 'một ít sủi cảo']],
           cau: ['也会做一些菜。', 'yě huì zuò yìxiē cài.'],
-          hoi: [{ q: '“些” 能不能单独用？', qv: 'Chữ 些 đứng một mình được không?', d: 'Không — phải là 一些 · 这些 · 那些.' }, { q: '“一些” 的 “一” 读几声？', qv: 'Chữ 一 trong 一些 đọc thanh mấy?', d: 'Thanh 4 — yìxiē.' }],
+          hoi: [{ q: '你会做菜吗？', qv: 'Em biết nấu ăn không?', d: '我会做一些菜。' }, { q: '你有中国同学吗？', qv: 'Em có bạn học người Trung Quốc không?', d: '有，我有一些中国同学。' }],
+          mo: [['这些', 'zhèxiē', 'những cái này', 'cùng chữ'], ['那些', 'nàxiē', 'những cái kia', 'cùng chữ'], ['哪些', 'nǎxiē', 'những cái nào', 'cùng chữ'], ['有些', 'yǒuxiē', 'có một số', 'cùng chữ']],
           chu: '一些' },
         { w: '菜', py: 'cài', loai: 'danh từ · 名词', hv: 'THÁI', nghia: 'món ăn; rau', anh: 'tu-菜.jpg',
           khi: 'Khi nói về MÓN ĂN đã nấu (中国菜 · 越南菜) hoặc rau xanh.',
@@ -761,7 +800,8 @@ const DATA = {
           meo: 'Hán–Việt THÁI. 菜 = 艹 (cây cỏ) trên 采 (hái) — hái cây cỏ về ăn, thành RAU, thành MÓN ĂN.',
           cum: [['越南菜', 'Yuènán cài', 'món Việt'], ['两个菜', 'liǎng gè cài', 'hai món']],
           cau: ['也会做一些菜。', 'yě huì zuò yìxiē cài.'],
-          hoi: [{ q: '你会做哪国菜？', qv: 'Em biết nấu món nước nào?', d: '我会做越南菜。/ 我会做中国菜。' }, { q: '“菜” 上面是什么部首？', qv: 'Chữ 菜 bộ gì ở trên?', d: '艹 bộ thảo — cây cỏ, rau.' }],
+          hoi: [{ q: '你会做哪国菜？', qv: 'Em biết nấu món nước nào?', d: '我会做越南菜。/ 我会做中国菜。' }, { q: '你喜欢中国菜吗？', qv: 'Em có thích món Trung Quốc không?', d: '很喜欢。／ 我不太喜欢。' }],
+          mo: [['中国菜', 'Zhōngguó cài', 'món Trung Quốc', 'cụm hay gặp'], ['做菜', 'zuò cài', 'nấu món ăn', 'cụm hay gặp'], ['米饭', 'mǐfàn', 'cơm trắng', 'cùng nhóm'], ['好吃', 'hǎochī', 'ngon', 'cùng nhóm']],
           chu: '菜' },
       ],
       np: {
@@ -779,7 +819,7 @@ const DATA = {
         xep: [
           { dap: ['你', '会', '做饭', '吗'], dau: '？' },
           { dap: ['我', '不会', '做', '菜'], dau: '。' },
-          { dap: ['他', '会', '说', '中文'], dau: '。' },
+          { dap: ['他', '会', '做', '饺子'], dau: '。' },
         ],
         loi: [
           ['我没会做饭。', '我不会做饭。', 'Nhiễm chéo từ **没有** (Bài 4). Chỉ **有** dùng 没, còn lại dùng **不**.'],
@@ -788,7 +828,7 @@ const DATA = {
         ],
         hoi: [
           { q: '你会做什么菜？', qv: 'Em biết nấu món gì?', d: '我会做饺子。/ 我不会做菜。' },
-          { q: '“会” 的否定用 “没” 还是 “不”？', qv: 'Phủ định của 会 dùng 没 hay 不?', d: '不会 — chỉ 有 mới dùng 没.' },
+          { q: '你妈妈会做越南菜吗？', qv: 'Mẹ em biết nấu món Việt không?', d: '会，她会做越南菜。／ 她不会。' },
         ],
         gv: {
           dan: 'Làm động tác thái rau, hỏi bằng tiếng Việt "cô đang làm gì?" → viết **做饭**. Hỏi tiếp: "cô BIẾT nấu ăn" thì thêm chữ gì? Viết **我会做饭**, gạch chân **会**. Rồi: "cô KHÔNG biết nấu" thì sao? Lớp sẽ chia phe **没会** / **不会** — để lớp cãi nhau rồi mới chốt.',
@@ -820,17 +860,19 @@ const DATA = {
           khi: 'Khi nói việc RỜI CHỖ LÀM cuối giờ — câu chào rất hay gặp giữa đồng nghiệp.',
           the: 'AI + 下班: 我下班。 Hỏi: 下班吗？ Trả lời gọn bằng cách LẶP LẠI động từ: 下班。 Trái nghĩa: 上班 shàngbān (đi làm).',
           meo: 'Hán–Việt HẠ BAN — "xuống ca". 下 là xuống, 班 là ca làm. Đi làm thì "lên ca" 上班, về thì "xuống ca" 下班.<br>Cặp 上 / 下 còn gặp ở 上课 / 下课.',
-          cum: [['下班吗', 'xiàbān ma', 'tan làm chưa'], ['上班', 'shàngbān', 'đi làm']],
+          cum: [['下班吗', 'xiàbān ma', 'tan làm chưa'], ['我也下班', 'wǒ yě xiàbān', 'tôi cũng tan làm']],
           cau: ['同乐，下班吗？', 'Tónglè, xiàbān ma?'],
-          hoi: [{ q: '同事问你 “下班吗？”，你怎么回答？', qv: 'Đồng nghiệp hỏi 下班吗, em đáp sao?', d: '下班。— lặp lại chính động từ.' }, { q: '“下班” 的反义词是什么？', qv: 'Trái nghĩa của 下班?', d: '上班 — đi làm.' }],
+          hoi: [{ q: '老师，您下班吗？', qv: 'Thầy/cô ơi, thầy/cô tan làm chưa?', d: '下班。／ 不下班，我很忙。' }, { q: '你爸爸下班吗？', qv: 'Bố em tan làm chưa?', d: '下班。／ 他不下班，他工作很忙。' }],
+          mo: [['上班', 'shàngbān', 'đi làm', 'trái nghĩa'], ['下课', 'xiàkè', 'tan học', 'cùng nhóm'], ['上课', 'shàngkè', 'vào học', 'cùng nhóm'], ['休息', 'xiūxi', 'nghỉ ngơi', 'cùng nhóm']],
           chu: '下班' },
         { w: '新', py: 'xīn', loai: 'tính từ · 形容词', hv: 'TÂN', nghia: 'mới', anh: 'tu-新.jpg',
           khi: 'Khi nói đồ vật vừa mua, vừa có — máy tính mới, sách mới, bạn mới.',
           the: '新 + DANH TỪ, đứng ngay trước danh từ: 新电脑 · 新书. Có cả 的 thì: AI + 的 + 新 + ĐỒ VẬT: 我的新电脑. Trái nghĩa: 旧 jiù (cũ).',
           meo: 'Hán–Việt TÂN — như "tân sinh viên", "tân niên". 新 = 亲 + 斤 (cái rìu) — lấy rìu đẽo cây tươi ra đồ MỚI.<br>⚠ 新 ↔ 亲: 新 có thêm 斤 bên phải.',
-          cum: [['新电脑', 'xīn diànnǎo', 'máy tính mới'], ['我的新书', 'wǒ de xīn shū', 'sách mới của tôi']],
+          cum: [['新电脑', 'xīn diànnǎo', 'máy tính mới'], ['新同学', 'xīn tóngxué', 'bạn học mới']],
           cau: ['这是你的新电脑吗？', 'Zhè shì nǐ de xīn diànnǎo ma?'],
-          hoi: [{ q: '“我的新电脑” 里，“新” 放在哪儿？', qv: 'Trong 我的新电脑, 新 đứng đâu?', d: 'Sau 的, ngay trước danh từ.' }, { q: '“新” 的反义词是什么？', qv: 'Trái nghĩa của 新?', d: '旧 — cũ.' }],
+          hoi: [{ q: '你有新电脑吗？', qv: 'Em có máy tính mới không?', d: '有，这是我的新电脑。' }, { q: '他是新同学吗？', qv: 'Bạn ấy là bạn học mới à?', d: '是，他是我们的新同学。' }],
+          mo: [['新手机', 'xīn shǒujī', 'điện thoại mới', 'cụm hay gặp'], ['新衣服', 'xīn yīfu', 'quần áo mới', 'cụm hay gặp'], ['新老师', 'xīn lǎoshī', 'giáo viên mới', 'cụm hay gặp']],
           chu: '新' },
         { w: '电脑', py: 'diànnǎo', loai: 'danh từ · 名词', hv: 'ĐIỆN NÃO', nghia: 'máy tính', anh: 'tu-电脑.jpg',
           khi: 'Khi nói về máy tính — đồ vật quen thuộc để luyện mẫu câu 这是……的……',
@@ -838,7 +880,8 @@ const DATA = {
           meo: 'Hán–Việt ĐIỆN NÃO — "bộ não chạy bằng điện". 电 = 田 (ruộng) thêm nét móc kéo xuống — tia chớp xẹt qua cánh đồng. 脑 có bộ 月 (ở đây là 肉, thịt) — bộ phận cơ thể.',
           cum: [['新电脑', 'xīn diànnǎo', 'máy tính mới'], ['我的电脑', 'wǒ de diànnǎo', 'máy tính của tôi']],
           cau: ['这是你的新电脑吗？', 'Zhè shì nǐ de xīn diànnǎo ma?'],
-          hoi: [{ q: '“我电脑” 对不对？', qv: 'Nói 我电脑 có đúng không?', d: 'Sai — đồ vật phải có 的: 我的电脑.' }, { q: '再说一次电脑，用哪个字？', qv: 'Nhắc lại máy tính thì thay bằng chữ gì?', d: '它 — 我也很喜欢它。' }],
+          hoi: [{ q: '“我电脑” 对不对？', qv: 'Nói 我电脑 có đúng không?', d: 'Sai — đồ vật phải có 的: 我的电脑.' }, { q: '你喜欢你的新电脑吗？', qv: 'Em có thích máy tính mới của mình không?', d: '我很喜欢它。' }],
+          mo: [['手机', 'shǒujī', 'điện thoại di động', 'cùng nhóm'], ['电话', 'diànhuà', 'điện thoại', 'cùng chữ'], ['电视', 'diànshì', 'tivi', 'cùng chữ'], ['电影', 'diànyǐng', 'phim', 'cùng chữ']],
           chu: '电脑' },
         { w: '真', py: 'zhēn', loai: 'phó từ · 副词', hv: 'CHÂN', nghia: 'thật, thật là', anh: 'tu-真.jpg',
           khi: 'Khi KHEN hoặc THAN, cảm xúc bật ra ngay lúc nhìn thấy — không phải lúc kể lại bình thường.',
@@ -846,15 +889,17 @@ const DATA = {
           meo: 'Hán–Việt CHÂN — như "chân thật". 真好看 = đẹp THẬT. 真 có 目 (mắt) ở giữa — thấy tận mắt mới là thật.<br>⚠ 真 ↔ 直: 真 có 八 ở dưới.',
           cum: [['真好看', 'zhēn hǎokàn', 'đẹp thật'], ['真忙', 'zhēn máng', 'bận thật']],
           cau: ['真好看！', 'Zhēn hǎokàn!'],
-          hoi: [{ q: '看见好看的东西，马上说什么？', qv: 'Thấy thứ gì đẹp, bật ra câu gì?', d: '真好看！' }, { q: '“真很好看” 对不对？', qv: 'Nói 真很好看 đúng không?', d: 'Sai — chọn một, 真 hoặc 很.' }],
+          hoi: [{ q: '你今天忙吗？', qv: 'Hôm nay em có bận không?', d: '真忙！／ 我今天不忙。' }, { q: '“真很好看” 对不对？', qv: 'Nói 真很好看 đúng không?', d: 'Sai — chọn một, 真 hoặc 很.' }],
+          mo: [['真好吃', 'zhēn hǎochī', 'ngon thật', 'cụm hay gặp'], ['很', 'hěn', 'rất', 'gần nghĩa'], ['非常', 'fēicháng', 'rất, cực kỳ', 'gần nghĩa'], ['太……了', 'tài……le', 'quá…', 'gần nghĩa']],
           chu: '真' },
         { w: '好看', py: 'hǎokàn', loai: 'tính từ · 形容词', hv: 'HẢO KHÁN', nghia: 'đẹp, đẹp mắt', anh: 'tu-好看.jpg',
           khi: 'Khi khen thứ gì NHÌN đẹp — đồ vật, quần áo, người, cảnh.',
-          the: 'Tính từ nên cần 很 / 真 đỡ phía trước: 很好看 · 真好看. Họ 好 + giác quan: 好看 (nhìn đẹp) · 好吃 (ăn ngon, Bài 6) · 好听 (nghe hay).',
+          the: 'Tính từ nên cần 很 / 真 đỡ phía trước: 很好看 · 真好看. Họ 好 + giác quan: 好看 (nhìn đẹp) · 好吃 (ăn ngon, Bài 6) · 好听 (nghe hay). Được khen 真好看！ thì đáp 谢谢！',
           meo: 'Hán–Việt HẢO KHÁN — "tốt để nhìn". 看 = 手 (tay) che trên 目 (mắt) — giơ tay che nắng mà NHÌN.',
-          cum: [['真好看', 'zhēn hǎokàn', 'đẹp thật'], ['你的眼睛真好看', 'nǐ de yǎnjing zhēn hǎokàn', 'mắt bạn đẹp thật']],
+          cum: [['真好看', 'zhēn hǎokàn', 'đẹp thật'], ['很好看', 'hěn hǎokàn', 'rất đẹp']],
           cau: ['真好看！', 'Zhēn hǎokàn!'],
-          hoi: [{ q: '“好看” 前面要加什么？', qv: 'Trước 好看 cần thêm gì?', d: '很 hoặc 真 — tính từ cần từ đỡ.' }, { q: '这个菜真好看！你说什么？', qv: 'Bạn khen món ăn đẹp, em đáp sao?', d: '谢谢！' }],
+          hoi: [{ q: '我的新电脑好看吗？', qv: 'Máy tính mới của mình đẹp không?', d: '真好看！／ 很好看。' }, { q: '你妈妈好看吗？', qv: 'Mẹ em có đẹp không?', d: '我妈妈很好看。' }],
+          mo: [['好吃', 'hǎochī', 'ngon', 'cùng nhóm'], ['好听', 'hǎotīng', 'hay (nghe)', 'cùng nhóm'], ['漂亮', 'piàoliang', 'đẹp, xinh', 'gần nghĩa'], ['好玩儿', 'hǎowánr', 'vui, hay ho', 'cùng nhóm']],
           chu: '好看' },
         { w: '喜欢', py: 'xǐhuan', loai: 'động từ · 动词', hv: 'HỶ HOAN', nghia: 'thích', anh: 'tu-喜欢.jpg',
           khi: 'Khi nói mình THÍCH một người, một vật, một việc.',
@@ -862,7 +907,8 @@ const DATA = {
           meo: 'Hán–Việt HỶ HOAN — "mừng vui". 喜 có 口 (miệng) ở dưới — vui thì cười thành tiếng. 欢 = 又 (tay) + 欠 (há miệng) — vừa vỗ tay vừa reo.',
           cum: [['很喜欢', 'hěn xǐhuan', 'rất thích'], ['不喜欢', 'bù xǐhuan', 'không thích']],
           cau: ['我也很喜欢它。', 'Wǒ yě hěn xǐhuan tā.'],
-          hoi: [{ q: '你喜欢什么菜？', qv: 'Em thích món gì?', d: '我很喜欢饺子。' }, { q: '“我很喜欢” 怎么读？', qv: '我很喜欢 đọc sao?', d: 'wó hén xǐhuan — hai chữ đầu đổi thành thanh 2.' }],
+          hoi: [{ q: '你喜欢什么菜？', qv: 'Em thích món gì?', d: '我很喜欢饺子。' }, { q: '你喜欢中国吗？', qv: 'Em có thích Trung Quốc không?', d: '我很喜欢中国。' }],
+          mo: [['爱', 'ài', 'yêu', 'gần nghĩa'], ['想', 'xiǎng', 'muốn', 'cùng nhóm'], ['喜欢吃', 'xǐhuan chī', 'thích ăn', 'cụm hay gặp']],
           chu: '喜欢' },
         { w: '它', py: 'tā', loai: 'đại từ · 人称代词', hv: 'THA', nghia: 'nó (đồ vật, con vật)', anh: 'tu-它.jpg',
           khi: 'Khi NHẮC LẠI một đồ vật hoặc con vật đã nói ở câu trước, khỏi phải lặp tên nó.',
@@ -870,7 +916,8 @@ const DATA = {
           meo: '他 · 她 · 它 đọc GIỐNG HỆT tā, chỉ mắt mới phân biệt được: 亻 người nam · 女 người nữ · 宀 mái nhà che đồ vật.',
           cum: [['喜欢它', 'xǐhuan tā', 'thích nó'], ['它们', 'tāmen', 'chúng nó (đồ vật)']],
           cau: ['我也很喜欢它。', 'Wǒ yě hěn xǐhuan tā.'],
-          hoi: [{ q: '说电脑用 “他” 还是 “它”？', qv: 'Nói về máy tính dùng 他 hay 它?', d: '它 — chỉ đồ vật.' }, { q: '“他、她、它” 读音一样吗？', qv: 'Ba chữ đó đọc giống nhau không?', d: 'Giống hệt — đều là tā.' }],
+          hoi: [{ q: '这是你的电脑吗？', qv: 'Đây là máy tính của em à?', d: '是，它是我的新电脑。' }, { q: '你喜欢它吗？', qv: '(Chỉ vào máy tính) Em có thích nó không?', d: '我很喜欢它。／ 我不喜欢它。' }],
+          mo: [['他', 'tā', 'anh ấy', 'cùng nhóm'], ['她', 'tā', 'cô ấy', 'cùng nhóm'], ['猫', 'māo', 'con mèo (gọi bằng 它)', 'cùng nhóm']],
           chu: '它' },
       ],
     },
@@ -1193,7 +1240,7 @@ function vietChu(ids, chu, ma, lap = false) {   // vẽ nét lần lượt từn
   const ws = ids.map((id, i) => {
     const o = document.getElementById(id); if (!o) return null;
     o.previousElementSibling && (o.previousElementSibling.style.visibility = 'hidden');
-    return HanziWriter.create(id, chu[i], { width: o.clientWidth, height: o.clientHeight, padding: 4, strokeColor: '#33402A', radicalColor: '#6AAE45', showOutline: true, outlineColor: '#E3ECD3', delayBetweenStrokes: 160, strokeAnimationSpeed: 1.1, showCharacter: false,
+    return HanziWriter.create(id, chu[i], { width: o.clientWidth, height: o.clientHeight, padding: 4, strokeColor: '#33402A', radicalColor: '#6AAE45', showOutline: true, outlineColor: '#C2D3A6', drawingColor: '#33402A', drawingWidth: 6, highlightColor: '#F2A541', showHintAfterMisses: 1, delayBetweenStrokes: 160, strokeAnimationSpeed: 1.1, showCharacter: false,
       onLoadCharDataError: () => { o.previousElementSibling && (o.previousElementSibling.style.visibility = 'visible'); } });
   });
   const chay = i => { if (ma !== phien || i >= ws.length) return; const w = ws[i]; if (!w) return chay(i + 1); w.animateCharacter({ onComplete: () => setTimeout(() => chay(i + 1), 250) }); };
@@ -1219,11 +1266,12 @@ them('bia', { c: 0 });
 DATA.phan.forEach((p, k) => {
   const c = k + 1;
   them('chuong', { c, k }); them('bang', { c, k });
-  // ngữ pháp (np: một điểm hoặc danh sách): np.sau = từ → ngay sau thẻ từ đó; np.sau = 'khoa' → sau bài khoá; không ghi → sau thẻ cuối
+  // ngữ pháp (np: một điểm hoặc danh sách) đứng SAU toàn bộ thẻ từ của phần, theo thứ tự trong dữ liệu (cô chốt 28/11, không xen giữa thẻ);
+  // np.sau = 'khoa' → sau bài khoá
   const nps = [].concat(p.np || []);
   const npSau = dk => nps.forEach((g, n) => { if (dk(g)) them('nguphap', { c, k, n }); });
-  p.tu.forEach((w, j) => { them('the', { c, k, j }); npSau(g => g.sau === w.w); });
-  npSau(g => g.sau !== 'khoa' && !p.tu.some(w => w.w === g.sau));
+  p.tu.forEach((w, j) => them('the', { c, k, j }));
+  npSau(g => g.sau !== 'khoa');
   them('khoa', { c, k });
   npSau(g => g.sau === 'khoa');
   them('tau', { c, k });   // trò xếp toa tàu: câu của bài khoá vừa học
@@ -1340,6 +1388,7 @@ VE.the = (t, el) => {
       <div class="khoi"><span class="pill">Hỏi nhanh</span>
         <div class="hoi-hang">${w.hoi.map((h, i) => `<div class="hoi" data-hoi="${i}"><span class="so">${i + 1}</span><div class="q">${hl(h.q)}</div><div class="qv">${esc(h.qv)}</div><div class="d">→ ${hl(h.d)}</div></div>`).join('')}</div></div>
       <div class="nut-lop">
+        ${w.mo && w.mo.length ? '<button class="nut chinh" id="b-mo">➕ Mở rộng</button>' : ''}
         <button class="nut" id="b-meo">💡 Mẹo nhớ</button>
         <button class="nut" id="b-chu">✍️ Chữ Hán (${chu.length})</button>
         <button class="nut" id="b-gv">🗒 Ghi chú GV</button>
@@ -1350,7 +1399,9 @@ VE.the = (t, el) => {
   const ma = phien;
   vietChu(chu.map((c, i) => 'hw' + i), chu, ma);
   $('#b-ve', el).onclick = () => { chu.forEach((c, i) => { const o = $('#hw' + i, el); if (o) o.innerHTML = ''; }); vietChu(chu.map((c, i) => 'hw' + i), chu, phien); };
-  $$('[data-hoi]', el).forEach(h => h.onclick = () => { const x = w.hoi[h.dataset.hoi]; if (!h.classList.contains('mo')) { h.classList.add('mo'); sao(`the${t.k}-${t.j}-${h.dataset.hoi}`, 1, h); doc(chiHan(x.d.split('—')[0])); } else doc(x.q); });
+  $$('[data-hoi]', el).forEach(h => h.onclick = () => { if (!h.classList.contains('mo')) { h.classList.add('mo'); sao(`the${t.k}-${t.j}-${h.dataset.hoi}`, 1, h); } });   // không phát âm (cô chốt 28/11)
+  const bm = $('#b-mo', el); if (bm) bm.onclick = () => moLop('➕ Mở rộng', `Từ <span class="zh">${esc(w.w)}</span> còn đi với…`,
+    `<div class="mr-luoi">${w.mo.map(m => `<button class="mr" data-doc="${esc(m[0])}">${m[3] ? `<span class="pill">${esc(m[3])}</span>` : ''}<span class="zh">${hl(m[0])}</span><span class="py">${esc(m[1])}</span><span class="vi">${esc(m[2])}</span></button>`).join('')}</div>`);
   $('#b-meo', el).onclick = () => moLop('💡 Mẹo nhớ', `<span class="zh">${esc(w.w)}</span> · ${esc(w.hv)}`, `<p>${w.meo}</p>`);
   $('#b-chu', el).onclick = () => moLop('✍️ Chữ Hán', `Tháo từng chữ của <span class="zh">${esc(w.w)}</span>`, chu.map(c => { const x = DATA.chu[c]; return `<div class="chu-o">${MI(c, 110)}<div>
       <p><b class="zh" style="font-size:26px">${c}</b> <span class="py">${x.py}</span> — bộ <b class="zh">${esc(x.bo)}</b> ${x.viet ? '<span class="pill">★ phải viết tay</span>' : '<span class="pill trang">chỉ nhận mặt</span>'}</p>
@@ -1388,6 +1439,7 @@ VE.nguphap = (t, el) => {
   const chon = k => {
     dungDoc();
     phai.innerHTML = VEM[k]();
+    phai.classList.remove('chat'); if (phai.scrollHeight > phai.clientHeight + 2) phai.classList.add('chat');   // dư chữ thì co lại một nấc
     $$('.np-muc', el).forEach(b => b.classList.toggle('bat', b.dataset.muc === k));
     if (k === 'xep') $$('.xep', phai).forEach(o => {
       const x = g.xep[o.dataset.x], kq = $('.xep-kq', o); let i = 0;
@@ -1399,7 +1451,7 @@ VE.nguphap = (t, el) => {
       });
     });
     if (k === 'loi') $$('.loi', phai).forEach(o => o.onclick = () => { const l = g.loi[o.dataset.l]; if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-l${o.dataset.l}`, 1, o); } doc(l[1]); });
-    if (k === 'hoi') $$('.hoi', phai).forEach(o => o.onclick = () => { const h = g.hoi[o.dataset.hoi]; if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-h${o.dataset.hoi}`, 1, o); doc(chiHan(h.d.split('—')[0])); } else doc(h.q); });
+    if (k === 'hoi') $$('.hoi', phai).forEach(o => o.onclick = () => { if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-h${o.dataset.hoi}`, 1, o); } });   // không phát âm
   };
   $$('.np-muc', el).forEach(b => b.onclick = () => chon(b.dataset.muc));
   $('#np-gv', el).onclick = () => moLop('🗒 Ghi chú giáo viên', `Ngữ pháp ${g.so} · <span class="zh">${esc(g.ten)}</span>`, `<dl class="ghi-gv">
@@ -1778,7 +1830,7 @@ function capNhatDau() {
 }
 function sang(i) {
   i = Math.max(0, Math.min(TRANG.length - 1, i));
-  dungDoc(); phien++; dongLop();
+  dungDoc(); phien++; dongLop(); dongDS();
   S.i = i; luu();
   const t = TRANG[i], k = $('#khung');
   k.dataset.loai = t.loai;
@@ -1791,6 +1843,26 @@ document.addEventListener('click', e => {
   const h = e.target.closest('[data-anh]'); if (h) { xemAnh(h.dataset.anh, h.dataset.tieu || ''); return; }
   const d = e.target.closest('[data-doc]'); if (d) { doc(d.dataset.doc); return; }
 });
+const NHAN_TRANG = { bia: 'Bìa', chuong: 'Mở chặng', bang: 'Bảng từ', tau: '🚂 Tàu', sosanh: 'So sánh', viettay: 'Viết tay', bothu: 'Bộ thủ', nham: 'Chữ dễ nhầm', khoidong: 'Nhìn tranh', rao: 'Nói nhanh', quiz: 'Quiz', check: 'Tự kiểm', cuoi: 'Kết thúc' };
+function nhanTrang(t) {
+  if (t.loai === 'the') return `<span class="zh">${esc(DATA.phan[t.k].tu[t.j].w.replace(/\u200B/g, ''))}</span>`;
+  if (t.loai === 'nguphap') { const g = [].concat(DATA.phan[t.k].np)[t.n || 0]; return `📘 <span class="zh">${esc(g.ten)}</span>`; }
+  if (t.loai === 'khoa') return `📖 Bài khoá ${t.k + 1}`;
+  return NHAN_TRANG[t.loai] || t.loai;
+}
+function moDS() {
+  const nhom = [];
+  TRANG.forEach((t, i) => { const g = nhom[nhom.length - 1]; if (g && g.c === t.c) g.ds.push(i); else nhom.push({ c: t.c, ds: [i] }); });
+  $('#ds-noi').innerHTML = nhom.map(g => `<div class="ds-chang"><div class="ds-ten">${CHUONG[g.c].ic} ${esc(CHUONG[g.c].ten)}</div><div class="ds-the">${g.ds.map(i =>
+    `<button data-sang="${i}" class="${i === S.i ? 'dang' : ''}"><small>${i + 1}</small>${nhanTrang(TRANG[i])}</button>`).join('')}</div></div>`).join('');
+  $('#ds-dang').textContent = `Đang ở slide ${S.i + 1} / ${TRANG.length}`;
+  $('#ds-slide').classList.add('mo');
+  const d = $('#ds-noi .dang'); if (d) d.scrollIntoView({ block: 'center' });
+}
+function dongDS() { $('#ds-slide').classList.toggle('mo', false); }
+const batDS = () => $('#ds-slide').classList.contains('mo') ? dongDS() : moDS();
+$('#ds-nut').onclick = batDS;
+$('#ds-dong').onclick = dongDS;
 $('#lui').onclick = () => sang(S.i - 1);
 $('#toi').onclick = () => sang(S.i + 1);
 const toanMH = () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); else document.exitFullscreen(); };
@@ -1800,7 +1872,8 @@ document.addEventListener('keydown', e => {
   if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); sang(S.i + 1); }
   else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); sang(S.i - 1); }
   else if (e.key === 'f' || e.key === 'F') toanMH();
-  else if (e.key === 'Escape') dongLop();
+  else if (e.key === 'g' || e.key === 'G') batDS();
+  else if (e.key === 'Escape') { dongLop(); dongDS(); }
 });
 $$('[data-toc]').forEach(b => { b.classList.toggle('bat', +b.dataset.toc === S.toc); b.onclick = () => { S.toc = +b.dataset.toc; luu(); $$('[data-toc]').forEach(x => x.classList.toggle('bat', x === b)); }; });
 $('#ten-bai').textContent = `Bài ${DATA.bai} · ${DATA.ten}`;
