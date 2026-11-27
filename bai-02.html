@@ -1142,12 +1142,11 @@ function moLop(kicker, tieuDe, noiDung) {
   $('#khung').appendChild(l);
   l.onclick = e => { if (e.target === l) dongLop(); };
   $('.dong-lai', l).onclick = dongLop;
-  $$('[data-doc]', l).forEach(b => b.onclick = () => doc(b.dataset.doc));
-  $$('[data-mo]', l).forEach(b => b.onclick = () => { const m = $(b.dataset.mo, l); m.classList.toggle('mo'); if (m.classList.contains('mo') && m.dataset.doc) doc(m.dataset.doc); });
+  $$('[data-mo]', l).forEach(b => b.onclick = () => $(b.dataset.mo, l).classList.toggle('mo'));   // slide từ vựng: không tự đọc câu
   return l;
 }
 function dongLop() { const l = $('#lop'); if (l) l.remove(); }
-const cauTo = (zh, py) => `<div class="cau-to"><span class="han">${hl(zh)}</span> <button class="nut" data-doc="${esc(zh)}" style="font-size:12px;padding:3px 10px;vertical-align:middle">🔊</button><span class="py">${esc(py || '')}</span></div>`;
+const cauTo = (zh, py) => `<div class="cau-to"><span class="han">${hl(zh)}</span><span class="py">${esc(py || '')}</span></div>`;
 
 /* ══════════ 3a · bảng từ mới (PPT “TỪ MỚI ①–⑤”) ══════════ */
 function bangTu(t, k) {
@@ -1190,12 +1189,12 @@ function theTu(t, k, tg) {
         <div class="luyen6"><button class="nut" id="l-anh">🖼 Nhìn ảnh</button><button class="nut" id="l-th">🎭 Tình huống</button>${w.mo ? '<button class="nut" id="l-mo">➕ Mở rộng</button>' : ''}<button class="nut" id="l-meo">💡 Mẹo & bẫy</button><button class="nut" id="l-gv">🗒 Ghi chú GV</button></div>
       </div></div>`);
   const veCau = (i, doc1) => { chon = i; const c = w.cap[i]; $$('.chip-cum').forEach((b, j) => b.classList.toggle('chon', j === i));
-    $('#cau1').innerHTML = `① ${hl(c.cau)}<span class="py">${esc(c.py)}</span>${c.vi ? `<span class="vi">${esc(c.vi)}</span>` : ''}`; if (doc1) doc(c.cau); };
-  $$('.chip-cum').forEach(b => b.onclick = () => veCau(+b.dataset.i, true));
-  $('#cau1').onclick = () => doc(w.cap[chon].cau);
-  veCau(0, false);
-  $$('.hoi6 .q').forEach(b => b.onclick = () => doc(b.textContent.replace(/^[②③]\s*/, '')));
-  $$('.hoi6 .dap').forEach(d => d.onclick = () => { d.classList.add('mo'); doc(d.dataset.doc); });
+    $('#cau1').innerHTML = `① ${hl(c.cau)}<span class="py">${esc(c.py)}</span>${c.vi ? `<span class="vi">${esc(c.vi)}</span>` : ''}`; };
+  $$('.chip-cum').forEach(b => b.onclick = () => veCau(+b.dataset.i));
+  veCau(0);
+  // slide từ vựng chỉ phát âm TỪ (nút 🔊); câu ví dụ / câu hỏi / câu trả lời không tự đọc
+  $$('.hoi6 .q').forEach(b => b.onclick = () => { const d = $(b.dataset.d); if (d) d.classList.add('mo'); });
+  $$('.hoi6 .dap').forEach(d => d.onclick = () => d.classList.add('mo'));
   $('#nghe-tu').onclick = () => doc(w.w);
   const ap = $('#anh-ppt'); if (ap) ap.onclick = () => xemAnh(w.anh_ppt, `<span class="han">${esc(w.w)}</span> · ${esc(w.nghia)}`);
   $('#linh').onclick = () => linhDoc([w.w, w.w, ...w.cap.map(c => c.cum)], () => {});
@@ -1248,11 +1247,11 @@ function vanDung(t, k) {
          <div class="mau-dap" id="md"><span class="han">${hl(w.th_d)}</span><span class="py">${esc(w.th_d_py)}</span></div></div>
        <div class="hang-nut" style="justify-content:space-between"><span class="thong-bao" id="tb"></span>
          <span class="hang-nut"><button class="nut" id="xem">👁 Câu mẫu</button><button class="nut chinh" id="tiep">${c < ds.length - 1 ? 'Tình huống tiếp →' : 'Làm lại'}</button></span></div></div>`);
-    const moMau = () => { $('#md').classList.add('mo'); doc(w.th_d); };
+    const moMau = () => $('#md').classList.add('mo');
     $$('.ngan-tu button').forEach(b => b.onclick = () => {
       if (kq[c] === 1) return;
       const ok = b.dataset.w === w.w;
-      if (ok) { b.classList.add('dung'); if (kq[c] == null) { kq[c] = 1; sao('vd' + k + '-' + w.w, 1, b); } $('#tb').textContent = '✅ Đúng — giờ nói cả câu!'; moMau(); }
+      if (ok) { b.classList.add('dung'); if (kq[c] == null) { kq[c] = 1; sao('vd' + k + '-' + w.w, 1, b); } $('#tb').textContent = '✅ Đúng — giờ nói cả câu!'; moMau(); doc(w.w); }
       else { b.classList.remove('sai'); void b.offsetWidth; b.classList.add('sai'); if (kq[c] == null) kq[c] = 0; $('#tb').textContent = '❌ Chưa đúng — nghe lại tình huống nhé.'; }
     });
     $('#xem').onclick = moMau;
