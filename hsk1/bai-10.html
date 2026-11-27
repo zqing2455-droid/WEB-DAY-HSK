@@ -243,7 +243,14 @@ button{font:inherit;cursor:pointer}
 .hoi .d{margin-top:8px;font-family:var(--zh);font-size:20px;font-weight:700;color:var(--la-dam);background:var(--la-nhat);border-radius:10px;padding:4px 10px;filter:blur(7px);opacity:.55;transition:.25s}
 .hoi.mo .d{filter:none;opacity:1}
 .hoi:not(.mo) .d::after{content:""}
-.nut-lop{display:flex;gap:10px;margin-top:auto}
+.nut-lop{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap}
+.mr-luoi{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px}
+.mr{position:relative;border:2px dashed var(--vien);background:#fff;border-radius:18px;padding:16px 18px 12px;text-align:left;display:flex;flex-direction:column;gap:2px;cursor:pointer}
+.mr .pill{position:absolute;top:-12px;left:14px;font-size:12.5px;padding:2px 12px}
+.mr .zh{font-family:var(--zh);font-size:34px;font-weight:700;line-height:1.2;color:var(--muc)}
+.mr .py{font-size:17px;color:var(--la-dam);font-weight:700}
+.mr .vi{font-size:16px;color:var(--muc-phu)}
+.mr:hover{border-style:solid;border-color:var(--la)}
 
 /* ── bài khoá ── */
 .khoa{display:grid;grid-template-columns:450px 1fr;grid-template-rows:minmax(0,1fr);gap:26px;height:calc(100% - 82px)}
@@ -416,6 +423,7 @@ button{font:inherit;cursor:pointer}
 .np-cau .py{margin-left:14px;font-size:16px}
 .np-ghi{margin-top:12px;background:var(--la-nhat);border-radius:14px;padding:10px 16px;font-size:16.5px;line-height:1.5}
 .np-ghi b{color:var(--la-dam)}
+.np-phai.chat .np-ct{margin-bottom:6px}.np-phai.chat .np-o{padding:3px 16px}.np-phai.chat .np-o b{font-size:26px}.np-phai.chat .np-vd{gap:2px}.np-phai.chat .np-cau{padding:2px 6px}.np-phai.chat .vd-o,.np-phai.chat .np-cau .dau{font-size:27px}.np-phai.chat .np-ghi{margin-top:8px;padding:7px 14px;font-size:15.5px}
 .xep-ds{display:flex;flex-direction:column;gap:14px}
 .xep{border:2px dashed var(--vien);border-radius:18px;padding:10px 16px}
 .xep-kq{min-height:50px;border-bottom:3px solid var(--la-3);font-family:var(--zh);font-size:32px;font-weight:700;display:flex;gap:4px;align-items:center;padding-bottom:2px}
@@ -447,6 +455,22 @@ button{font:inherit;cursor:pointer}
 .luoi6.nhieu .bt .mi{width:72px!important;height:72px!important;font-size:52px!important}
 .luoi6.nhieu .bt h4{font-size:19px}
 /* ── lớp phủ ── */
+#ds-slide{position:absolute;left:18px;right:18px;bottom:58px;max-height:470px;background:#fff;border:2.5px solid var(--la);border-radius:22px;box-shadow:0 10px 30px rgba(60,80,30,.25);z-index:30;display:none;flex-direction:column;overflow:hidden}
+#ds-slide.mo{display:flex}
+#ds-slide .ds-dau{display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:2px dashed var(--vien);font-size:17px;color:var(--la-dam)}
+#ds-slide .ds-dau span{font-size:14px;color:var(--muc-phu)}
+#ds-slide .dong-x{position:static;margin-left:auto}
+#ds-noi{overflow-y:auto;padding:8px 18px 14px}
+.ds-chang{display:flex;gap:12px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--vien)}
+.ds-chang:last-child{border-bottom:0}
+.ds-ten{flex:none;width:150px;font:800 14px "Nunito";color:var(--la-dam);padding-top:5px}
+.ds-the{display:flex;flex-wrap:wrap;gap:6px}
+.ds-the button{border:1.5px solid var(--vien);background:var(--la-nhat);border-radius:10px;padding:3px 10px;font:700 14px "Nunito";color:var(--muc);cursor:pointer;display:flex;gap:6px;align-items:baseline}
+.ds-the button small{font-size:11px;color:var(--muc-phu)}
+.ds-the button .zh{font-family:var(--zh);font-size:17px}
+.ds-the button:hover{border-color:var(--la)}
+.ds-the button.dang{background:var(--la);border-color:var(--la);color:#fff}
+.ds-the button.dang small{color:#E8F2DA}
 #lop{position:absolute;inset:0;background:rgba(60,80,30,.35);display:none;z-index:40;align-items:center;justify-content:center}
 #lop.mo{display:flex}
 #lop .hop{width:860px;max-height:600px;overflow:auto;background:#fff;border-radius:28px;padding:22px 30px 26px;position:relative;border:3px dashed var(--vien);box-shadow:0 16px 40px rgba(40,60,20,.3)}
@@ -510,9 +534,10 @@ button{font:inherit;cursor:pointer}
     <span class="ten" id="ten-bai"></span>
     <span class="toc">Tốc độ đọc: <button data-toc="0.7">chậm</button><button data-toc="0.85">vừa</button><button data-toc="1">thường</button></span>
     <span id="bao-giong"></span>
-    <span class="phai"><button class="dieu" id="lui" title="Trang trước (←)">‹</button><span id="so-trang">1 / 1</span><button class="dieu" id="toi" title="Trang sau (→)">›</button><button class="dieu" id="toan" title="Toàn màn hình (F)" style="font-size:17px">⛶</button></span>
+    <span class="phai"><button class="dieu" id="ds-nut" title="Danh sách slide (G)" style="font-size:17px">☰</button><button class="dieu" id="lui" title="Trang trước (←)">‹</button><span id="so-trang">1 / 1</span><button class="dieu" id="toi" title="Trang sau (→)">›</button><button class="dieu" id="toan" title="Toàn màn hình (F)" style="font-size:17px">⛶</button></span>
   </footer>
   <div id="chi-doc">Cả lớp đọc theo ✋</div>
+  <div id="ds-slide"><div class="ds-dau"><b>☰ Chọn slide</b><span id="ds-dang"></span><button class="dong-x" id="ds-dong">✕</button></div><div id="ds-noi"></div></div>
   <div id="lop"><div class="hop"><button class="dong-x" id="dong-lop">✕</button><div id="lop-noi"></div></div></div>
 </div>
 <script>
@@ -562,7 +587,8 @@ const DATA = {
           meo: 'Hán–Việt BÔI TỬ — "bôi" là cái chén, như "cạn bôi". Chữ 杯 = 木 (gỗ) + 不 gợi âm — cái chén bằng gỗ.<br>Cùng bộ 木 với 椅 · 本 (Bài 9) · 桌 (Bài 8).',
           cum: [['一个杯子', 'yí gè bēizi', 'một cái cốc'], ['这些杯子', 'zhèxiē bēizi', 'những cái cốc này']],
           cau: ['请问，有杯子吗？', 'Qǐngwèn, yǒu bēizi ma?'],
-          hoi: [{ q: '“杯子” 的量词是什么？', qv: 'Lượng từ của 杯子 là gì?', d: '个 — 一个杯子 · 这个杯子。' }, { q: '这个杯子多少钱？', qv: 'Cái cốc này bao nhiêu tiền?', d: '这个杯子五块钱。' }],
+          hoi: [{ q: '你有几个杯子？', qv: 'Bạn có mấy cái cốc?', d: '我有两个杯子。／ 我有一个杯子。' }, { q: '这个杯子多少钱？', qv: 'Cái cốc này bao nhiêu tiền?', d: '这个杯子五块钱。' }],
+          mo: [['一杯茶', 'yì bēi chá', 'một cốc trà', 'cụm hay gặp'], ['一杯水', 'yì bēi shuǐ', 'một cốc nước', 'cụm hay gặp'], ['买杯子', 'mǎi bēizi', 'mua cốc', 'cụm hay gặp'], ['椅子', 'yǐzi', 'cái ghế', 'cùng nhóm']],
           chu: '杯子' },
         { w: '售货员', py: 'shòuhuòyuán', loai: 'danh từ · 名词', hv: 'THỤ HOÁ VIÊN', nghia: 'nhân viên bán hàng', anh: 'tu-售货员.jpg',
           khi: 'Khi gọi hoặc nói về người bán hàng trong cửa hàng, siêu thị, chợ.',
@@ -570,15 +596,17 @@ const DATA = {
           meo: 'Hán–Việt THỤ HOÁ VIÊN — "người bán hàng hoá": 售 (bán) + 货 (hàng) + 员 (người làm một việc).<br>Đuôi 员 rất hay gặp: 服务员 phục vụ · 教员 giáo viên.',
           cum: [['一个售货员', 'yí gè shòuhuòyuán', 'một nhân viên bán hàng'], ['他是售货员', 'tā shì shòuhuòyuán', 'anh ấy là nhân viên bán hàng']],
           cau: ['售货员：有，杯子在这边。', 'Shòuhuòyuán: Yǒu, bēizi zài zhèbiān.'],
-          hoi: [{ q: '“售货员” 在哪儿工作？', qv: '售货员 làm việc ở đâu?', d: '在商店 — 他是商店的售货员。' }, { q: '叫售货员的时候说什么？', qv: 'Gọi người bán hàng thì nói gì?', d: '说 “请问……” 或 “您好” — không gọi thẳng chức danh.' }],
+          hoi: [{ q: '“售货员” 在哪儿工作？', qv: '售货员 làm việc ở đâu?', d: '在商店 — 他是商店的售货员。' }, { q: '你是售货员吗？', qv: 'Bạn là nhân viên bán hàng à?', d: '不是，我是学生。／ 是，我在商店工作。' }],
+          mo: [['服务员', 'fúwùyuán', 'nhân viên phục vụ', 'cùng chữ'], ['商店', 'shāngdiàn', 'cửa hàng', 'cùng nhóm'], ['卖', 'mài', 'bán', 'cùng nhóm'], ['超市', 'chāoshì', 'siêu thị', 'cùng nhóm']],
           chu: '售货员' },
         { w: '这边', py: 'zhèbiān', loai: 'đại từ · 代词', hv: 'GIÁ BIÊN', nghia: 'bên này, phía này', anh: 'tu-这边.jpg',
           khi: 'Khi CHỈ HƯỚNG cho người khác — phía gần mình. Người bán chỉ chỗ để hàng.',
           the: '在这边 · 这边请 · 杯子在这边。Trái nghĩa là 那边. ⚠ 这边 thiên về HƯỚNG (bên này), 这儿 thiên về ĐIỂM (chỗ này).',
           meo: 'Hán–Việt GIÁ BIÊN — "bên này". Hai chữ đều đã học: 这 (Bài 3) + 边 (Bài 6).<br>Nhớ bộ bốn: 这边 / 那边 (hướng) ｜ 这儿 / 那儿 (điểm).',
-          cum: [['在这边', 'zài zhèbiān', 'ở bên này'], ['这边请', 'zhèbiān qǐng', 'mời đi lối này']],
+          cum: [['在这边', 'zài zhèbiān', 'ở bên này'], ['这边的衣服', 'zhèbiān de yīfu', 'quần áo bên này']],
           cau: ['有，杯子在这边。', 'Yǒu, bēizi zài zhèbiān.'],
-          hoi: [{ q: '杯子在哪儿？', qv: 'Cốc ở đâu?', d: '杯子在这边。' }, { q: '“这边” 和 “这儿” 有什么不同？', qv: '这边 và 这儿 khác nhau thế nào?', d: '这边 chỉ HƯỚNG (bên này); 这儿 chỉ ĐIỂM (chỗ này).' }],
+          hoi: [{ q: '杯子在哪儿？', qv: 'Cốc ở đâu?', d: '杯子在这边。' }, { q: '苹果在这边吗？', qv: 'Táo ở bên này à?', d: '在，苹果在这边。／ 不在，苹果在那边。' }],
+          mo: [['那边', 'nàbiān', 'bên kia', 'trái nghĩa'], ['这边请', 'zhèbiān qǐng', 'mời đi lối này', 'cụm hay gặp'], ['这儿', 'zhèr', 'chỗ này', 'gần nghĩa'], ['外边', 'wàibian', 'bên ngoài', 'cùng chữ']],
           chu: '这边' },
         { w: '钱', py: 'qián', loai: 'danh từ · 名词', hv: 'TIỀN', nghia: 'tiền', anh: 'tu-钱.jpg',
           khi: 'Khi nói về tiền, và nhất là khi HỎI GIÁ.',
@@ -587,6 +615,7 @@ const DATA = {
           cum: [['多少钱', 'duōshao qián', 'bao nhiêu tiền'], ['五块钱', 'wǔ kuài qián', 'năm đồng']],
           cau: ['多少钱一个？', 'Duōshao qián yí gè?'],
           hoi: [{ q: '“几钱” 对不对？', qv: 'Nói 几钱 đúng không?', d: 'Sai — phải nói 多少钱; muốn dùng 几 thì phải có lượng từ: 几块钱.' }, { q: '“一百元钱” 对不对？', qv: 'Nói 一百元钱 đúng không?', d: 'Sai — 元 không ghép 钱. Nói 一百元 hoặc 一百块钱.' }],
+          mo: [['多少钱一个', 'duōshao qián yí gè', 'bao nhiêu tiền một cái', 'cụm hay gặp'], ['没有钱', 'méiyǒu qián', 'không có tiền', 'cụm hay gặp'], ['块', 'kuài', 'đồng (lối nói)', 'cùng nhóm'], ['元', 'yuán', 'đồng (lối viết)', 'cùng nhóm']],
           chu: '钱' },
         { w: '这些', py: 'zhèxiē', loai: 'đại từ · 代词', hv: 'GIÁ TA', nghia: 'những cái này', anh: 'tu-这些.jpg',
           khi: 'Khi trỏ NHIỀU vật ở GẦN mình — nhất là khi so hai nhóm hàng.',
@@ -594,7 +623,8 @@ const DATA = {
           meo: 'Hán–Việt GIÁ TA — 这 (này) + 些 (một số, Bài 5 trong 一些).<br>Bốn ô: 这个 MỘT cái này ｜ 这些 NHIỀU cái này ｜ 那个 MỘT cái kia ｜ 那些 NHIỀU cái kia.',
           cum: [['这些杯子', 'zhèxiē bēizi', 'những cái cốc này'], ['这些苹果', 'zhèxiē píngguǒ', 'chỗ táo này']],
           cau: ['这些五块钱一个，那些十块钱一个。', 'Zhèxiē wǔ kuài qián yí gè, nàxiē shí kuài qián yí gè.'],
-          hoi: [{ q: '“这些的杯子” 对不对？', qv: 'Nói 这些的杯子 đúng không?', d: 'Sai — 这些 ghép thẳng danh từ: 这些杯子。' }, { q: '“这个” 和 “这些” 有什么不同？', qv: '这个 và 这些 khác nhau thế nào?', d: '这个 MỘT cái; 这些 NHIỀU cái.' }],
+          hoi: [{ q: '“这些的杯子” 对不对？', qv: 'Nói 这些的杯子 đúng không?', d: 'Sai — 这些 ghép thẳng danh từ: 这些杯子。' }, { q: '这些是你的书吗？', qv: 'Mấy quyển này là sách của bạn à?', d: '是，这些是我的书。／ 不是，这些是他的。' }],
+          mo: [['那些', 'nàxiē', 'những cái kia', 'trái nghĩa'], ['哪些', 'nǎxiē', 'những cái nào', 'cùng chữ'], ['这个', 'zhège', 'cái này', 'cùng nhóm'], ['一些', 'yìxiē', 'một số, một ít', 'cùng chữ']],
           chu: '这些' },
         { w: '那些', py: 'nàxiē', loai: 'đại từ · 代词', hv: 'NA TA', nghia: 'những cái kia', anh: 'tu-那些.jpg',
           khi: 'Khi trỏ NHIỀU vật ở XA mình — thường đi CẶP với 这些 để so giá.',
@@ -602,15 +632,17 @@ const DATA = {
           meo: 'Hán–Việt NA TA — 那 (kia, Bài 6) + 些. Chỉ khác 这些 đúng chữ đầu.<br>Chỉ xuống bàn mình nói 这些, chỉ sang bàn bên kia nói 那些.',
           cum: [['那些杯子', 'nàxiē bēizi', 'những cái cốc kia'], ['那些书', 'nàxiē shū', 'những quyển sách kia']],
           cau: ['那些十块钱一个。', 'Nàxiē shí kuài qián yí gè.'],
-          hoi: [{ q: '“这些” 的反义词是什么？', qv: 'Từ trái nghĩa với 这些 là gì?', d: '那些 — cặp 这些 / 那些。' }, { q: '用 “这些……，那些……” 说一句话。', qv: 'Đặt một câu với cặp 这些……，那些……', d: '这些五块钱一个，那些十块钱一个。' }],
+          hoi: [{ q: '那些杯子多少钱一个？', qv: 'Mấy cái cốc kia bao nhiêu tiền một cái?', d: '那些十块钱一个。' }, { q: '那些是谁的衣服？', qv: 'Chỗ quần áo kia là của ai?', d: '那些是我妹妹的衣服。' }],
+          mo: [['这些', 'zhèxiē', 'những cái này', 'trái nghĩa'], ['那个', 'nàge', 'cái kia', 'cùng nhóm'], ['哪些', 'nǎxiē', 'những cái nào', 'cùng chữ'], ['那边', 'nàbiān', 'bên kia', 'cùng chữ']],
           chu: '那些' },
         { w: '块', py: 'kuài', loai: 'lượng từ · 量词', hv: 'KHOÁI', nghia: 'đồng (đơn vị tiền, lối nói)', anh: 'tu-块.jpg',
           khi: 'Khi NÓI MIỆNG về tiền — mua bán hằng ngày, đi chợ, trả giá.',
-          the: 'SỐ + 块 (+ 钱): 五块 · 五块钱 · 五块钱一个. Ghép hàng nhỏ hơn: 三块五 (= 3,5 元). ⚠ 块 là lối NÓI, 元 là lối VIẾT — cùng một giá trị.',
+          the: 'SỐ + 块 (+ 钱): 五块 · 五块钱 · 五块钱一个. Ghép hàng nhỏ hơn: 三块五 (= 3,5 元). ⚠ 块 là lối NÓI, 元 là lối VIẾT — cùng một giá trị. Hàng cuối (毛) thường được lược: 3,5 元 nói 三块五.',
           meo: 'Hán–Việt KHOÁI — nghĩa gốc là "cục, miếng" (一块面包). Tiền xưa là những MIẾNG bạc, nên đếm tiền cũng dùng 块.<br>Chữ 块 = 土 (đất) + 夬 — cục đất.',
           cum: [['五块钱', 'wǔ kuài qián', 'năm đồng'], ['三块五', 'sān kuài wǔ', 'ba đồng rưỡi']],
           cau: ['这些五块钱一个。', 'Zhèxiē wǔ kuài qián yí gè.'],
-          hoi: [{ q: '“块” 和 “元” 有什么不同？', qv: '块 và 元 khác nhau thế nào?', d: '块 là lối NÓI, 元 là lối VIẾT — cùng giá trị.' }, { q: '3.5元怎么说？', qv: '3,5 元 nói thế nào?', d: '三块五 — đơn vị cuối 毛 được lược.' }],
+          hoi: [{ q: '你的手机多少钱？', qv: 'Điện thoại của bạn bao nhiêu tiền?', d: '两千块。／ 三千多块。' }, { q: '一个杯子多少钱？（¥3.5）', qv: 'Một cái cốc bao nhiêu tiền? (3,5 tệ)', d: '三块五。' }],
+          mo: [['一块钱', 'yí kuài qián', 'một đồng', 'cụm hay gặp'], ['几块钱', 'jǐ kuài qián', 'mấy đồng', 'cụm hay gặp'], ['元', 'yuán', 'đồng (lối viết)', 'gần nghĩa'], ['钱', 'qián', 'tiền', 'cùng nhóm']],
           chu: '块' },
       ],
       np: [
@@ -638,8 +670,8 @@ const DATA = {
             ['一百元钱', '一百元 / 一百块钱', 'Chỉ **块** mới ghép được với **钱**.'],
           ],
           hoi: [
-            { q: '3.5元怎么说？', qv: '3,5 元 nói thế nào?', d: '三块五 — đơn vị cuối 毛 được lược.' },
-            { q: '6.02元怎么说？', qv: '6,02 元 nói thế nào?', d: '六块零两分 — chỗ khuyết phải đọc 零.' },
+            { q: '苹果多少钱一斤？（¥3.5）', qv: 'Táo bao nhiêu tiền một cân? (3,5 tệ)', d: '苹果三块五一斤。' },
+            { q: '这个包子多少钱？（¥2.05）', qv: 'Cái bánh bao này bao nhiêu tiền? (2,05 tệ)', d: '两块零五分。' },
           ],
           gv: {
             dan: 'Rải tiền RMB thật (hoặc ảnh in màu) lên bàn: 100元 · 50元 · 20元 · 10元 · 5元 · 1元 · 5角 · 1角. Mời hai em xếp từ TO xuống NHỎ. Chỉ vào chữ in trên tờ tiền: lớp đọc ra **元** và **角**. Rồi GV cầm tờ 5元 nói to **五块钱** — lớp tự thấy có HAI lối gọi.',
@@ -672,7 +704,8 @@ const DATA = {
           meo: 'Hán–Việt GIÁ NHI — 这 (này) + 儿 (đuôi nhi hoá). Đọc LIỀN một âm zhèr, cuối âm cong lưỡi lên.<br>Nhớ cặp 这儿 / 那儿 cùng lúc với 这边 / 那边.',
           cum: [['这儿的水果', 'zhèr de shuǐguǒ', 'hoa quả ở đây'], ['在这儿', 'zài zhèr', 'ở đây']],
           cau: ['这儿的水果真不少！', 'Zhèr de shuǐguǒ zhēn bù shǎo!'],
-          hoi: [{ q: '这儿的水果怎么样？', qv: 'Hoa quả ở đây thế nào?', d: '这儿的水果真不少！' }, { q: '“这儿” 的反义词是什么？', qv: 'Từ trái nghĩa với 这儿 là gì?', d: '那儿 — cặp 这儿 / 那儿, hỏi thì dùng 哪儿.' }],
+          hoi: [{ q: '这儿的水果怎么样？', qv: 'Hoa quả ở đây thế nào?', d: '这儿的水果真不少！' }, { q: '你家在这儿吗？', qv: 'Nhà bạn ở đây à?', d: '在，我家在这儿。／ 不在，我家在那儿。' }],
+          mo: [['那儿', 'nàr', 'ở kia', 'trái nghĩa'], ['哪儿', 'nǎr', 'ở đâu', 'cùng nhóm'], ['这里', 'zhèlǐ', 'ở đây', 'gần nghĩa'], ['这边', 'zhèbiān', 'bên này', 'gần nghĩa']],
           chu: '这儿' },
         { w: '水果', py: 'shuǐguǒ', loai: 'danh từ · 名词', hv: 'THUỶ QUẢ', nghia: 'trái cây, hoa quả', anh: 'tu-水果.jpg',
           khi: 'Khi nói CHUNG về hoa quả, chưa nói loại cụ thể.',
@@ -680,7 +713,8 @@ const DATA = {
           meo: 'Hán–Việt THUỶ QUẢ — "quả nhiều nước". 水 vẽ dòng nước chảy có sóng hai bên; 果 là 田 (quả tròn) đặt trên 木 (cây) — quả đậu trên cành.',
           cum: [['买水果', 'mǎi shuǐguǒ', 'mua hoa quả'], ['这儿的水果', 'zhèr de shuǐguǒ', 'hoa quả ở đây']],
           cau: ['这儿的水果真不少！', 'Zhèr de shuǐguǒ zhēn bù shǎo!'],
-          hoi: [{ q: '你喜欢吃什么水果？', qv: 'Em thích ăn quả gì?', d: '我喜欢吃苹果。' }, { q: '“水果” 和 “苹果” 有什么不同？', qv: '水果 và 苹果 khác nhau thế nào?', d: '水果 là tên gọi CHUNG; 苹果 là MỘT loại cụ thể.' }],
+          hoi: [{ q: '你喜欢吃什么水果？', qv: 'Em thích ăn quả gì?', d: '我喜欢吃苹果。' }, { q: '你今天想买水果吗？', qv: 'Hôm nay bạn có muốn mua hoa quả không?', d: '想，我想买苹果。／ 不想。' }],
+          mo: [['吃水果', 'chī shuǐguǒ', 'ăn hoa quả', 'cụm hay gặp'], ['水果店', 'shuǐguǒdiàn', 'cửa hàng hoa quả', 'từ ghép'], ['水', 'shuǐ', 'nước', 'cùng chữ'], ['苹果', 'píngguǒ', 'quả táo', 'cùng nhóm']],
           chu: '水果' },
         { w: '少', py: 'shǎo', loai: 'tính từ · 形容词', hv: 'THIỂU', nghia: 'ít', anh: 'tu-少.jpg',
           khi: 'Khi nói số lượng ÍT — trong bài dùng để KHEN ngược: 真不少 = nhiều lắm.',
@@ -688,7 +722,8 @@ const DATA = {
           meo: 'Hán–Việt THIỂU — như "thiểu số", "tối thiểu". Chữ 少 là 小 (nhỏ) thêm một nét phẩy — nhỏ đi chút nữa thì thành ÍT.',
           cum: [['真不少', 'zhēn bù shǎo', 'nhiều thật'], ['很少', 'hěn shǎo', 'rất ít']],
           cau: ['这儿的水果真不少！', 'Zhèr de shuǐguǒ zhēn bù shǎo!'],
-          hoi: [{ q: '“少” 的反义词是什么？', qv: 'Từ trái nghĩa với 少 là gì?', d: '多 — cặp 多 / 少.' }, { q: '“真不少” 是多还是少？', qv: '真不少 là nhiều hay ít?', d: 'NHIỀU — phủ định của "ít", dùng để khen.' }],
+          hoi: [{ q: '你的朋友多吗？', qv: 'Bạn của bạn có nhiều không?', d: '我的朋友不少。／ 我的朋友很少。' }, { q: '“真不少” 是多还是少？', qv: '真不少 là nhiều hay ít?', d: 'NHIỀU — phủ định của "ít", dùng để khen.' }],
+          mo: [['多', 'duō', 'nhiều', 'trái nghĩa'], ['多少', 'duōshao', 'bao nhiêu', 'cùng chữ'], ['太少了', 'tài shǎo le', 'ít quá', 'cụm hay gặp'], ['有点儿少', 'yǒudiǎnr shǎo', 'hơi ít', 'cụm hay gặp']],
           chu: '少' },
         { w: '斤', py: 'jīn', loai: 'lượng từ · 量词', hv: 'CÂN', nghia: 'cân (1 斤 = 0,5 kg)', anh: 'tu-斤.jpg',
           khi: 'Khi mua bán thứ TÍNH THEO CÂN — hoa quả, rau, thịt ngoài chợ.',
@@ -697,6 +732,7 @@ const DATA = {
           cum: [['两斤苹果', 'liǎng jīn píngguǒ', 'hai cân táo'], ['多少钱一斤', 'duōshao qián yì jīn', 'bao nhiêu tiền một cân']],
           cau: ['我想买两斤苹果。', 'Wǒ xiǎng mǎi liǎng jīn píngguǒ.'],
           hoi: [{ q: '一斤是多少？', qv: 'Một 斤 là bao nhiêu?', d: '一斤 = 0,5 kg = 500 g.' }, { q: '苹果多少钱一斤？', qv: 'Táo bao nhiêu tiền một cân?', d: '苹果三块五一斤。' }],
+          mo: [['半斤', 'bàn jīn', 'nửa cân (250 g)', 'cụm hay gặp'], ['几斤', 'jǐ jīn', 'mấy cân', 'cụm hay gặp'], ['一斤水果', 'yì jīn shuǐguǒ', 'một cân hoa quả', 'cụm hay gặp'], ['个', 'gè', 'quả, cái (đếm từng quả)', 'cùng nhóm']],
           chu: '斤' },
         { w: '苹果', py: 'píngguǒ', loai: 'danh từ · 名词', hv: 'BÌNH QUẢ', nghia: 'quả táo', anh: 'tu-苹果.jpg',
           khi: 'Khi nói về quả táo — món hàng trung tâm của cả bài.',
@@ -704,7 +740,8 @@ const DATA = {
           meo: 'Hán–Việt BÌNH QUẢ. Chữ 苹 = 艹 (cây cỏ) + 平 (bằng, gợi âm píng). Chữ 果 vừa học ở 水果 — hai từ dạy liền nhau cho chắc.',
           cum: [['两斤苹果', 'liǎng jīn píngguǒ', 'hai cân táo'], ['这儿的苹果', 'zhèr de píngguǒ', 'táo ở đây']],
           cau: ['好的，这儿的苹果真便宜！', 'Hǎo de, zhèr de píngguǒ zhēn piányi!'],
-          hoi: [{ q: '“两个苹果” 和 “两斤苹果” 有什么不同？', qv: 'Hai cụm này khác nhau thế nào?', d: '两个 đếm QUẢ; 两斤 tính theo CÂN.' }, { q: '这儿的苹果怎么样？', qv: 'Táo ở đây thế nào?', d: '这儿的苹果真便宜！' }],
+          hoi: [{ q: '你喜欢吃苹果吗？', qv: 'Bạn có thích ăn táo không?', d: '喜欢。／ 不太喜欢。' }, { q: '这儿的苹果怎么样？', qv: 'Táo ở đây thế nào?', d: '这儿的苹果真便宜！' }],
+          mo: [['水果', 'shuǐguǒ', 'hoa quả', 'cùng chữ'], ['吃苹果', 'chī píngguǒ', 'ăn táo', 'cụm hay gặp'], ['一个苹果', 'yí gè píngguǒ', 'một quả táo', 'cụm hay gặp'], ['买苹果', 'mǎi píngguǒ', 'mua táo', 'cụm hay gặp']],
           chu: '苹果' },
         { w: '便宜', py: 'piányi', loai: 'tính từ · 形容词', hv: 'TIỆN NGHI', nghia: 'rẻ', anh: 'tu-便宜.jpg',
           khi: 'Khi KHEN giá rẻ — câu chốt của cả bài.',
@@ -712,7 +749,8 @@ const DATA = {
           meo: 'Hán–Việt TIỆN NGHI — "tiện và hợp": mua được giá hợp thì là RẺ. 便 = 亻 (người) + 更; 宜 = 宀 (mái nhà) che 且.',
           cum: [['真便宜', 'zhēn piányi', 'rẻ thật'], ['很便宜', 'hěn piányi', 'rất rẻ']],
           cau: ['好的，这儿的苹果真便宜！', 'Hǎo de, zhèr de píngguǒ zhēn piányi!'],
-          hoi: [{ q: '“便宜” 的反义词是什么？', qv: 'Từ trái nghĩa với 便宜 là gì?', d: '贵 — cặp 便宜 / 贵.' }, { q: '“便” 在 “便宜” 里读什么？', qv: '便 trong 便宜 đọc thế nào?', d: 'Đọc pián, không đọc biàn; 宜 đọc khinh thanh yi.' }],
+          hoi: [{ q: '这儿的东西便宜吗？', qv: 'Đồ ở đây có rẻ không?', d: '很便宜。／ 不便宜。' }, { q: '你的手机便宜吗？', qv: 'Điện thoại của bạn có rẻ không?', d: '很便宜。／ 不太便宜，三千块。' }],
+          mo: [['贵', 'guì', 'đắt', 'trái nghĩa'], ['便宜一点儿', 'piányi yìdiǎnr', 'rẻ hơn chút', 'cụm hay gặp'], ['不便宜', 'bù piányi', 'không rẻ', 'cụm hay gặp'], ['太便宜了', 'tài piányi le', 'rẻ quá', 'cụm hay gặp']],
           chu: '便宜' },
       ],
       np: [
@@ -739,7 +777,7 @@ const DATA = {
             ['这件衣服贵吗？——是。', '这件衣服贵吗？——很贵。/ 不贵。', 'Trả lời câu hỏi tính từ thì nhắc lại tính từ, không nói **是**.'],
           ],
           hoi: [
-            { q: '“这儿的苹果是便宜” 错在哪儿？', qv: 'Câu đó sai ở đâu?', d: 'Thừa chữ 是 — tính từ tự làm vị ngữ.' },
+            { q: '这儿的苹果贵吗？', qv: 'Táo ở đây có đắt không?', d: '不贵，这儿的苹果真便宜！' },
             { q: '你的房间怎么样？', qv: 'Phòng của em thế nào?', d: '我的房间不大。/ 我的房间很漂亮。' },
           ],
           gv: {
@@ -775,7 +813,8 @@ const DATA = {
           meo: 'Hán–Việt THƯƠNG ĐIẾM — "tiệm buôn". 商 là buôn bán (như "thương mại"); 店 = 广 (mái hiên) che 占 — cái quán dựng dưới mái hiên.',
           cum: [['一家商店', 'yì jiā shāngdiàn', 'một cửa hàng'], ['去商店', 'qù shāngdiàn', 'đi cửa hàng']],
           cau: ['这家商店衣服真多！', 'Zhè jiā shāngdiàn yīfu zhēn duō!'],
-          hoi: [{ q: '“商店” 的量词是什么？', qv: 'Lượng từ của 商店 là gì?', d: '家 — 一家商店。' }, { q: '“商店” “书店” “饭店” 有什么不同？', qv: 'Ba từ này khác nhau thế nào?', d: 'Cửa hàng ｜ hiệu sách ｜ nhà hàng — cùng chữ 店.' }],
+          hoi: [{ q: '你家前边有商店吗？', qv: 'Trước nhà bạn có cửa hàng không?', d: '有，有一家商店。／ 没有。' }, { q: '你去商店买什么？', qv: 'Bạn đi cửa hàng mua gì?', d: '我去商店买衣服。／ 我去买水果。' }],
+          mo: [['书店', 'shūdiàn', 'hiệu sách', 'cùng chữ'], ['饭店', 'fàndiàn', 'nhà hàng', 'cùng chữ'], ['超市', 'chāoshì', 'siêu thị', 'gần nghĩa'], ['在商店里', 'zài shāngdiàn li', 'ở trong cửa hàng', 'cụm hay gặp']],
           chu: '商店' },
         { w: '衣服', py: 'yīfu', loai: 'danh từ · 名词', hv: 'Y PHỤC', nghia: 'quần áo', anh: 'tu-衣服.jpg',
           khi: 'Khi nói về quần áo nói chung — mua, mặc, khen chê.',
@@ -783,7 +822,8 @@ const DATA = {
           meo: 'Hán–Việt Y PHỤC — y như tiếng Việt "y phục". 衣 vẽ cái áo có hai tay áo xoè ra; bộ 衤 trong các chữ về áo quần chính là 衣 rút gọn.',
           cum: [['一件衣服', 'yí jiàn yīfu', 'một bộ quần áo'], ['买衣服', 'mǎi yīfu', 'mua quần áo']],
           cau: ['这家商店衣服真多！', 'Zhè jiā shāngdiàn yīfu zhēn duō!'],
-          hoi: [{ q: '“衣服” 的量词是什么？', qv: 'Lượng từ của 衣服 là gì?', d: '件 — 一件衣服 · 这件衣服。' }, { q: '这件衣服怎么样？', qv: 'Cái áo này thế nào?', d: '很好看，也不贵。' }],
+          hoi: [{ q: '你喜欢买衣服吗？', qv: 'Bạn có thích mua quần áo không?', d: '喜欢。／ 不太喜欢。' }, { q: '这件衣服怎么样？', qv: 'Cái áo này thế nào?', d: '很好看，也不贵。' }],
+          mo: [['穿衣服', 'chuān yīfu', 'mặc quần áo', 'cụm hay gặp'], ['新衣服', 'xīn yīfu', 'quần áo mới', 'cụm hay gặp'], ['漂亮的衣服', 'piàoliang de yīfu', 'quần áo đẹp', 'cụm hay gặp'], ['件', 'jiàn', 'chiếc (lượng từ của áo)', 'cùng nhóm']],
           chu: '衣服' },
         { w: '件', py: 'jiàn', loai: 'lượng từ · 量词', hv: 'KIỆN', nghia: 'chiếc, cái (đếm quần áo)', anh: 'tu-件.jpg',
           khi: 'Khi ĐẾM quần áo — áo, váy, áo khoác.',
@@ -791,7 +831,8 @@ const DATA = {
           meo: 'Hán–Việt KIỆN — như "kiện hàng", "bưu kiện". 件 = 亻 (người) + 牛 (con bò): một người, một con bò, mỗi thứ là MỘT KIỆN để đếm.',
           cum: [['一件衣服', 'yí jiàn yīfu', 'một chiếc áo'], ['这件衣服', 'zhè jiàn yīfu', 'chiếc áo này']],
           cau: ['小雪能穿，买一件吧。', 'Xiǎoxuě néng chuān, mǎi yí jiàn ba.'],
-          hoi: [{ q: '“一个衣服” 对不对？', qv: 'Nói 一个衣服 đúng không?', d: 'Sai — quần áo dùng 件: 一件衣服。' }, { q: '说出六个量词。', qv: 'Nói sáu lượng từ đã học.', d: '个 · 口 · 只 · 本 · 家 · 件.' }],
+          hoi: [{ q: '“一个衣服” 对不对？', qv: 'Nói 一个衣服 đúng không?', d: 'Sai — quần áo dùng 件: 一件衣服。' }, { q: '你今天想买几件衣服？', qv: 'Hôm nay bạn muốn mua mấy chiếc áo?', d: '我想买两件。／ 买一件吧。' }],
+          mo: [['几件', 'jǐ jiàn', 'mấy chiếc', 'cụm hay gặp'], ['那件', 'nà jiàn', 'chiếc kia', 'cụm hay gặp'], ['一件事', 'yí jiàn shì', 'một việc', 'cụm hay gặp'], ['个', 'gè', 'cái (lượng từ chung)', 'cùng nhóm']],
           chu: '件' },
         { w: '元', py: 'yuán', loai: 'lượng từ · 量词', hv: 'NGUYÊN', nghia: 'đồng (đơn vị tiền, lối viết)', anh: 'tu-元.jpg',
           khi: 'Khi ĐỌC hoặc VIẾT giá trên bảng giá, hoá đơn, biển hàng.',
@@ -799,7 +840,8 @@ const DATA = {
           meo: 'Hán–Việt NGUYÊN — đơn vị của 人民币. 元 = 二 (hai nét ngang) + 儿 — nghĩa gốc là cái ĐẦU, chỗ bắt đầu. Chữ này nằm trong 玩 (Bài 9).',
           cum: [['一百元', 'yìbǎi yuán', 'một trăm đồng'], ['二十元', 'èrshí yuán', 'hai mươi đồng']],
           cau: ['这件一百元，怎么样？', 'Zhè jiàn yìbǎi yuán, zěnmeyàng?'],
-          hoi: [{ q: '“元” 和 “块” 哪个写在价格牌上？', qv: 'Chữ nào ghi trên bảng giá?', d: '元 — còn nói miệng thì dùng 块.' }, { q: '100元怎么说？', qv: '100 元 nói thế nào?', d: '一百元，口语说 一百块（钱）。' }],
+          hoi: [{ q: '这本书多少钱？（¥20）', qv: 'Quyển sách này bao nhiêu tiền? (20 tệ)', d: '二十元。／ 二十块。' }, { q: '这个手机两千元，贵吗？', qv: 'Cái điện thoại này 2000 tệ, có đắt không?', d: '不贵。／ 很贵。' }],
+          mo: [['块', 'kuài', 'đồng (lối nói)', 'gần nghĩa'], ['钱', 'qián', 'tiền', 'cùng nhóm'], ['一千元', 'yìqiān yuán', 'một nghìn đồng', 'cụm hay gặp'], ['多少元', 'duōshao yuán', 'bao nhiêu đồng', 'cụm hay gặp']],
           chu: '元' },
         { w: '怎么样', py: 'zěnmeyàng', loai: 'đại từ nghi vấn · 疑问代词', hv: 'TẨM MA DẠNG', nghia: 'thế nào, như thế nào', anh: 'tu-怎么样.jpg',
           khi: 'Khi HỎI Ý KIẾN người khác, hỏi TÌNH HÌNH của cái gì, hoặc RỦ RÊ.',
@@ -808,6 +850,7 @@ const DATA = {
           cum: [['这件衣服怎么样', 'zhè jiàn yīfu zěnmeyàng', 'cái áo này thế nào'], ['……，怎么样？', '……, zěnmeyàng?', '…, được không?']],
           cau: ['这件一百元，怎么样？', 'Zhè jiàn yìbǎi yuán, zěnmeyàng?'],
           hoi: [{ q: '“这件衣服怎么样吗？” 对不对？', qv: 'Câu này đúng không?', d: 'Sai — đã có 怎么样 thì KHÔNG thêm 吗.' }, { q: '这件衣服怎么样？', qv: 'Cái áo này thế nào?', d: '很好看，也不贵。' }],
+          mo: [['你觉得怎么样', 'nǐ juéde zěnmeyàng', 'bạn thấy thế nào', 'cụm hay gặp'], ['天气怎么样', 'tiānqì zěnmeyàng', 'thời tiết thế nào', 'cụm hay gặp'], ['怎么', 'zěnme', 'thế nào, sao', 'cùng chữ'], ['好不好', 'hǎo bu hǎo', 'được không (rủ rê)', 'gần nghĩa']],
           chu: '怎么样' },
         { w: '贵', py: 'guì', loai: 'tính từ · 形容词', hv: 'QUÝ', nghia: 'đắt, mắc', anh: 'tu-贵.jpg',
           khi: 'Khi CHÊ giá cao, hoặc nói một món hàng đắt tiền.',
@@ -815,7 +858,8 @@ const DATA = {
           meo: 'Hán–Việt QUÝ — "quý giá", cái gì quý thì đắt. Chân chữ là bộ 贝 (vỏ sò) — vỏ sò là tiền xưa nhất: 贵 · 买 · 货.',
           cum: [['很贵', 'hěn guì', 'rất đắt'], ['不贵', 'bú guì', 'không đắt']],
           cau: ['好看，也不贵。', 'Hǎokàn, yě bú guì.'],
-          hoi: [{ q: '“贵” 的反义词是什么？', qv: 'Từ trái nghĩa với 贵 là gì?', d: '便宜 — cặp 贵 / 便宜.' }, { q: '“你很贵” 对不对？', qv: 'Nói 你很贵 đúng không?', d: 'Sai — 贵 tả món hàng: 这件衣服很贵。' }],
+          hoi: [{ q: '这件衣服贵吗？', qv: 'Chiếc áo này có đắt không?', d: '很贵。／ 不贵。' }, { q: '“你很贵” 对不对？', qv: 'Nói 你很贵 đúng không?', d: 'Sai — 贵 tả món hàng: 这件衣服很贵。' }],
+          mo: [['便宜', 'piányi', 'rẻ', 'trái nghĩa'], ['太贵了', 'tài guì le', 'đắt quá', 'cụm hay gặp'], ['有点儿贵', 'yǒudiǎnr guì', 'hơi đắt', 'cụm hay gặp'], ['贵不贵', 'guì bu guì', 'có đắt không', 'cụm hay gặp']],
           chu: '贵' },
         { w: '穿', py: 'chuān', loai: 'động từ · 动词', hv: 'XUYÊN', nghia: 'mặc, mang (áo quần, giày)', anh: 'tu-穿.jpg',
           khi: 'Khi nói việc MẶC quần áo, ĐI giày — không dùng cho mũ, kính.',
@@ -823,7 +867,8 @@ const DATA = {
           meo: 'Hán–Việt XUYÊN — "xuyên qua": luồn tay xuyên qua ống tay áo là MẶC. 穿 = 穴 (cái hang) + 牙 (cái răng) — răng khoét thủng một lỗ mà chui qua.',
           cum: [['穿衣服', 'chuān yīfu', 'mặc quần áo'], ['能穿吗', 'néng chuān ma', 'mặc được không']],
           cau: ['小雪能穿，买一件吧。', 'Xiǎoxuě néng chuān, mǎi yí jiàn ba.'],
-          hoi: [{ q: '小明能穿吗？', qv: 'Tiểu Minh mặc được không?', d: '不能。这些是女孩子穿的衣服。' }, { q: '“穿” 能用在什么东西上？', qv: '穿 dùng cho những thứ gì?', d: 'Quần áo và giày dép; mũ, kính thì dùng 戴 (chưa học).' }],
+          hoi: [{ q: '小明能穿吗？', qv: 'Tiểu Minh mặc được không?', d: '不能。这些是女孩子穿的衣服。' }, { q: '这件衣服你能穿吗？', qv: 'Chiếc áo này bạn mặc vừa không?', d: '能穿。／ 不能穿。' }],
+          mo: [['穿什么', 'chuān shénme', 'mặc gì', 'cụm hay gặp'], ['穿新衣服', 'chuān xīn yīfu', 'mặc quần áo mới', 'cụm hay gặp'], ['穿这件吧', 'chuān zhè jiàn ba', 'mặc chiếc này đi', 'cụm hay gặp']],
           chu: '穿' },
         { w: '女', py: 'nǚ', loai: 'tính từ · 形容词', hv: 'NỮ', nghia: 'nữ, con gái', anh: 'tu-女.jpg',
           khi: 'Khi nói đồ vật hoặc người thuộc phái NỮ.',
@@ -832,6 +877,7 @@ const DATA = {
           cum: [['女孩子', 'nǚ háizi', 'bé gái'], ['女朋友', 'nǚ péngyou', 'bạn gái']],
           cau: ['这些是女孩子穿的衣服。', 'Zhèxiē shì nǚ háizi chuān de yīfu.'],
           hoi: [{ q: '“她很女” 对不对？', qv: 'Nói 她很女 đúng không?', d: 'Sai — 女 đứng TRƯỚC danh từ: 女孩子 · 女朋友.' }, { q: '这些是谁穿的衣服？', qv: 'Đây là quần áo của ai?', d: '这些是女孩子穿的衣服。' }],
+          mo: [['男', 'nán', 'nam', 'trái nghĩa'], ['女儿', 'nǚ\'ér', 'con gái', 'từ ghép'], ['女士', 'nǚshì', 'quý bà, chị (lịch sự)', 'từ ghép'], ['女老师', 'nǚ lǎoshī', 'cô giáo', 'cụm hay gặp']],
           chu: '女' },
         { w: '男', py: 'nán', loai: 'tính từ · 形容词', hv: 'NAM', nghia: 'nam, con trai', anh: 'tu-男.jpg',
           khi: 'Khi nói đồ vật hoặc người thuộc phái NAM — đi CẶP với 女.',
@@ -839,7 +885,8 @@ const DATA = {
           meo: 'Hán–Việt NAM — y như tiếng Việt. 男 = 田 (ruộng) + 力 (sức): người ra đồng dùng sức cày ruộng. Dạy liền cặp với 女.',
           cum: [['男孩子', 'nán háizi', 'bé trai'], ['男朋友', 'nán péngyou', 'bạn trai']],
           cau: ['男孩子的衣服在那儿。', 'Nán háizi de yīfu zài nàr.'],
-          hoi: [{ q: '男孩子的衣服在哪儿？', qv: 'Quần áo con trai ở đâu?', d: '男孩子的衣服在那儿。' }, { q: '“男” 和 “女” 怎么用？', qv: '男 và 女 dùng thế nào?', d: 'Đều đứng trước danh từ: 男孩子 / 女孩子 · 男朋友 / 女朋友.' }],
+          hoi: [{ q: '男孩子的衣服在哪儿？', qv: 'Quần áo con trai ở đâu?', d: '男孩子的衣服在那儿。' }, { q: '你的老师是男老师吗？', qv: 'Giáo viên của bạn là thầy giáo à?', d: '是，是男老师。／ 不是，是女老师。' }],
+          mo: [['女', 'nǚ', 'nữ', 'trái nghĩa'], ['男学生', 'nán xuésheng', 'nam sinh', 'cụm hay gặp'], ['男老师', 'nán lǎoshī', 'thầy giáo', 'cụm hay gặp'], ['儿子', 'érzi', 'con trai (của bố mẹ)', 'cùng nhóm']],
           chu: '男' },
         { w: '那儿', py: 'nàr', loai: 'đại từ · 代词', hv: 'NA NHI', nghia: 'ở kia, đằng kia', anh: 'tu-那儿.jpg',
           khi: 'Khi CHỈ CHỖ ở xa mình — chỉ đường cho khách, chỉ chỗ để hàng.',
@@ -847,7 +894,8 @@ const DATA = {
           meo: 'Hán–Việt NA NHI — 那 (kia) + 儿. Bảng ba ô: 这儿 ĐÂY ｜ 那儿 KIA ｜ 哪儿 ĐÂU — một ô hỏi, hai ô trả lời.',
           cum: [['在那儿', 'zài nàr', 'ở đằng kia'], ['那儿有……', 'nàr yǒu……', 'ở kia có…']],
           cau: ['男孩子的衣服在那儿。', 'Nán háizi de yīfu zài nàr.'],
-          hoi: [{ q: '“这儿” “那儿” “哪儿” 有什么不同？', qv: 'Ba từ này khác nhau thế nào?', d: 'ĐÂY ｜ KIA ｜ ĐÂU — một ô hỏi, hai ô trả lời.' }, { q: '男孩子的衣服在哪儿？', qv: 'Quần áo con trai ở đâu?', d: '在那儿。' }],
+          hoi: [{ q: '那儿有什么？', qv: 'Ở đằng kia có gì?', d: '那儿有一家商店。' }, { q: '男孩子的衣服在哪儿？', qv: 'Quần áo con trai ở đâu?', d: '在那儿。' }],
+          mo: [['这儿', 'zhèr', 'ở đây', 'trái nghĩa'], ['哪儿', 'nǎr', 'ở đâu', 'cùng nhóm'], ['那里', 'nàlǐ', 'ở đó', 'gần nghĩa'], ['去那儿', 'qù nàr', 'đi tới đó', 'cụm hay gặp']],
           chu: '那儿' },
       ],
       np: [
@@ -875,7 +923,7 @@ const DATA = {
           ],
           hoi: [
             { q: '这个菜怎么样？', qv: 'Món này thế nào?', d: '这个菜很好吃。/ 这个菜不太好吃。' },
-            { q: '怎么用 “怎么样” 邀请朋友？', qv: 'Dùng 怎么样 để rủ bạn thế nào?', d: '我们去买水果，怎么样？' },
+            { q: '明天我们去看电影，怎么样？', qv: 'Mai mình đi xem phim nhé, được không?', d: '好的！／ 明天我不能去。' },
           ],
           gv: {
             dan: 'Cầm hai cái cốc (hoặc hai ảnh áo), giơ cái thứ nhất trước mặt một em và hỏi **这个杯子怎么样？** (giọng lên cuối câu). Em đó hiểu và trả lời bằng tiếng Việt. Làm lại với cái thứ hai, rồi hỏi lớp: cô hỏi ĐÂY LÀ CÁI GÌ, hay hỏi EM THẤY THẾ NÀO? Lớp tự chốt là hỏi Ý KIẾN.',
@@ -953,11 +1001,11 @@ const DATA = {
     { tab: '块 ↔ 元',
       a: { w: '块', nhan: 'lối NÓI — ngoài chợ, mua bán', vd: [['这些五块钱一个。', 'Zhèxiē wǔ kuài qián yí gè.']], ghi: 'ghép được với 钱: 五块钱' },
       b: { w: '元', nhan: 'lối VIẾT — bảng giá, hoá đơn', vd: [['这件一百元。', 'Zhè jiàn yìbǎi yuán.']], ghi: 'KHÔNG ghép 钱: ✗一百元钱' },
-      luyen: [['这个杯子五___钱。', '块', ['块', '元']], ['人民币的单位：___、角、分。', '元', ['块', '元']]] },
+      luyen: [['这个杯子五___钱。', '块', ['块', '元']], ['这件衣服：二百___ (bảng giá ghi)', '元', ['块', '元']]] },
     { tab: '这边 ↔ 这儿',
       a: { w: '这边', nhan: 'chỉ HƯỚNG — bên này', vd: [['杯子在这边。', 'Bēizi zài zhèbiān.']], ghi: 'đi cặp 那边 · 这边请' },
       b: { w: '这儿', nhan: 'chỉ ĐIỂM — chỗ này', vd: [['这儿的水果真不少！', 'Zhèr de shuǐguǒ zhēn bù shǎo!']], ghi: 'đi cặp 那儿 · hỏi 哪儿' },
-      luyen: [['您好，___请！', '这边', ['这边', '这儿']], ['___的苹果真便宜！', '这儿', ['这边', '这儿']]] },
+      luyen: [['___的衣服很漂亮。(chỉ dãy bên này)', '这边', ['这边', '这儿']], ['___的苹果真便宜！', '这儿', ['这边', '这儿']]] },
     { tab: '个 ↔ 件',
       a: { w: '个', nhan: 'đếm đồ vật, người nói chung', vd: [['我买这个吧。', 'Wǒ mǎi zhège ba.']], ghi: '一个杯子 · 两个苹果' },
       b: { w: '件', nhan: 'đếm QUẦN ÁO', vd: [['小雪能穿，买一件吧。', 'Xiǎoxuě néng chuān, mǎi yí jiàn ba.']], ghi: '一件衣服 · 这件衣服' },
@@ -1206,7 +1254,7 @@ function vietChu(ids, chu, ma, lap = false) {   // vẽ nét lần lượt từn
   const ws = ids.map((id, i) => {
     const o = document.getElementById(id); if (!o) return null;
     o.previousElementSibling && (o.previousElementSibling.style.visibility = 'hidden');
-    return HanziWriter.create(id, chu[i], { width: o.clientWidth, height: o.clientHeight, padding: 4, strokeColor: '#33402A', radicalColor: '#6AAE45', showOutline: true, outlineColor: '#E3ECD3', delayBetweenStrokes: 160, strokeAnimationSpeed: 1.1, showCharacter: false,
+    return HanziWriter.create(id, chu[i], { width: o.clientWidth, height: o.clientHeight, padding: 4, strokeColor: '#33402A', radicalColor: '#6AAE45', showOutline: true, outlineColor: '#C2D3A6', drawingColor: '#33402A', drawingWidth: 6, highlightColor: '#F2A541', showHintAfterMisses: 1, delayBetweenStrokes: 160, strokeAnimationSpeed: 1.1, showCharacter: false,
       onLoadCharDataError: () => { o.previousElementSibling && (o.previousElementSibling.style.visibility = 'visible'); } });
   });
   const chay = i => { if (ma !== phien || i >= ws.length) return; const w = ws[i]; if (!w) return chay(i + 1); w.animateCharacter({ onComplete: () => setTimeout(() => chay(i + 1), 250) }); };
@@ -1232,11 +1280,12 @@ them('bia', { c: 0 });
 DATA.phan.forEach((p, k) => {
   const c = k + 1;
   them('chuong', { c, k }); them('bang', { c, k });
-  // ngữ pháp (np: một điểm hoặc danh sách): np.sau = từ → ngay sau thẻ từ đó; np.sau = 'khoa' → sau bài khoá; không ghi → sau thẻ cuối
+  // ngữ pháp (np: một điểm hoặc danh sách) đứng SAU toàn bộ thẻ từ của phần, theo thứ tự trong dữ liệu (cô chốt 28/11, không xen giữa thẻ);
+  // np.sau = 'khoa' → sau bài khoá
   const nps = [].concat(p.np || []);
   const npSau = dk => nps.forEach((g, n) => { if (dk(g)) them('nguphap', { c, k, n }); });
-  p.tu.forEach((w, j) => { them('the', { c, k, j }); npSau(g => g.sau === w.w); });
-  npSau(g => g.sau !== 'khoa' && !p.tu.some(w => w.w === g.sau));
+  p.tu.forEach((w, j) => them('the', { c, k, j }));
+  npSau(g => g.sau !== 'khoa');
   them('khoa', { c, k });
   npSau(g => g.sau === 'khoa');
   them('tau', { c, k });   // trò xếp toa tàu: câu của bài khoá vừa học
@@ -1353,6 +1402,7 @@ VE.the = (t, el) => {
       <div class="khoi"><span class="pill">Hỏi nhanh</span>
         <div class="hoi-hang">${w.hoi.map((h, i) => `<div class="hoi" data-hoi="${i}"><span class="so">${i + 1}</span><div class="q">${hl(h.q)}</div><div class="qv">${esc(h.qv)}</div><div class="d">→ ${hl(h.d)}</div></div>`).join('')}</div></div>
       <div class="nut-lop">
+        ${w.mo && w.mo.length ? '<button class="nut chinh" id="b-mo">➕ Mở rộng</button>' : ''}
         <button class="nut" id="b-meo">💡 Mẹo nhớ</button>
         <button class="nut" id="b-chu">✍️ Chữ Hán (${chu.length})</button>
         <button class="nut" id="b-gv">🗒 Ghi chú GV</button>
@@ -1363,7 +1413,9 @@ VE.the = (t, el) => {
   const ma = phien;
   vietChu(chu.map((c, i) => 'hw' + i), chu, ma);
   $('#b-ve', el).onclick = () => { chu.forEach((c, i) => { const o = $('#hw' + i, el); if (o) o.innerHTML = ''; }); vietChu(chu.map((c, i) => 'hw' + i), chu, phien); };
-  $$('[data-hoi]', el).forEach(h => h.onclick = () => { const x = w.hoi[h.dataset.hoi]; if (!h.classList.contains('mo')) { h.classList.add('mo'); sao(`the${t.k}-${t.j}-${h.dataset.hoi}`, 1, h); doc(chiHan(x.d.split('—')[0])); } else doc(x.q); });
+  $$('[data-hoi]', el).forEach(h => h.onclick = () => { if (!h.classList.contains('mo')) { h.classList.add('mo'); sao(`the${t.k}-${t.j}-${h.dataset.hoi}`, 1, h); } });   // không phát âm (cô chốt 28/11)
+  const bm = $('#b-mo', el); if (bm) bm.onclick = () => moLop('➕ Mở rộng', `Từ <span class="zh">${esc(w.w)}</span> còn đi với…`,
+    `<div class="mr-luoi">${w.mo.map(m => `<button class="mr" data-doc="${esc(m[0])}">${m[3] ? `<span class="pill">${esc(m[3])}</span>` : ''}<span class="zh">${hl(m[0])}</span><span class="py">${esc(m[1])}</span><span class="vi">${esc(m[2])}</span></button>`).join('')}</div>`);
   $('#b-meo', el).onclick = () => moLop('💡 Mẹo nhớ', `<span class="zh">${esc(w.w)}</span> · ${esc(w.hv)}`, `<p>${w.meo}</p>`);
   $('#b-chu', el).onclick = () => moLop('✍️ Chữ Hán', `Tháo từng chữ của <span class="zh">${esc(w.w)}</span>`, chu.map(c => { const x = DATA.chu[c]; return `<div class="chu-o">${MI(c, 110)}<div>
       <p><b class="zh" style="font-size:26px">${c}</b> <span class="py">${x.py}</span> — bộ <b class="zh">${esc(x.bo)}</b> ${x.viet ? '<span class="pill">★ phải viết tay</span>' : '<span class="pill trang">chỉ nhận mặt</span>'}</p>
@@ -1401,6 +1453,7 @@ VE.nguphap = (t, el) => {
   const chon = k => {
     dungDoc();
     phai.innerHTML = VEM[k]();
+    phai.classList.remove('chat'); if (phai.scrollHeight > phai.clientHeight + 2) phai.classList.add('chat');   // dư chữ thì co lại một nấc
     $$('.np-muc', el).forEach(b => b.classList.toggle('bat', b.dataset.muc === k));
     if (k === 'xep') $$('.xep', phai).forEach(o => {
       const x = g.xep[o.dataset.x], kq = $('.xep-kq', o); let i = 0;
@@ -1412,7 +1465,7 @@ VE.nguphap = (t, el) => {
       });
     });
     if (k === 'loi') $$('.loi', phai).forEach(o => o.onclick = () => { const l = g.loi[o.dataset.l]; if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-l${o.dataset.l}`, 1, o); } doc(l[1]); });
-    if (k === 'hoi') $$('.hoi', phai).forEach(o => o.onclick = () => { const h = g.hoi[o.dataset.hoi]; if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-h${o.dataset.hoi}`, 1, o); doc(chiHan(h.d.split('—')[0])); } else doc(h.q); });
+    if (k === 'hoi') $$('.hoi', phai).forEach(o => o.onclick = () => { if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-h${o.dataset.hoi}`, 1, o); } });   // không phát âm
   };
   $$('.np-muc', el).forEach(b => b.onclick = () => chon(b.dataset.muc));
   $('#np-gv', el).onclick = () => moLop('🗒 Ghi chú giáo viên', `Ngữ pháp ${g.so} · <span class="zh">${esc(g.ten)}</span>`, `<dl class="ghi-gv">
@@ -1791,7 +1844,7 @@ function capNhatDau() {
 }
 function sang(i) {
   i = Math.max(0, Math.min(TRANG.length - 1, i));
-  dungDoc(); phien++; dongLop();
+  dungDoc(); phien++; dongLop(); dongDS();
   S.i = i; luu();
   const t = TRANG[i], k = $('#khung');
   k.dataset.loai = t.loai;
@@ -1804,6 +1857,26 @@ document.addEventListener('click', e => {
   const h = e.target.closest('[data-anh]'); if (h) { xemAnh(h.dataset.anh, h.dataset.tieu || ''); return; }
   const d = e.target.closest('[data-doc]'); if (d) { doc(d.dataset.doc); return; }
 });
+const NHAN_TRANG = { bia: 'Bìa', chuong: 'Mở chặng', bang: 'Bảng từ', tau: '🚂 Tàu', sosanh: 'So sánh', viettay: 'Viết tay', bothu: 'Bộ thủ', nham: 'Chữ dễ nhầm', khoidong: 'Nhìn tranh', rao: 'Nói nhanh', quiz: 'Quiz', check: 'Tự kiểm', cuoi: 'Kết thúc' };
+function nhanTrang(t) {
+  if (t.loai === 'the') return `<span class="zh">${esc(DATA.phan[t.k].tu[t.j].w.replace(/\u200B/g, ''))}</span>`;
+  if (t.loai === 'nguphap') { const g = [].concat(DATA.phan[t.k].np)[t.n || 0]; return `📘 <span class="zh">${esc(g.ten)}</span>`; }
+  if (t.loai === 'khoa') return `📖 Bài khoá ${t.k + 1}`;
+  return NHAN_TRANG[t.loai] || t.loai;
+}
+function moDS() {
+  const nhom = [];
+  TRANG.forEach((t, i) => { const g = nhom[nhom.length - 1]; if (g && g.c === t.c) g.ds.push(i); else nhom.push({ c: t.c, ds: [i] }); });
+  $('#ds-noi').innerHTML = nhom.map(g => `<div class="ds-chang"><div class="ds-ten">${CHUONG[g.c].ic} ${esc(CHUONG[g.c].ten)}</div><div class="ds-the">${g.ds.map(i =>
+    `<button data-sang="${i}" class="${i === S.i ? 'dang' : ''}"><small>${i + 1}</small>${nhanTrang(TRANG[i])}</button>`).join('')}</div></div>`).join('');
+  $('#ds-dang').textContent = `Đang ở slide ${S.i + 1} / ${TRANG.length}`;
+  $('#ds-slide').classList.add('mo');
+  const d = $('#ds-noi .dang'); if (d) d.scrollIntoView({ block: 'center' });
+}
+function dongDS() { $('#ds-slide').classList.toggle('mo', false); }
+const batDS = () => $('#ds-slide').classList.contains('mo') ? dongDS() : moDS();
+$('#ds-nut').onclick = batDS;
+$('#ds-dong').onclick = dongDS;
 $('#lui').onclick = () => sang(S.i - 1);
 $('#toi').onclick = () => sang(S.i + 1);
 const toanMH = () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); else document.exitFullscreen(); };
@@ -1813,7 +1886,8 @@ document.addEventListener('keydown', e => {
   if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); sang(S.i + 1); }
   else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); sang(S.i - 1); }
   else if (e.key === 'f' || e.key === 'F') toanMH();
-  else if (e.key === 'Escape') dongLop();
+  else if (e.key === 'g' || e.key === 'G') batDS();
+  else if (e.key === 'Escape') { dongLop(); dongDS(); }
 });
 $$('[data-toc]').forEach(b => { b.classList.toggle('bat', +b.dataset.toc === S.toc); b.onclick = () => { S.toc = +b.dataset.toc; luu(); $$('[data-toc]').forEach(x => x.classList.toggle('bat', x === b)); }; });
 $('#ten-bai').textContent = `Bài ${DATA.bai} · ${DATA.ten}`;
