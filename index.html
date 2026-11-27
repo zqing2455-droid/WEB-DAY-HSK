@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HSK4 · Web dạy học</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rung:#687D3A; --rung-dam:#4B5A36; --la:#C9D6B3; --la-nhat:#E3EAD3; --giay:#F7F2E1; --trang:#FFFDF5;
+  --vang:#F1E9CC; --vang-dam:#9A7A33; --muc:#33402A; --muc-phu:#6F7860;
+  --han:'Kaiti SC','STKaiti','KaiTi','Noto Serif SC',serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--rung);
+  font-family:'Nunito','Calibri',sans-serif;color:var(--muc);
+  padding:16px;min-height:100vh;
+}
+.khung{
+  max-width:1080px;margin:0 auto;border-radius:22px;padding:34px 34px 28px;
+  background-color:var(--giay);
+  background-image:linear-gradient(rgba(104,125,58,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(104,125,58,.07) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+.dau{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.nhan{display:inline-block;background:var(--rung);color:#fff;font:700 13px/1 'Baloo 2',sans-serif;letter-spacing:.06em;
+  text-transform:uppercase;border-radius:999px;padding:7px 14px 5px}
+h1{font:800 40px/1.1 'Baloo 2',sans-serif;margin:12px 0 4px;color:var(--rung-dam)}
+.phu{margin:0;color:var(--muc-phu);font-size:16px}
+.goi-y{font-size:14px;color:var(--muc-phu);max-width:330px;background:var(--trang);border:2px dashed var(--la);border-radius:14px;padding:10px 14px}
+.goi-y b{color:var(--rung-dam)}
+.luoi{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.bai a{display:flex;gap:14px;align-items:center;text-decoration:none;color:inherit;height:100%;
+  background:var(--trang);border:2px dashed var(--la);border-radius:18px;padding:16px 16px 14px;position:relative;
+  transition:transform .15s,border-color .15s,box-shadow .15s}
+.bai a::before{content:'';position:absolute;top:-7px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;
+  background:var(--rung);box-shadow:0 0 0 3px var(--giay)}
+.bai a:hover,.bai a:focus-visible{transform:translateY(-3px);border-color:var(--rung);border-style:solid;box-shadow:0 8px 20px rgba(75,90,54,.14);outline:none}
+.so{flex:none;width:52px;height:52px;border-radius:50%;background:var(--la-nhat);color:var(--rung-dam);
+  display:grid;place-items:center;font:800 22px/1 'Baloo 2',sans-serif}
+.noi{min-width:0}
+.han{font-family:var(--han);font-size:24px;line-height:1.25;color:var(--muc)}
+.py{font-size:13px;color:var(--muc-phu);margin-top:2px}
+.vi{font-weight:700;font-size:15px;color:var(--rung-dam);margin-top:4px}
+.chu-de{display:inline-block;margin-top:6px;font-size:12px;background:var(--vang);color:var(--vang-dam);border-radius:999px;padding:2px 10px;font-family:var(--han)}
+.chan{margin-top:24px;font-size:13px;color:var(--muc-phu);text-align:center}
+@media (max-width:600px){
+  .khung{padding:22px 16px 20px;border-radius:16px}
+  h1{font-size:30px}
+  .luoi{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<main class="khung">
+  <div class="dau">
+    <div>
+      <span class="nhan">New HSK Course 4上</span>
+      <h1>Web dạy học HSK4</h1>
+      <p class="phu">Trình chiếu trên lớp · 10 bài · Giáo viên: Thanh Trúc</p>
+    </div>
+    <p class="goi-y">Bấm vào bài để mở. Mỗi bài là một tệp lớn (8–12 MB), lần đầu mở cần chờ vài giây. Chiếu toàn màn hình bằng nút <b>⛶</b> ở góc dưới.</p>
+  </div>
+  <ul class="luoi" id="ds"></ul>
+  <p class="chan">Nét viết chữ Hán và giọng đọc cần kết nối mạng.</p>
+</main>
+<script>
+const BAI = [
+  ['我们来中国学习了', 'Wǒmen lái Zhōngguó xuéxí le', 'Chúng mình đến Trung Quốc học rồi', '留学'],
+  ['租到了合适的房子', 'Zū dào le héshì de fángzi', 'Thuê được căn nhà vừa ý', '租房'],
+  ['手机扫一下', 'Shǒujī sǎo yíxià', 'Lấy điện thoại quét một cái', '手机生活'],
+  ['很高兴能帮到你', 'Hěn gāoxìng néng bāngdào nǐ', 'Rất vui vì giúp được bạn', '出行与互助'],
+  ['“不怕辣”和“怕不辣”', '“Bú pà là” hé “pà bú là”', '“Không sợ cay” và “Sợ không cay”', '饮食'],
+  ['我陪你去看病', 'Wǒ péi nǐ qù kànbìng', 'Mình đi khám bệnh cùng cậu', '看病'],
+  ['在工作中学习', 'Zài gōngzuò zhōng xuéxí', 'Học trong công việc', '职场'],
+  ['该放松时就放松', 'Gāi fàngsōng shí jiù fàngsōng', 'Lúc cần xả hơi thì cứ xả hơi', '放松 · 减压'],
+  ['遇见你，刚刚好', 'Yùjiàn nǐ, gānggāng hǎo', 'Gặp được em, vừa vặn đúng lúc', '爱情与友情'],
+  ['南方不懂北方的冷', 'Nánfāng bù dǒng běifāng de lěng', 'Người miền Nam không hiểu cái lạnh miền Bắc', '气候与环境'],
+];
+document.getElementById('ds').innerHTML = BAI.map(([han, py, vi, cd], i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return `<li class="bai"><a href="bai-${n}.html"><span class="so">${i + 1}</span><span class="noi">
+    <div class="han">${han}</div><div class="py">${py}</div><div class="vi">${vi}</div><span class="chu-de">${cd}</span></span></a></li>`;
+}).join('');
+</script>
+</body>
+</html>
