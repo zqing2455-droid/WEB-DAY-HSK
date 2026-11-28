@@ -63,7 +63,7 @@ h1{font:800 40px/1.1 'Baloo 2',sans-serif;margin:12px 0 4px;color:var(--rung-dam
       <a class="ve" href="../">← Tất cả cấp độ</a><br>
       <span class="nhan">新HSK教程2</span>
       <h1>Web dạy học HSK2</h1>
-      <p class="phu">Trình chiếu trên lớp · 1 bài · Giáo viên: Thanh Trúc</p>
+      <p class="phu">Trình chiếu trên lớp · 2 bài · Giáo viên: Thanh Trúc</p>
     </div>
     <p class="goi-y">Bấm vào bài để mở. Mỗi bài là một tệp lớn (vài MB), lần đầu mở cần chờ vài giây. Chiếu toàn màn hình bằng nút <b>⛶</b> ở góc dưới.</p>
   </div>
@@ -72,11 +72,12 @@ h1{font:800 40px/1.1 'Baloo 2',sans-serif;margin:12px 0 4px;color:var(--rung-dam
 </main>
 <script>
 const BAI = [
-  ['她请我们吃了北京烤鸭', 'Tā qǐng wǒmen chīle Běijīng Kǎoyā', 'Chị ấy mời chúng tôi ăn vịt quay Bắc Kinh', ''],
+  ['她请我们吃了北京烤鸭', 'Tā qǐng wǒmen chīle Běijīng Kǎoyā', 'Chị ấy mời chúng tôi ăn vịt quay Bắc Kinh', '', 1],
+  ['他篮球打得很好', 'Tā lánqiú dǎ de hěn hǎo', 'Cậu ấy chơi bóng rổ rất giỏi', '', 7],
 ];
-document.getElementById('ds').innerHTML = BAI.map(([han, py, vi, cd], i) => {
-  const n = String(i + 1).padStart(2, '0');
-  return `<li class="bai"><a href="bai-${n}.html"><span class="so">${i + 1}</span><span class="noi">
+document.getElementById('ds').innerHTML = BAI.map(([han, py, vi, cd, so], i) => {
+  const n = String(so || i + 1).padStart(2, '0');
+  return `<li class="bai"><a href="bai-${n}.html"><span class="so">${so || i + 1}</span><span class="noi">
     <div class="han">${han}</div><div class="py">${py}</div><div class="vi">${vi}</div>${cd ? `<span class="chu-de">${cd}</span>` : ''}</span></a></li>`;
 }).join('');
 </script>

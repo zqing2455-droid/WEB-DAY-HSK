@@ -483,6 +483,7 @@ button{font:inherit;cursor:pointer}
 .np-phai{background:#fff;border-radius:24px;padding:20px 26px;box-shadow:0 4px 0 rgba(104,125,58,.15);overflow:hidden}
 .np-ct{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}
 .np-o{display:flex;flex-direction:column;align-items:center;background:var(--m);color:#fff;border-radius:16px;padding:6px 20px;min-width:118px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.np-ct:has(> :nth-child(11)){gap:7px}.np-ct:has(> :nth-child(11)) .np-o{min-width:0;padding-left:13px !important;padding-right:13px !important}.np-ct:has(> :nth-child(11)) .cong{font-size:24px}
 .np-o b{font-size:30px;line-height:1.2}
 .np-o small{font-size:13px;font-weight:800}
 .cong{font:900 30px "Baloo 2";color:var(--muc-phu)}
@@ -1107,7 +1108,7 @@ const DATA = {
   ],
 
   vanDungCuoi: [
-    { tieu: 'Kể lại chuyến đi — dùng đủ 3 mẫu câu', cong: '① …… <b>吧</b>？　② <b>是 …… 的</b>　③ <b>请 / 让 / 叫</b> + người + việc', vang: 'Đi khi nào · đi bằng gì · ai đón · ai mời ăn gì',
+    { nhan: 'Kể lại', tieu: 'Kể lại chuyến đi — dùng đủ 3 mẫu câu', cong: '① …… <b>吧</b>？　② <b>是 …… 的</b>　③ <b>请 / 让 / 叫</b> + người + việc', vang: 'Đi khi nào · đi bằng gì · ai đón · ai mời ăn gì',
       luot: 'Nói xong thì viết lại thành tin nhắn 6–8 câu — bài viết về nhà.',
       tranh: [
         { anh: 'vd-4-1.jpg', canh: 'Đến bằng gì? Ai ra đón?', goi: ['是……的', '让', '接'], zh: '我们是坐飞机来的，一飞让她姐姐来接我们。', py: 'Wǒmen shì zuò fēijī lái de, Yīfēi ràng tā jiějie lái jiē wǒmen.' },
@@ -1499,13 +1500,13 @@ VE.chuong = (t, el) => {
     noi = `<div class="so-tron"><span>0${t.k + 2}<small>课文${t.k + 1}</small></span></div>
       <div class="chuong-zh zh" data-doc="${esc(p.zh)}" style="cursor:pointer">${esc(p.zh)}</div><div class="chuong-vi">${esc(p.vi)}</div>
       <span class="vang">${esc(p.canhVi)}</span><div class="chuong-canh">${esc(p.canh)}</div>`;
-    anh = `<figure class="polar nho" data-anh="${p.anh}" style="margin:0;cursor:zoom-in"><img src="${md(p.anh)}" alt=""><figcaption>${p.tu.length} từ mới · ${p.khoa.length} câu thoại</figcaption></figure>`;
+    anh = `<figure class="polar nho" data-anh="${p.anh}" style="margin:0;cursor:zoom-in"><img src="${md(p.anh)}" alt=""><figcaption>${p.tu.length} từ mới · ${p.khoa.length} ${p.kieu === 'tin' ? 'câu' : 'câu thoại'}</figcaption></figure>`;
   } else if (t.k === 'chu') {
     noi = `<div class="so-tron">${String(C_CHU + 1).padStart(2, '0')}</div><div class="chuong-zh zh">汉字</div><div class="chuong-vi">Chữ Hán của bài</div>
       <span class="vang">${[...DATA.vietTay].length} chữ phải viết tay · ${DATA.boThu.length} bộ thủ · ${DATA.nham.length} cặp chữ dễ nhầm</span>`;
   } else {
     noi = `<div class="so-tron">${String(C_LUYEN + 1).padStart(2, '0')}</div><div class="chuong-zh zh">练一练</div><div class="chuong-vi">Luyện tập & trò chơi</div>
-      <span class="vang">${['Nhìn tranh nói lời', DATA.vanDungCuoi ? 'Kể lại' : '', DATA.vanHoa ? 'Văn hoá' : '', DATA.rao ? 'Đọc nhanh không vấp' : '', 'Em nói gì?', 'Tổng kết'].filter(Boolean).join(' · ')}</span>`;
+      <span class="vang">${['Nhìn tranh nói lời', ...(DATA.vanDungCuoi || []).map(x => x.nhan || 'Vận dụng'), DATA.vanHoa ? 'Văn hoá' : '', DATA.rao ? 'Đọc nhanh không vấp' : '', 'Em nói gì?', 'Tổng kết'].filter(Boolean).join(' · ')}</span>`;
   }
   el.innerHTML = `<div class="tam">${MAY}
     ${tt(KINH, 'left:110px;top:40px;width:76px;height:76px')}${tt(LAP('#F2A541'), 'left:140px;top:400px;width:26px;height:26px', 'lap')}
@@ -1647,7 +1648,7 @@ VE.khoa = (t, el) => {
         <div class="hang-nut"><button class="nut bat" id="hc">🙈 Đang che chữ</button><button class="nut" id="dc">🇻🇳 Dịch</button><button class="nut" id="an-pyk" title="Ẩn / hiện phiên âm (phím P)"></button></div>
         ${p.tip ? `<div class="tip"><img src="${md('xiaoyu.png')}" alt=""><div><b style="color:var(--la-dam)">小语助力</b><div class="zh">${hl(p.tip.zh)}</div><small>${esc(p.tip.vi)}</small></div></div>` : ''}
       </div>
-      <div class="thoai an-chu ${p.khoa.length > 4 ? 'nhieu' : ''} ${p.kieu === 'tin' ? 'tin' : ''}" id="thoai">${p.kieu === 'tin' ? `<div class="tin-dau">📱 ${p.tinDau || 'Tin nhắn'}</div>` : ''}${p.khoa.map((d, i) => { const v = DATA.vai[d.vai]; return `<div class="dong ${p.kieu === 'tin' && i ? 'noi-tiep' : ''}" data-i="${i}" style="--mau:${v.mau}">
+      <div class="thoai an-chu ${p.khoa.length > 4 ? 'nhieu' : ''} ${p.kieu === 'tin' ? 'tin' : ''}" id="thoai">${p.kieu === 'tin' ? `<div class="tin-dau">${p.tinIc || '📱'} ${p.tinDau || 'Tin nhắn'}</div>` : ''}${p.khoa.map((d, i) => { const v = DATA.vai[d.vai]; return `<div class="dong ${p.kieu === 'tin' && i ? 'noi-tiep' : ''}" data-i="${i}" style="--mau:${v.mau}">
         <div class="ai"><div class="av">${avatar(d.vai)}</div><span class="ten-py">${esc(v.py)}</span><span class="ten">${esc(d.vai)}</span></div>
         <div class="bong">${(r => r ? `<span class="zh co-ruby">${r}</span>` : (console.warn('pinyin không khớp chữ:', d.zh, '|', d.py), `<span class="py">${esc(d.py)}</span><span class="zh">${hl(d.zh)}</span>`))(rubyHan(d.zh, d.py))}<span class="vi">${esc(d.vi)}</span></div></div>`; }).join('')}</div>
     </div>`, p.canhVi);
