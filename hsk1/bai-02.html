@@ -284,6 +284,8 @@ button{font:inherit;cursor:pointer}
 .dong.dang-doc .bong{background:#FFF8D9;transform:scale(1.02)}
 .an-chu .bong .zh,.an-chu .bong .py{color:transparent!important;background:repeating-linear-gradient(90deg,#DDE9C6 0 26px,transparent 26px 34px);background-clip:padding-box;border-radius:6px}
 .an-chu .bong .zh *{color:transparent!important}
+/* ẩn phiên âm bài khoá (giữ chỗ để khung không nhảy) */
+.an-pyk .bong rt,.an-pyk .bong .py,.an-pyk .dong .ten-py{visibility:hidden}
 
 /* ── so sánh (trước → sau) ── */
 .tabs{display:flex;justify-content:center;gap:10px;margin-bottom:14px}
@@ -1385,7 +1387,7 @@ VE.khoa = (t, el) => {
       <div class="khoa-trai">
         <div class="anh" data-anh="${p.anh}" data-tieu="课文 ${t.k + 1}"><img src="${md(p.anh)}" alt=""></div>
         <div class="hang-nut"><button class="nut chinh" id="ga">🎧 Ghi âm ${p.so}</button><button class="nut" id="md">🔈 Máy đọc</button><button class="nut" id="ld">🗣 领读</button></div>
-        <div class="hang-nut"><button class="nut bat" id="hc">🙈 Đang che chữ</button><button class="nut" id="dc">🇻🇳 Dịch</button></div>
+        <div class="hang-nut"><button class="nut bat" id="hc">🙈 Đang che chữ</button><button class="nut" id="dc">🇻🇳 Dịch</button><button class="nut" id="an-pyk" title="Ẩn / hiện phiên âm (phím P)"></button></div>
         ${p.tip ? `<div class="tip"><img src="${md('xiaoyu.png')}" alt=""><div><b style="color:var(--la-dam)">小语助力</b><div class="zh">${hl(p.tip.zh)}</div><small>${esc(p.tip.vi)}</small></div></div>` : ''}
       </div>
       <div class="thoai an-chu ${p.khoa.length > 4 ? 'nhieu' : ''}" id="thoai">${p.khoa.map((d, i) => { const v = DATA.vai[d.vai]; return `<div class="dong" data-i="${i}" style="--mau:${v.mau}">
@@ -1406,7 +1408,12 @@ VE.khoa = (t, el) => {
     if (tran()) th.classList.add('nhieu'); if (tran()) th.classList.add('chat'); };
   requestAnimationFrame(vua); setTimeout(vua, 30); document.fonts && document.fonts.ready.then(() => el.contains(th) && vua());
   $('#dc', el).onclick = e => { th.classList.toggle('hien-dich'); e.currentTarget.classList.toggle('bat'); vua(); };
+  // ẩn / hiện phiên âm: giữ nguyên lựa chọn khi sang bài khoá khác (cô chốt 28/11)
+  const bp = $('#an-pyk', el), vePy = () => { th.classList.toggle('an-pyk', anPyKhoa); bp.classList.toggle('bat', anPyKhoa); bp.innerHTML = anPyKhoa ? '🔤 Hiện phiên âm' : '🔤 Ẩn phiên âm'; };
+  bp.onclick = () => { anPyKhoa = !anPyKhoa; vePy(); };
+  vePy();
 };
+let anPyKhoa = false;
 
 
 /* ══════════ trò chơi "Chuyến tàu định mệnh": xếp toa tàu (sau mỗi bài khoá) ══════════ */
@@ -1790,6 +1797,7 @@ document.addEventListener('keydown', e => {
   else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); sang(S.i - 1); }
   else if (e.key === 'f' || e.key === 'F') toanMH();
   else if (e.key === 'g' || e.key === 'G') batDS();
+  else if ((e.key === 'p' || e.key === 'P') && $('#an-pyk')) $('#an-pyk').click();
   else if (e.key === 'Escape') { dongLop(); dongDS(); }
 });
 $$('[data-toc]').forEach(b => { b.classList.toggle('bat', +b.dataset.toc === S.toc); b.onclick = () => { S.toc = +b.dataset.toc; luu(); $$('[data-toc]').forEach(x => x.classList.toggle('bat', x === b)); }; });
