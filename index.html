@@ -68,7 +68,7 @@ h1{font:800 40px/1.1 'Baloo 2',sans-serif;margin:12px 0 4px;color:var(--rung-dam
   <p class="chan">Nét viết chữ Hán và giọng đọc cần kết nối mạng.</p>
 </main>
 <script>
-const CAP = [['hsk1/', 'HSK1', '新HSK教程1', '15 bài · trọn quyển 1', 'Xīn HSK jiàochéng 1'], ['hsk4/', 'HSK4', '新HSK教程4上', '10 bài · quyển thượng', 'Xīn HSK jiàochéng 4 shàng']];
+const CAP = [['hsk1/', 'HSK1', '新HSK教程1', '15 bài · trọn quyển 1', 'Xīn HSK jiàochéng 1'], ['hsk2/', 'HSK2', '新HSK教程2', '1 bài · đang soạn', 'Xīn HSK jiàochéng 2'], ['hsk4/', 'HSK4', '新HSK教程4上', '10 bài · quyển thượng', 'Xīn HSK jiàochéng 4 shàng']];
 document.getElementById('ds').innerHTML = CAP.map(([href, so, han, vi, py]) => `<li class="bai"><a href="${href}"><span class="so">${so.replace('HSK', '')}</span><span class="noi">
     <div class="han">${han}</div><div class="py">${py}</div><div class="vi">${so} · ${vi}</div></span></a></li>`).join('');
 </script>
