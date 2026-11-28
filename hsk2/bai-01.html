@@ -216,6 +216,14 @@ button{font:inherit;cursor:pointer}
 .vh-noi>b{color:var(--la-dam);font-size:15px}
 .vh-noi .np-cau .zh{font-size:26px;font-weight:700}
 
+/* ── trang ảnh to sau thẻ từ (tu[].sauThe) ── */
+.at{display:flex;flex-direction:column;align-items:center;gap:8px;height:calc(100% - 96px)}
+.at-anh{flex:1;min-height:0;max-width:100%;object-fit:contain;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(60,70,40,.2);cursor:zoom-in}
+.at-cau{display:flex;gap:14px;flex:none}
+.at-c{display:flex;align-items:baseline;gap:10px;background:#fff;border:2px dashed var(--vien);border-radius:999px;padding:3px 20px}
+.at-c:hover{background:var(--la-nhat)}
+.at-c .zh{font-size:25px;font-weight:700}
+.at-c .py{font-size:15px}
 /* ── mở chương ── */
 .so-tron{width:86px;height:86px;border-radius:50%;background:var(--la);color:#fff;display:grid;place-items:center;font:800 26px "Baloo 2";box-shadow:0 4px 0 var(--la-dam);margin-bottom:10px;line-height:1}
 .so-tron small{font:700 15px var(--zh);display:block;text-align:center}
@@ -495,6 +503,9 @@ button{font:inherit;cursor:pointer}
 .np-cau .py{margin-left:14px;font-size:16px}
 .np-ghi{margin-top:12px;background:var(--la-nhat);border-radius:14px;padding:10px 16px;font-size:16.5px;line-height:1.5}
 .np-ghi b{color:var(--la-dam)}
+.np-phai:not(.hien-py) .np-cau .py,.np-phai:not(.hien-py) .nb-py{display:none}   /* ngữ pháp: câu ví dụ ẩn phiên âm sẵn; nút 🔤 / phím P để hiện */
+.np-duoi{margin-top:auto;display:flex;gap:6px;flex-wrap:wrap}
+.np-duoi .nut{font-size:13.5px;padding:6px 12px}
 /* ── ngữ pháp · công thức THEO BƯỚC (np.buoc): mỗi công thức đi liền ví dụ của nó, chữ nằm thẳng cột dưới ô công thức; mở từng bước ── */
 .nb-vande{display:flex;align-items:center;gap:7px;background:#FBEAE8;border:2px dashed #E59A8E;border-radius:14px;padding:6px 14px;margin-bottom:10px}
 .nb-vande .x{font:900 24px "Nunito";color:#C0392B;margin-right:2px}
@@ -775,17 +786,23 @@ const DATA = {
         {
           so: 1, ten: '语气助词 “吧”（2）', vi: '**Câu hỏi + 吧？** — đã ĐOÁN được (khoảng 80–90 %), chỉ hỏi lại cho chắc: "…phải không?", "…nhỉ?". 吧 đứng đúng chỗ của 吗, không dùng chung.',
           khuon: [
-            [['Câu trần thuật', 'đã có căn cứ', 'a'], ['吧？', 'hỏi cho chắc', 'c']],
-            [['你是王老师', 'không biết', 'a'], ['吗？', 'hỏi thật', 'b']],
-            [['你是王老师', 'đã đoán ra', 'a'], ['吧？', 'xác nhận', 'c']],
+            [['Câu trần thuật', 'điều mình đoán', 'a'], ['吧？', 'hỏi cho chắc', 'c']],
+            [['Cùng một câu', '', 'a'], ['吗 / 吧', 'chọn MỘT', 'c']],
           ],
           vd: [
             { o: [['你们就是她的学生', 'a'], ['吧', 'c']], dau: '？', py: 'Nǐmen jiù shì tā de xuéshēng ba?' },
             { o: [['你也是越南人', 'a'], ['吧', 'c']], dau: '？', py: 'Nǐ yě shì Yuènán rén ba?' },
             { o: [['她唱歌很好听', 'a'], ['吧', 'c']], dau: '？', py: 'Tā chàng gē hěn hǎotīng ba?' },
             { o: [['陈天中是泰国人', 'a'], ['吧', 'c']], dau: '？', py: 'Chén Tiānzhōng shì Tàiguó rén ba?' },
+            { o: [['你是王老师', 'a'], ['吗', 'b']], dau: '？', py: 'Nǐ shì Wáng lǎoshī ma?' },   // cặp đối chiếu của bước 1
+            { o: [['你是王老师', 'a'], ['吧', 'c']], dau: '？', py: 'Nǐ shì Wáng lǎoshī ba?' },
           ],
-          ghi: '吧 đứng CUỐI câu hỏi, thay đúng chỗ của 吗 — không dùng cùng lúc (✗你是学生吗吧？). **你是王老师吗？** = không biết, hỏi thật ｜ **你是王老师吧？** = đoán ~90 %, chỉ xác nhận, thường được đáp 是的 / 对. HSK1 đã có 吧 = lời ĐỀ NGHỊ (太晚了，睡觉吧); nay là nghĩa PHỎNG ĐOÁN.',
+          // trình bày theo bước: mỗi công thức đi liền ví dụ của nó (k = số thứ tự khuôn, vd = số thứ tự ví dụ)
+          buoc: [
+            { ten: '吗 hay 吧?', phu: 'cùng một câu — khác ở chỗ đã đoán được chưa', k: 1, vd: [4, 5], ghi: '**吗** = chưa biết, hỏi thật ｜ **吧** = đã đoán ~90 %, hỏi cho chắc → thường được đáp 是的 / 对.' },
+            { ten: 'Đoán rồi hỏi lại: câu + 吧？', phu: '…phải không? · …nhỉ?', k: 0, vd: [0, 1, 2, 3] },
+          ],
+          ghi: '吧 đứng CUỐI câu, đúng chỗ của 吗 — chọn một (✗你是学生吗吧？). HSK1: 吧 = lời đề nghị (睡觉吧) ｜ bài này: 吧 = phỏng đoán.',
           xep: [
             { dap: ['这', '是', '你的手机', '吧'], dau: '？' },
             { dap: ['你', '是', '白家月', '吧'], dau: '？' },
@@ -857,10 +874,11 @@ const DATA = {
       ],
       np: [
         {
-          so: 2, ten: '“是……的”句', vi: '**S + 是 + chi tiết (khi nào · ở đâu · bằng gì · với ai · để làm gì · AI làm) + V + 的** — nhấn mạnh CHI TIẾT của việc ĐÃ xảy ra. Phủ định **不是……的**: không được bỏ 是.',
+          so: 2, ten: '“是……的”句', vi: '**S + 是 + chi tiết + V + 的** — việc ĐÃ xảy ra rồi, giờ nhấn vào CHI TIẾT: khi nào · ở đâu · bằng gì · với ai · để làm gì.',
           khuon: [
-            [['S', 'Chủ ngữ', 'a'], ['是', 'bỏ được', 'b'], ['chi tiết', 'khi nào · bằng gì…', 'c'], ['V', 'Động từ', 'd'], ['的', '', 'b']],
-            [['S', 'Chủ ngữ', 'a'], ['不是', 'KHÔNG bỏ', 'b'], ['chi tiết', '', 'c'], ['V', 'Động từ', 'd'], ['的', '', 'b']],
+            [['S', 'ai', 'a'], ['是', 'bỏ được', 'b'], ['chi tiết', 'khi nào · bằng gì…', 'c'], ['V', 'làm gì', 'd'], ['的', '', 'b']],
+            [['S', 'ai', 'a'], ['不是', 'KHÔNG bỏ 是', 'b'], ['chi tiết', '', 'c'], ['V', 'làm gì', 'd'], ['的', '', 'b']],
+            [['是', '', 'b'], ['AI', 'người làm', 'c'], ['V', 'làm gì', 'd'], ['的', '', 'b'], ['tân ngữ', '', 'a']],
           ],
           vd: [
             { o: [['我们', 'a'], ['是', 'b'], ['来旅游', 'c'], ['的', 'b']], dau: '。', py: 'Wǒmen shì lái lǚyóu de.' },
@@ -869,7 +887,12 @@ const DATA = {
             { o: [['我们', 'a'], ['不是', 'b'], ['坐出租车', 'c'], ['去', 'd'], ['的', 'b']], dau: '。', py: 'Wǒmen bú shì zuò chūzūchē qù de.' },
             { o: [['是', 'b'], ['您姐姐', 'c'], ['来接', 'd'], ['的', 'b'], ['我们', 'a']], dau: '。', py: 'Shì nín jiějie lái jiē de wǒmen.' },
           ],
-          ghi: 'Chỉ dùng cho việc ĐÃ xảy ra: ✗你是明天几点来的？ → ✓你明天几点来？ Khẳng định và câu hỏi bỏ được 是; phủ định thì KHÔNG. **Mở rộng (gặp ở bài khoá 4):** 是 + NGƯỜI LÀM + V + 的 → nhấn mạnh AI làm: **是您姐姐来接的我们** = **是您姐姐来接我们的** (的 trước hay sau tân ngữ đều đúng). 的 này KHÔNG phải "của".',
+          buoc: [
+            { ten: 'Nhấn vào CHI TIẾT của việc đã xảy ra', phu: 'khi nào · ở đâu · để làm gì', k: 0, vd: [1, 0, 2], ghi: 'Câu khẳng định và câu hỏi **bỏ được 是**: 苹果(是)在哪儿买的？' },
+            { ten: 'Phủ định: 不是……的', phu: 'KHÔNG được bỏ 是', k: 1, vd: [3] },
+            { ten: 'Mở rộng · nhấn vào AI làm', phu: 'gặp ở bài khoá 4', k: 2, vd: [4], ghi: '= 是您姐姐来接我们**的** — 的 đứng trước hay sau tân ngữ đều đúng.' },
+          ],
+          ghi: 'Chỉ dùng cho việc ĐÃ xảy ra: ✗你是明天几点来的？ → ✓你明天几点来？ Chữ 的 này KHÔNG phải "của".',
           xep: [
             { dap: ['你', '是', '什么时候', '到的'], dau: '？' },
             { dap: ['我们', '是', '坐飞机', '来的'], dau: '。' },
@@ -970,7 +993,9 @@ const DATA = {
         {
           so: 3, ten: '兼语句：请 / 让 / 叫 + người + việc', vi: '**A + 请 / 让 / 叫 + B + V** — B vừa là người được nhờ / được bảo, vừa là người làm việc thứ hai. Lịch sự: **请 > 让 > 叫**.',
           khuon: [
-            [['A', 'người nhờ', 'a'], ['请 / 让 / 叫', 'nhờ · bảo', 'b'], ['B', 'người làm', 'c'], ['V (+ tân ngữ)', 'việc', 'd']],
+            [['A', 'người mời', 'a'], ['请', 'mời · nhờ', 'b'], ['B', 'người làm', 'c'], ['V (+ tân ngữ)', 'việc', 'd']],
+            [['A', 'người bảo', 'a'], ['让', 'bảo · để cho', 'b'], ['B', 'người làm', 'c'], ['V (+ tân ngữ)', 'việc', 'd']],
+            [['A', 'người gọi', 'a'], ['叫', 'bảo · gọi', 'b'], ['B', 'người làm', 'c'], ['V (+ tân ngữ)', 'việc', 'd']],
           ],
           vd: [
             { o: [['我想', 'a'], ['请', 'b'], ['你', 'c'], ['帮个忙', 'd']], dau: '。', py: 'Wǒ xiǎng qǐng nǐ bāng gè máng.' },
@@ -978,7 +1003,14 @@ const DATA = {
             { o: [['妈妈', 'a'], ['叫', 'b'], ['孩子们', 'c'], ['回家', 'd']], dau: '。', py: 'Māma jiào háizimen huí jiā.' },
             { o: [['她', 'a'], ['请', 'b'], ['我们', 'c'], ['吃了北京烤鸭', 'd']], dau: '。', py: 'Tā qǐng wǒmen chīle Běijīng Kǎoyā.' },
           ],
-          ghi: 'NGƯỜI đứng ngay sau 请 / 让 / 叫, VIỆC theo sau (✗老师让说中文我们). 了 đặt sau động từ thứ hai: 她请我们吃**了**北京烤鸭. **Một chữ nhiều nghĩa:** 请问 · 请喝茶 = xin hãy (không có người ở giữa) ↔ 请你帮个忙 = mời, nhờ AI; 我叫李文 = tên là ↔ 妈妈叫孩子们回家 = bảo, gọi.',
+          // câu sai làm điểm xuất phát: 'x' = cụm đứng sai chỗ
+          vanDe: { o: [['老师', 'a'], ['让', 'b'], ['说中文', 'x'], ['我们', 'c']], loi: '**Người** (我们) phải đứng NGAY SAU **让** — việc đứng sau cùng.' },
+          buoc: [
+            { ten: '请 — mời · nhờ', phu: 'lịch sự nhất', k: 0, vd: [0, 3], ghi: '了 đứng sau động từ thứ HAI: 她请我们吃**了**北京烤鸭.' },
+            { ten: '让 — bảo · để cho', phu: 'bình thường, hay dùng nhất', k: 1, vd: [1] },
+            { ten: '叫 — bảo · gọi', phu: 'thân mật, người trên nói với người dưới', k: 2, vd: [2] },
+          ],
+          ghi: 'Lịch sự: **请 > 让 > 叫**. Một chữ nhiều nghĩa: 请问 · 请喝茶 = xin hãy ｜ 我叫李文 = tên là.',
           xep: [
             { dap: ['老师', '让', '我们', '说中文'], dau: '。' },
             { dap: ['我想', '请', '你', '帮个忙'], dau: '。' },
@@ -1438,7 +1470,7 @@ DATA.phan.forEach((p, k) => {
   // np.sau = 'khoa' → sau bài khoá
   const nps = [].concat(p.np || []);
   const npSau = dk => nps.forEach((g, n) => { if (dk(g)) them('nguphap', { c, k, n }); });
-  p.tu.forEach((w, j) => them('the', { c, k, j }));
+  p.tu.forEach((w, j) => { them('the', { c, k, j }); (w.sauThe || []).forEach((x, n) => them('anhto', { c, k, j, n })); });   // sauThe: trang ảnh to (poster mở rộng) ngay sau thẻ từ
   npSau(g => g.sau !== 'khoa');
   (p.vanDung || []).forEach((x, n) => them('vandung', { c, k, n }));   // nhìn tranh đặt câu, sau ngữ pháp, trước bài khoá
   if (p.nghe) them('nghe', { c, k });                                  // nghe ghi âm, chọn đáp án — trước khi đọc bài khoá
@@ -1521,6 +1553,16 @@ VE.nghe = (t, el) => {
 };
 
 /* 🏮 Văn hoá (DATA.vanHoa = { tieu, vang, a: { ten, py, vi, anh, y: [...] }, b: {...}, noiTieu, noi: [[zh, py], …] }) */
+// trang ẢNH TO sau thẻ từ: tu[].sauThe = [{ anh, tieu, vang?, cau?: [[zh, py]] }] — ảnh chiếm cả trang, bấm để phóng to; câu mẫu bấm để nghe
+VE.anhto = (t, el) => {
+  const x = DATA.phan[t.k].tu[t.j].sauThe[t.n];
+  el.innerHTML = khung('', x.tieu || '', '🖼', 'Bấm ảnh để phóng to', `
+    <div class="at ${x.cau ? 'co-cau' : ''}">
+      <img class="at-anh" src="${md(x.anh)}" alt="" data-anh="${x.anh}" data-tieu="${esc((x.tieu || '').replace(/<[^>]+>/g, ''))}">
+      ${x.cau ? `<div class="at-cau">${x.cau.map(c => `<button class="at-c" data-doc="${esc(c[0])}"><span class="zh">${hl(c[0])}</span><small class="py">${esc(c[1])}</small></button>`).join('')}</div>` : ''}
+    </div>`, x.vang || '');
+};
+
 VE.vanhoa = (t, el) => {
   const v = DATA.vanHoa;
   const o = x => `<div class="vh-o"><figure class="polar vh-anh" data-anh="${x.anh}"><img src="${md(x.anh)}" alt=""></figure>
@@ -1637,7 +1679,7 @@ VE.nguphap = (t, el) => {
       <div class="np-trai">
         <div class="bi-kip"><span class="pill vang-p">Bí kíp</span><p>${dam(g.vi)}</p></div>
         ${MUC.map(([k, n]) => `<button class="np-muc" data-muc="${k}">${n}</button>`).join('')}
-        <button class="nut" id="np-gv" style="margin-top:auto;align-self:flex-start">🗒 Ghi chú GV</button>
+        <div class="np-duoi"><button class="nut" id="np-gv">🗒 Ghi chú GV</button><button class="nut" id="an-pyk" title="Hiện / ẩn phiên âm của câu ví dụ (phím P)">🔤 Hiện phiên âm</button></div>
       </div>
       <div class="np-phai" id="np-phai"></div>
     </div>`, '');
@@ -1667,18 +1709,18 @@ VE.nguphap = (t, el) => {
     loi: () => `<div class="loi-ds">${g.loi.map((l, i) => `<div class="loi" data-l="${i}"><span class="sai zh">✗ ${esc(l[0])}</span><span class="mui-l">→</span><span class="dung zh">✓ ${hl(l[1])}</span><small>${dam(l[2])}</small></div>`).join('')}</div>`,
     hoi: () => `<div class="hoi-hang" style="grid-template-columns:1fr;gap:18px">${g.hoi.map((h, i) => `<div class="hoi" data-hoi="${i}"><span class="so">${i + 1}</span><div class="q">${hl(h.q)}</div><div class="qv">${esc(h.qv)}</div><div class="d">→ ${hl(h.d)}</div></div>`).join('')}</div>`,
   };
+  const vuaLuoi = () => $$('.nb.mo .nb-luoi', phai).forEach(l => {   // đo lưới của bước đang mở: câu dài thì đưa phiên âm xuống dưới, vẫn tràn thì thu chữ
+    l.classList.remove('py-duoi', 'hep', 'hep2');
+    const tran = () => l.scrollWidth > l.clientWidth + 1;
+    if (tran() || $$('.nb-py', l).some(x => x.offsetHeight > 46)) l.classList.add('py-duoi');
+    if (tran()) l.classList.add('hep');
+    if (tran()) l.classList.add('hep2');
+  });
   const chon = k => {
     dungDoc();
     phai.innerHTML = VEM[k]();
     phai.classList.remove('chat'); if (phai.scrollHeight > phai.clientHeight + 2) phai.classList.add('chat');   // dư chữ thì co lại một nấc
     $$('.np-muc', el).forEach(b => b.classList.toggle('bat', b.dataset.muc === k));
-    const vuaLuoi = () => $$('.nb.mo .nb-luoi', phai).forEach(l => {   // đo lưới của bước đang mở: câu dài thì đưa phiên âm xuống dưới, vẫn tràn thì thu chữ
-      l.classList.remove('py-duoi', 'hep', 'hep2');
-      const tran = () => l.scrollWidth > l.clientWidth + 1;
-      if (tran() || $$('.nb-py', l).some(x => x.offsetHeight > 46)) l.classList.add('py-duoi');
-      if (tran()) l.classList.add('hep');
-      if (tran()) l.classList.add('hep2');
-    });
     if (k === 'ct') { $$('.nb-dau', phai).forEach(b => b.onclick = () => {   // mở một bước thì các bước khác thu lại thành một dòng (kèm câu mẫu nếu đã xem)
       const o = b.parentElement, dang = o.classList.contains('mo');
       $$('.nb', phai).forEach(x => x.classList.remove('mo'));
@@ -1698,6 +1740,11 @@ VE.nguphap = (t, el) => {
     if (k === 'hoi') $$('.hoi', phai).forEach(o => o.onclick = () => { if (!o.classList.contains('mo')) { o.classList.add('mo'); sao(`np${t.k}.${t.n || 0}-h${o.dataset.hoi}`, 1, o); } });   // không phát âm
   };
   $$('.np-muc', el).forEach(b => b.onclick = () => chon(b.dataset.muc));
+  $('#an-pyk', el).onclick = e => {   // phiên âm câu ví dụ: ẩn sẵn, bấm (hoặc phím P) để hiện / ẩn
+    const hien = phai.classList.toggle('hien-py');
+    e.currentTarget.classList.toggle('bat', hien); e.currentTarget.textContent = hien ? '🔤 Ẩn phiên âm' : '🔤 Hiện phiên âm';
+    vuaLuoi();
+  };
   $('#np-gv', el).onclick = () => moLop('🗒 Ghi chú giáo viên', `Ngữ pháp ${g.so} · <span class="zh">${esc(g.ten)}</span>`, `<dl class="ghi-gv">
       <dt>🧭 Dẫn dắt (chưa đưa công thức)</dt><dd>${dam(g.gv.dan)}</dd>
       <dt>句法 · Cú pháp</dt><dd>${dam(g.gv.cu)}</dd><dt>语义 · Ngữ nghĩa</dt><dd>${dam(g.gv.nghia)}</dd><dt>语用 · Ngữ dụng</dt><dd>${dam(g.gv.dung)}</dd>
@@ -2092,7 +2139,7 @@ document.addEventListener('click', e => {
   const h = e.target.closest('[data-anh]'); if (h) { xemAnh(h.dataset.anh, h.dataset.tieu || ''); return; }
   const d = e.target.closest('[data-doc]'); if (d) { doc(d.dataset.doc); return; }
 });
-const NHAN_TRANG = { bia: 'Bìa', chuong: 'Mở chặng', bang: 'Bảng từ', tau: '🚂 Tàu', sosanh: 'So sánh', viettay: 'Viết tay', bothu: 'Bộ thủ', nham: 'Chữ dễ nhầm', khoidong: 'Nhìn tranh', vandung: '🖼 Vận dụng', nghe: '🎧 Nghe', vanhoa: '🏮 Văn hoá', rao: 'Nói nhanh', quiz: 'Quiz', check: 'Tự kiểm', cuoi: 'Kết thúc' };
+const NHAN_TRANG = { bia: 'Bìa', chuong: 'Mở chặng', bang: 'Bảng từ', tau: '🚂 Tàu', sosanh: 'So sánh', viettay: 'Viết tay', bothu: 'Bộ thủ', nham: 'Chữ dễ nhầm', khoidong: 'Nhìn tranh', vandung: '🖼 Vận dụng', nghe: '🎧 Nghe', vanhoa: '🏮 Văn hoá', anhto: '🖼 Ảnh mở rộng', rao: 'Nói nhanh', quiz: 'Quiz', check: 'Tự kiểm', cuoi: 'Kết thúc' };
 function nhanTrang(t) {
   if (t.loai === 'the') return `<span class="zh">${esc(DATA.phan[t.k].tu[t.j].w.replace(/\u200B/g, ''))}</span>`;
   if (t.loai === 'nguphap') { const g = [].concat(DATA.phan[t.k].np)[t.n || 0]; return `📘 <span class="zh">${esc(g.ten)}</span>`; }
