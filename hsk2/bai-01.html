@@ -495,6 +495,44 @@ button{font:inherit;cursor:pointer}
 .np-cau .py{margin-left:14px;font-size:16px}
 .np-ghi{margin-top:12px;background:var(--la-nhat);border-radius:14px;padding:10px 16px;font-size:16.5px;line-height:1.5}
 .np-ghi b{color:var(--la-dam)}
+/* ── ngữ pháp · công thức THEO BƯỚC (np.buoc): mỗi công thức đi liền ví dụ của nó, chữ nằm thẳng cột dưới ô công thức; mở từng bước ── */
+.nb-vande{display:flex;align-items:center;gap:7px;background:#FBEAE8;border:2px dashed #E59A8E;border-radius:14px;padding:6px 14px;margin-bottom:10px}
+.nb-vande .x{font:900 24px "Nunito";color:#C0392B;margin-right:2px}
+.nb-vande .c{font-family:var(--zh);font-size:31px;font-weight:700;padding:0 3px;border-bottom:4px solid var(--m);line-height:1.3;white-space:nowrap}
+.nb-vande .c.can{border:2.5px dashed #C0392B;border-radius:9px;color:#C0392B;background:#fff;padding:0 7px}
+.nb-vande small{margin-left:12px;font-size:16.5px;line-height:1.35;font-weight:700;color:#7A2E25}
+.nb-vande small b{color:#C0392B}
+.nb{border:2px solid var(--la-nhat);border-radius:16px;margin-bottom:8px;overflow:hidden;background:#fff}
+.nb.mo{border-color:var(--la)}
+.nb-dau{display:flex;align-items:center;gap:10px;width:100%;background:var(--la-nhat);border:0;padding:6px 14px;text-align:left;font:800 17.5px "Nunito";color:var(--muc)}
+.nb-dau:hover{filter:brightness(.97)}
+.nb.mo .nb-dau{background:var(--la);color:#fff}
+.nb-so{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--la);color:#fff;font:800 16px "Baloo 2";flex:none;padding-top:1px}
+.nb.mo .nb-so{background:#fff;color:var(--la-dam)}
+.nb-dau small{font-weight:700;font-size:14.5px;opacity:.85}
+.nb-dau .tom{margin-left:auto;font-family:var(--zh);font-size:21px;font-weight:700;color:var(--la-dam);white-space:nowrap}
+.nb-dau .goi{margin-left:auto;font-size:13.5px;font-weight:700;color:var(--muc-phu)}
+.nb.da-xem .goi,.nb.mo .goi,.nb.mo .tom,.nb:not(.da-xem) .tom{display:none}
+.nb-than{display:none;padding:10px 18px 9px}
+.nb.mo .nb-than{display:block}
+.nb-luoi{display:grid;column-gap:20px;row-gap:5px;align-items:end;justify-content:start}
+.nb-o{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--m);color:#fff;border-radius:12px;padding:4px 16px 5px;min-width:70px;min-height:52px;box-shadow:0 3px 0 rgba(0,0,0,.12);margin-bottom:4px}
+.nb-o b{font-family:var(--zh);font-size:26px;line-height:1.15;white-space:nowrap}
+.nb-o small{font:800 13px "Nunito";white-space:nowrap}
+.nb-o + .nb-o::before{content:"+";position:absolute;left:-16px;top:50%;transform:translateY(-50%);font:900 20px "Baloo 2";color:var(--muc-phu)}
+.nb-hang{display:contents;cursor:pointer}
+.nb-c{font-family:var(--zh);font-size:34px;font-weight:700;border-bottom:5px solid var(--m);text-align:center;padding:0 4px;line-height:1.35;white-space:nowrap}
+.nb-hang:hover .nb-c{background:var(--la-nhat)}
+.nb-py{align-self:center;padding-left:6px;font-size:16.5px;line-height:1.3;grid-row:var(--r)}
+/* câu dài: phiên âm xuống dưới câu (py-duoi), chữ thu một nấc (hep) hoặc hai nấc (hep2) — do vuaLuoi() gắn sau khi đo */
+.nb-luoi.py-duoi{grid-template-columns:repeat(var(--n),max-content) !important}
+.nb-luoi.py-duoi .nb-py{grid-column:1 / -1 !important;grid-row:calc(var(--r) + 1);padding:0 4px 4px;align-self:start}
+.nb-luoi.hep{column-gap:13px}.nb-luoi.hep .nb-c{font-size:29px}.nb-luoi.hep .nb-o{min-width:0;padding:3px 10px 4px}.nb-luoi.hep .nb-o b{font-size:23px}.nb-luoi.hep .nb-o + .nb-o::before{left:-12px;font-size:17px}
+.nb-luoi.hep2{column-gap:9px}.nb-luoi.hep2 .nb-c{font-size:25px;padding:0 2px}.nb-luoi.hep2 .nb-o{padding:2px 7px 3px}.nb-luoi.hep2 .nb-o b{font-size:20px}.nb-luoi.hep2 .nb-o small{font-size:11.5px}.nb-luoi.hep2 .nb-o + .nb-o::before{left:-9px;font-size:14px}
+.np-phai:has(.nb:not(.da-xem)) .nb ~ .np-ghi{display:none}   /* ô ghi nhớ chỉ hiện khi đã mở hết các bước */
+.nb-ghi{margin-top:7px;font-size:15.5px;line-height:1.4;font-weight:700;color:var(--muc-phu)}
+.nb-ghi b{color:var(--la-dam)}
+.np-phai.chat .nb-vande{padding:3px 14px;margin-bottom:6px}.np-phai.chat .nb{margin-bottom:5px}.np-phai.chat .nb-dau{padding:4px 14px;font-size:16.5px}.np-phai.chat .nb-than{padding:7px 18px 6px}.np-phai.chat .nb-c{font-size:28px}.np-phai.chat .nb-o{min-height:40px;padding:2px 13px 3px}.np-phai.chat .nb-o b{font-size:22px}.np-phai.chat .nb-vande .c{font-size:27px}.np-phai.chat .nb-luoi{row-gap:2px}
 .np-phai.chat .np-ct{margin-bottom:6px}.np-phai.chat .np-o{padding:3px 16px}.np-phai.chat .np-o b{font-size:26px}.np-phai.chat .np-vd{gap:2px}.np-phai.chat .np-cau{padding:2px 6px}.np-phai.chat .vd-o,.np-phai.chat .np-cau .dau{font-size:27px}.np-phai.chat .np-ghi{margin-top:8px;padding:7px 14px;font-size:15.5px}
 .xep-ds{display:flex;flex-direction:column;gap:14px}
 .xep{border:2px dashed var(--vien);border-radius:18px;padding:10px 16px}
@@ -1604,8 +1642,24 @@ VE.nguphap = (t, el) => {
       <div class="np-phai" id="np-phai"></div>
     </div>`, '');
   const phai = $('#np-phai', el);
+  // công thức THEO BƯỚC: buoc = [{ ten, phu?, k: số thứ tự khuôn, vd: [số thứ tự ví dụ], ghi? }], vanDe? = { o: [[chữ, màu | 'x' = vật cản]], loi }
+  const ctBuoc = () => {
+    const hang = (v, K, r) => {   // đặt từng cụm của câu vào đúng cột của ô công thức cùng màu
+      let c = 0;
+      const o = v.o.map(x => { let i = K.findIndex((q, j) => j >= c && q[2] === x[1]); if (i < 0) i = Math.min(c, K.length - 1); c = i + 1; return [x[0], x[1], i]; });
+      return `<div class="nb-hang" data-doc="${esc(v.o.map(x => x[0]).join('') + v.dau)}">${o.map((x, n) => `<span class="nb-c" style="--m:${MAU_O[x[1]]};grid-column:${x[2] + 1};grid-row:${r}">${hl(x[0])}${n === o.length - 1 ? v.dau : ''}</span>`).join('')}<small class="py nb-py" style="grid-column:${K.length + 1};--r:${r}">${esc(v.py)}</small></div>`;
+    };
+    const V = g.vanDe;
+    return `${V ? `<div class="nb-vande"><span class="x">✗</span>${V.o.map(x => `<span class="c ${x[1] === 'x' ? 'can' : ''}" style="--m:${MAU_O[x[1]] || 'transparent'}">${esc(x[0])}</span>`).join('')}<small>${dam(V.loi)}</small></div>` : ''}
+      ${g.buoc.map((b, i) => { const K = g.khuon[b.k], vd = b.vd.map(j => g.vd[j]); return `<div class="nb ${i ? '' : 'mo da-xem'}" data-b="${i}">
+        <button class="nb-dau"><span class="nb-so">${i + 1}</span><span>${dam(b.ten)}</span>${b.phu ? `<small>${dam(b.phu)}</small>` : ''}<span class="tom zh">${esc(vd[0].o.map(x => x[0]).join('') + vd[0].dau)}</span><span class="goi">bấm để mở ▸</span></button>
+        <div class="nb-than"><div class="nb-luoi" style="--n:${K.length};grid-template-columns:repeat(${K.length},max-content) minmax(0,1fr)">
+          ${K.map((o, c) => `<span class="nb-o" style="--m:${MAU_O[o[2]]};grid-column:${c + 1};grid-row:1"><b>${esc(o[0])}</b>${o[1] ? `<small>${esc(o[1])}</small>` : ''}</span>`).join('')}
+          ${vd.map((v, r) => hang(v, K, r * 2 + 2)).join('')}</div>${b.ghi ? `<div class="nb-ghi">${dam(b.ghi)}</div>` : ''}</div></div>`; }).join('')}
+      ${g.ghi ? `<div class="np-ghi">💡 ${dam(g.ghi)}</div>` : ''}`;
+  };
   const VEM = {
-    ct: () => `${g.khuon.map(f => `<div class="np-ct">${f.map((o, i) => (i ? '<span class="cong">+</span>' : '') + oNP(o[0], o[1], o[2])).join('')}</div>`).join('')}
+    ct: () => g.buoc ? ctBuoc() : `${g.khuon.map(f => `<div class="np-ct">${f.map((o, i) => (i ? '<span class="cong">+</span>' : '') + oNP(o[0], o[1], o[2])).join('')}</div>`).join('')}
       <div class="np-vd">${g.vd.map(v => `<button class="np-cau" data-doc="${esc(v.o.map(o => o[0]).join('') + v.dau)}">${v.o.map(o => `<span class="vd-o" style="--m:${MAU_O[o[1]]}">${hl(o[0])}</span>`).join('')}<span class="dau">${v.dau}</span><small class="py">${esc(v.py)}</small></button>`).join('')}</div>
       <div class="np-ghi">💡 ${dam(g.ghi)}</div>`,
     xep: () => `<div class="xep-ds">${g.xep.map((x, i) => `<div class="xep" data-x="${i}"><div class="xep-kq"></div>
@@ -1618,6 +1672,19 @@ VE.nguphap = (t, el) => {
     phai.innerHTML = VEM[k]();
     phai.classList.remove('chat'); if (phai.scrollHeight > phai.clientHeight + 2) phai.classList.add('chat');   // dư chữ thì co lại một nấc
     $$('.np-muc', el).forEach(b => b.classList.toggle('bat', b.dataset.muc === k));
+    const vuaLuoi = () => $$('.nb.mo .nb-luoi', phai).forEach(l => {   // đo lưới của bước đang mở: câu dài thì đưa phiên âm xuống dưới, vẫn tràn thì thu chữ
+      l.classList.remove('py-duoi', 'hep', 'hep2');
+      const tran = () => l.scrollWidth > l.clientWidth + 1;
+      if (tran() || $$('.nb-py', l).some(x => x.offsetHeight > 46)) l.classList.add('py-duoi');
+      if (tran()) l.classList.add('hep');
+      if (tran()) l.classList.add('hep2');
+    });
+    if (k === 'ct') { $$('.nb-dau', phai).forEach(b => b.onclick = () => {   // mở một bước thì các bước khác thu lại thành một dòng (kèm câu mẫu nếu đã xem)
+      const o = b.parentElement, dang = o.classList.contains('mo');
+      $$('.nb', phai).forEach(x => x.classList.remove('mo'));
+      if (!dang) o.classList.add('mo', 'da-xem');
+      vuaLuoi();
+    }); vuaLuoi(); }
     if (k === 'xep') $$('.xep', phai).forEach(o => {
       const x = g.xep[o.dataset.x], kq = $('.xep-kq', o); let i = 0;
       $$('.chon', o).forEach(b => b.onclick = () => {
